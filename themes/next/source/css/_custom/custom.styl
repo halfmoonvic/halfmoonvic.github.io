@@ -1,1 +1,56 @@
+
 // Custom styles.
+a {
+  color: #4078c0;
+  border-bottom: none;
+  &:hover {
+    color: #003984;
+    text-decoration: none;
+  }
+}
+
+// footer
+.footer {
+  background: #2B2B3C;
+  color: #bbb;
+}
+
+
+// $header-height: 437px
+.header {
+  // background: #222;
+  // height: $header-height;
+  // line-height: $header-height;
+  background: url('/banner.jpg');
+  .site-title {
+    color: #9d9d9d;
+    font-family: 'Helvetica Neue',Helvetica,Arial,'Microsoft YaHei',sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    // line-height: $header-height;
+  }
+  .logo-line-before i, .logo-line-after i {
+    background: #9d9d9d;
+    display: none;
+  }
+  .header-inner {
+    padding: 5px 0;
+    width: 70%;
+    @media (min-width: 1600px) {
+      width: 70%;
+    }
+  }
+  .menu .menu-item a {
+    font-size: 15px;
+  }
+  a {
+    color: #9d9d9d;
+    border-bottom: none;
+    animation: all 0.2s ease-in;
+    &:hover {
+      color: #fff;
+      background: transparent !important;
+      text-decoration: none;
+    }
+  }
+}
