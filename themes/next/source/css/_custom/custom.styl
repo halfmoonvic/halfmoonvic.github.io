@@ -1,33 +1,27 @@
-
 // Custom styles.
-a {
+// 黑色的主题
+/*a {
   color: #4078c0;
   border-bottom: none;
   &:hover {
     color: #003984;
     text-decoration: none;
   }
-}
+}*/
 
 // footer
-.footer {
+/*.footer {
   background: #2B2B3C;
   color: #bbb;
-}
+}*/
 
-
-// $header-height: 437px
-.header {
-  // background: #222;
-  // height: $header-height;
-  // line-height: $header-height;
+/*.header {
   background: url('/banner.jpg');
   .site-title {
     color: #9d9d9d;
     font-family: 'Helvetica Neue',Helvetica,Arial,'Microsoft YaHei',sans-serif;
     font-size: 18px;
     font-weight: normal;
-    // line-height: $header-height;
   }
   .logo-line-before i, .logo-line-after i {
     background: #9d9d9d;
@@ -52,5 +46,63 @@ a {
       background: transparent !important;
       text-decoration: none;
     }
+  }
+}*/
+
+// 白色的主题
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  color: #c7cdd0;
+  background: transparent;
+  font-family: -apple-system,"BlinkMacSystemFont",".SFNSText-Light","PingFang SC","Helvetica Neue","Lucida Grande","Hiragino Sans GB","Segoe UI","Microsoft Yahei",sans-serif;
+  z-index: 99;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  &::before {
+  }
+  .site-title {
+    font-weight: 300;
+    color: #333;
+  }
+  .logo-line-before i, .logo-line-after i {
+    background: #9d9d9d;
+    display: none;
+  }
+  .menu-item-icon {
+    display: none;
+  }
+  .header-inner {
+    padding: 5px 0;
+    width: 70%;
+    @media (min-width: 1600px) {
+      width: 70%;
+    }
+  }
+  .menu .menu-item a {
+    font-size: 16px;
+    color: #656565;
+    &:hover {
+      background: transparent;
+      color: #333;
+    }
+  }
+}
+
+.sidebar {
+  // position: relative;
+  background: #F5F5F5;
+  box-shadow: none;
+  .nav-item {
+    color: #000;
   }
 }
