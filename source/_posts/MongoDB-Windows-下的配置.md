@@ -9,8 +9,9 @@ tags: mongodb
 
 ### 启动
 #### 1) 前提准备
-1. 数据存放：在`MongoDB`安装目录下面新建文件夹 `mkdir data\db` 
-2. 日志存放：在`MongoDB`安装目录下面新建文件夹 `mkdir log`，并新建文件 `mongod.log` 
+1. 将 `mongo.exe` 所在目录 加入到系统环境变量当中
+2. 数据存放：在`MongoDB`安装目录下面新建文件夹 `mkdir data\db` 
+3. 日志存放：在`MongoDB`安装目录下面新建文件夹 `mkdir log`，并新建文件 `mongod.log` 
 
 #### 2) 双击 安装目录下的 `mongod.exe` 直接启动服务
 #### 3) 命令行启动服务
@@ -32,7 +33,7 @@ tags: mongodb
 
 ##### 3. 通过安装服务来启动
 * 命令行直接输入命令来安装  
-`mongod.exe --dbpath=C:\Program Files\MongoDB\data\db --logpath=C:\Program Files\MongoDB\log\mongod.log --install`
+`mongod.exe --dbpath="C:\Program Files\MongoDB\data\db" --logpath="C:\Program Files\MongoDB\log\mongod.log" --install`
 * 通过上面创建好的配置文件来安装  
 `mongod --config c:\mongod.cfg --install` 
 * 启动MongoDB服务  
@@ -42,6 +43,10 @@ tags: mongodb
 
 ### 进入mongodb
 命令行直接敲入 `mongo` 即可
+
+### 注意事项
+1. Windows 10 的 C盘下面有些权限的问题。可将MongoDB文件夹的各项权限提高。
+2. 安装服务不能成功的，以管理员身份运行安装下即可
 
 ### 参考资料
 1. [JasonCeng_的博客](http://blog.csdn.net/Jason_first/article/details/75439043)
