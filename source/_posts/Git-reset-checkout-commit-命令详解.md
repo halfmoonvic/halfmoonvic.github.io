@@ -122,6 +122,9 @@ tags: git
     与`git reset --hard HEAD^^`命令相比，`git reset --hard HEAD`命令要柔和的多。如下图所示：  
     ![](/images/git-reset-checkout/git-reset-hard-head.jpg)  
     这个是恢复当前 HEAD 所在的 commit 到以下两个区。也就不存在与远程库相冲突的问题了。
+    3. `git reset (--hard, --soft) 3857c85 note.md`  
+    hard 与 soft 模式不允许针对指定文件的操作
+    fatal: Cannot do (hard, soft) reset with paths.
 
 3. soft 模式  
 soft 仅仅是移动 Commit History 区的 MASTER 就不同的 commit 的指向。没什么好说的了。
@@ -182,3 +185,6 @@ soft 仅仅是移动 Commit History 区的 MASTER 就不同的 commit 的指向�
 [細說git reset和git checkout的不同之處](https://medicineyeh.wordpress.com/2015/01/22/%E7%B4%B0%E8%AA%AAgit-reset%E5%92%8Cgit-checkout%E7%9A%84%E4%B8%8D%E5%90%8C%E4%B9%8B%E8%99%95/)
 
 [Reset, Checkout, and Revert](https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting)
+
+[Why git can't do hard/soft resets by path?
+](https://stackoverflow.com/questions/11200839/why-git-cant-do-hard-soft-resets-by-path)
