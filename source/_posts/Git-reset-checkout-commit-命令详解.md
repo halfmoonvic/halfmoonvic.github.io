@@ -170,7 +170,7 @@ soft 仅仅是移动 Commit History 区的 MASTER 就不同的 commit 的指向�
 如下图，即 4' = 4'' ≠ 6
 ![](/images/git-reset-checkout/git-ck-head^^-testtxt.jpg)  
 
-同时，我们可以通过 <span style="color:red">**`git checkout HEAD^^ .`**</span> 命令将过去的某一版本下的所有文件放置当前的文件目录西面，而不更改 HEAD 指针
+同时，我们可以通过 <strong style="color:red">`git checkout HEAD^^ .`</strong> 命令将过去的某一版本下的所有文件放置当前的文件目录下面，而不更改 HEAD 指针
 
 ##### 4.5 总结
 情况1.1，情况1.2，未有指定 `<file_path>` 这时，会发生 HEAD 的变动，其指向自然也是由 Commit History 指向 Staged Snapshot 和 Woring Dir    
