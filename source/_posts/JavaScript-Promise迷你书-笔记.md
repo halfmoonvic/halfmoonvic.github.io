@@ -8,29 +8,57 @@ tags: [promise, 异步]
 
 ### promise
 ```
-class fakePromise {
+class FakePromise {
   constructor(fn) {
-    fn()
-    return this
+    this.status = 'pendding'
+    this.value = ''
+    this.onFulledCallBack = []
+    this.onRejectCallBack = []
+
+    fn(this.resolve.bind(this), this.reject.bind(this))
   }
-  then(success) {
-    console.log(success)
-    return this
+  resolve(value) {
+    setTimeout(() => {
+      if (this.status === 'pendding') {
+        this.status = 'fulfilled'
+        this.value = value
+        this.onFulledCallBack.forEach(cb => cb(this.value))
+      }
+    })
   }
-  catch(failed) {
-    console.log(failed)
-    return this
+  reject(value) {
+    setTimeout(() => {
+      if (this.status === 'pendding') {
+        this.status = 'rejected'
+        this.value = value
+        this.onRejectCallBack.forEach(cb => cb(this.value))
+      }
+    })
   }
-  resolve(resolveStatus) {
-    this.then(resolveStatus)
+  then(_success, _failed) {
+    if (this.status === 'pendding') {
+      return new Promise((resolve, reject) => {
+        this.onFulledCallBack.push((value) => {
+          let x = _success(value)
+          resolve(x)
+        })
+
+        this.onRejectCallBack.push((err) => {
+          let x = _failed(err)
+          reject(x)
+        })
+      })
+    }
   }
 }
 
-new fakePromise(function (resolve, reject) {
-  console.log('resolve')
-  // resolve('hehe')
-}).resolve('hehe')
-
+new FakePromise(function (resolve, reject) {
+    resolve('feaw')
+}).then(function (val) {
+    return 'ffffff'
+}).then((val) => {
+  console.log(val)
+})
 ```
 
 ##### 1. `.then .catch` 更像是 回调函数罢了
