@@ -102,6 +102,9 @@ tags: git
     * 当未注明`reset`采用何种模式时，默认将会采用`mixed`模式。可以看上文所述，当采用`mixed`的时候，只是 Commit History 与 Staged Snapshot 两区在同步。
     * 当未注明 HEAD 所处 Commit 位置时，默认采用 HEAD。  
     所以`git reset -- <file_path>`等同于`git reset HEAD -- <file_path>`。
+    * 当未注明 `<file_path>` 时默认是操作所有文件。  
+    所以 `git reset HEAD` 等同于 `git reset HEAD <all file_path>`。  
+    事实上 `git reset` 也同于 `git reset HEAD`(2018/05/02补记)
     * 结合以上两点，`git reset -- <file_path>`命令实际上是让 Commit History 处的 Commit 同步至 Staged Snapshot 区。  
     如此，当你进行的`add`操作时，一般情况下，Working Dir 的 commit 是会超前于 Commit History 区 的 commit，再次进行 `git reset -- <file_path>` 操作，Staged Snapshot 区的 commit 恢复到上个状态，这看起来像是撤销操作，其实并不。  
     如下图所示，`git reset -- <file_path>`命令只是将 Staged Snapshot 区的红色 commit 删掉，利用`mixed`模式的同步状态，使 Staged Snapshot 区的 commit 与 Commit History 区的 commit 相一致。（注：Commit History 区到底是处于哪个 commit 状态是由 HEAD 所在位置来决定的，下文讲。）
