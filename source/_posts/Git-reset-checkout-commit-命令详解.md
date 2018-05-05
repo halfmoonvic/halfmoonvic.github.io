@@ -206,5 +206,4 @@ soft 仅仅是移动 `Commit History `区的 `master` 就不同的 `commit` 的�
 
 [Reset, Checkout, and Revert](https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting)
 
-[Why git can't do hard/soft resets by path?
-](https://stackoverflow.com/questions/11200839/why-git-cant-do-hard-soft-resets-by-path)
+[Why git can't do hard/soft resets by path?](https://stackoverflow.com/questions/11200839/why-git-cant-do-hard-soft-resets-by-path)
