@@ -1,7 +1,7 @@
 ---
 title: react-redux 执行原理
 date: 2018-03-10 09:15:30
-category: sorce
+category: source
 tags: [redux]
 ---
 
