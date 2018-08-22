@@ -79,25 +79,25 @@ extends: 'eslint:recommended',
 扩展（或覆盖）extends 中预定义的规则
 ```
 rules: {
-  eqeqeq: 1,  // if 判断语句间
-  'no-console': 0, 
+  'comma-dangle': [1, 'never'],
+  eqeqeq: 1,
+  indent: [1, 2],
+  'generator-star-spacing': 0,
+  'no-console': 0,
+  'no-debugger': process.env.NODE_ENV === 'production' ? 0 : 1,
+  'no-multiple-empty-lines': [1, { max: 2 }],
+  'no-multi-spaces': 1,
+  'no-unused-vars': 1,
+  semi: [1, 'never'],
   'space-before-function-paren': [
     1,
     {
-      anonymous: 'always',
+      anonymous: 'never',
       named: 'never',
       asyncArrow: 'always'
     }
   ],
-  'generator-star-spacing': 0,
-  'spaced-comment': 1,  // 注释之后先跟一空格 在写注释内容
-  indent: [1, 2], 
-  'no-unused-vars': 1,
-  semi: [1, 'never'],
-  'no-multiple-empty-lines': [1, { max: 2 }], // 不允许多个空行
-  'comma-dangle': [1, 'never'], // 要求或禁止使用拖尾逗号
-  'no-multi-spaces': 1, // 禁止出现多个空格
-  'no-debugger': process.env.NODE_ENV === 'production' ? 0 : 1 // allow debugger during development
+  'spaced-comment': 1,
 },
 ```
 
