@@ -26,3 +26,10 @@ Profiles → general → working directory
 profiles → text → change-font → 固定宽度 → roboto Mono Light for Powerline
 更改上下行间距 Vertical → Chapter Spacing
 默认字体（固定宽度 → Monaco)
+
+### Text Rendering
+Profiles → text → Draw bold text in bright colors 去掉勾选
+
+
+### 参考资料
+1. [程序员内功系列--iTerm与Zsh篇](https://xiaozhou.net/learn-the-command-line-iterm-and-zsh-2017-06-23.html)
