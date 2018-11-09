@@ -134,7 +134,6 @@ mysql> select * from tbl;
 
 ### 第三章 约束以及修改数据表 ———— 修改列
 ![内容总结](./../images/2018-10-24-mysql/第三章.jpg)
-./../images/2018-10-24-mysql/4/insert.jpg
 #### 一. 约束
 1. 约束保证数据的完整性和一致性
 2. 约束分为表级约束和列级约束
@@ -425,7 +424,6 @@ alter table users2 alter age drop default;  删除
 ### 第四章 操作数据表中的记录（增删改查）———— 修改行
 <div>
     <img width="48%" src="./../images/2018-10-24-mysql/4/insert.jpg">
-    ./../images/2018-10-24-mysql/4/insert.jpg
     <img width="48%" src="./../images/2018-10-24-mysql/4/update.jpg">
     <img width="48%" src="./../images/2018-10-24-mysql/4/delete.jpg">
     <img width="48%" src="./../images/2018-10-24-mysql/4/select.jpg">
@@ -435,10 +433,10 @@ alter table users2 alter age drop default;  删除
 1. `INSERT [INTO] tabl_name [(col_name, ...)] {VALUES | VALUE} ({expr | DEFAULT}, ...), (...), ...`  
 insert users values(default, 'li', '123', 2 * 8, 1);  
 insert users values(default, 'lfi', '123', 2 * 8, 1), (null, 'rose', md5('123'), default, 0); 插入多条记录
-2. `INSERT [INTO] tabl_name SER col_name = {expr | DEFAULT}, ...`
+2. `INSERT [INTO] tabl_name SET col_name = {expr | DEFAULT}, ...`  
 说明：与第一种方式的区别在于，此方法可以使用子查询（SubQuery）  
 insert users set username = "ben", password="456";
-3. `INSERT [INTO] tabl_name [(col_name, ...)] SELECT ...`
+3. `INSERT [INTO] tabl_name [(col_name, ...)] SELECT ...`  
 说明：此方法可以将查询结果插入到指定数据表  
 
 #### 二、单表更新记录 UPDATE
@@ -524,7 +522,11 @@ goods_price >= (select round(avg(goods_price),2) from tdb_goods);
 insert tdb_goods_cates(cate_name) select goods_cate from tdb_goods group by goods_cate;
 
 ##### 2) 多表更新
-`UPDATE table_references SET column_name1={expr1|DEFAULT} [, column_name2={expr2|DEFAULT}] ... [WHERE where_condition]`  
+```
+UPDATE table_references 对两个表建立关系对等连接
+SET column_name1={expr1|DEFAULT} [, column_name2={expr2|DEFAULT}]...
+[WHERE where_condition]
+```
 mysql> update tdb_goods INNER JOIN tdb_goods_cates ON goods_cate = cate_name
     -> SET goods_cate = cate_id;
 
@@ -556,6 +558,7 @@ MySQL 在 SELECT 语句、多表更新、多表删除语句中支持join操作�
 使用 ON 关键字来设定连接条件，也可以使用 WHERE 来代替。通常使用 ON 关键字来设定连接条件，使用 WHERE 关键字来进行结果集记录的过滤。
 
 ##### 5) 多表连接
+这里就是 将多个表结合为一个表，然后查询结合的这个表当中的内容
 ```
 mysql> select goods_id, goods_name, cate_name, brand_name, goods_price from tdb_goods as g
     -> inner join tdb_goods_cates as c on g.cate_id = c.cate_id
@@ -569,3 +572,205 @@ A LEFT JOIN B jion_condition
 如果数据表A的某跳记录符合WHERE条件，但是在数据表B不存在符合连接条件的记录，将生成一个所有列为空的额外的B行。
 
 ##### 6) 无限集分类表设计
+
+----------
+
+### 第六章 运算符和函数
+
+#### 一、字符函数
+| 函数名称          | 描述             |
+|:--------------|:---------------|
+| `CONCAT()`    | 字符连接           |
+| `CONCAT_WS()` | 使用指定的分隔份进行字符连接 |
+| `FORMAT()`    | 数字格式化          |
+| `LOWER()`     | 转换成小写字母        |
+| `UPPER()`     | 转换成大写字母        |
+| `LFET()`      | 获取左侧字符         |
+| `RIGHT()`     | 获取右侧字符         |
+| `LENGTH()`    | 获取字符串长度        |
+| `LTRIM()`     | 删除前导空格         |
+| `RTRIM()`     | 删除后续空格         |
+| `TRIM()`      | 删除前导后续空格       |
+| `SUBSTRING()` | 字符串截取          |
+| `[NOT]LIKE()` | 模式匹配           |
+| `REPLACE()`   | 字符串替换          |
+
+##### 1) `select concat('aaa', 'bbb');`
+select 为查询功能。事实上感觉起来他更像是输出功能，如一些数据表的查询，它只是负责将后面的结果输出的命令行
+
+##### 2) 示例
+1. `select concat_ws('|', first_name, last_name) as fullname from test;
+`
+2. `select lower(right('ABCDE', 3));`
+3. `select trim(both '?' from '????MySql??'); → MySQL`
+4. `select trim(leading '?' from '????MySql??');  →  MySql??`
+5. `select trim(trailing '?' from '????MySql??'); →  ????MySql`
+6. `select replace('???MySql--??', '?', '*'); →  ***MySql--**`
+7. `select substring('abcdef', 1, 3);  →  abc MySQL当中是从1开始不是0`
+8. `select * from test where first_name like '%o%';`
+9. `select * from test where first_name like '%1%' escape '1'; escape '1' 代表 1之后的 ％ 不是通配符而就是 简单的匹配 百分号`
+
+#### 二、数值运算符与函数
+| 函数名称         | 描述     |
+|:-------------|:-------|
+| `CEIL()`     | 进一取整   |
+| `DIV`        | 整数除法   |
+| `FLOOR()`    | 舍一取整   |
+| `MOD`        | 取余数/取模 |
+| `POWER()`    | 幂运算    |
+| `ROUND()`    | 四舍五入   |
+| `TRUNCATE()` | 数字截取   |
+
+#### 三、比较运算符与函数
+| 函数名称                     | 描述          |
+|:-------------------------|:------------|
+| `[NOT] BETWEEN...AND...` | [不]在范围之内    |
+| `[NOT] IN()`             | [不]在列出值范围之内 |
+| `IS [NOT] NULL`          | [不]为空       |
+
+#### 四、日期时间函数
+| 函数名称            | 描述     |
+|:----------------|:-------|
+| `NOW()`         | 当前日期时间 |
+| `CURDATE()`     | 当前日期   |
+| `CURTIME()`     | 当前时间   |
+| `DATE_ADD()`    | 日期变化   |
+| `DATE_DIFF()`   | 日期差值   |
+| `DATE_FORMAT()` | 日期格式化  |
+
+1. `select date_add('2013-10-1', interval 356 day);  →  2014-09-22`
+2. `select datediff('2011-12-01', '2012-12-01');  →  －366`
+3. `select date_format('2013-12-21', '%m/%d/%Y');  →  12/21/2013`
+
+#### 五、信息函数
+| 函数名称               | 描述         |
+|:-------------------|:-----------|
+| `CONNECTION_ID()`  | 连接ID       |
+| `DATABASE()`       | 当前数据库      |
+| `LAST_INSERT_ID()` | 最后插入记录的ID号 |
+| `USER()`           | 当前用户       |
+| `VERSION()`        | 版本信息       |
+
+#### 六、聚合函数
+| 函数名称      | 描述  |
+|:----------|:----|
+| `AVG()`   | 平均值 |
+| `COUNT()` | 计数  |
+| `MAX()`   | 最大值 |
+| `MIN()`   | 最小值 |
+| `SUM()`   | 求和  |
+
+#### 七、加密函数
+| 函数名称         | 描述     |
+|:-------------|:-------|
+| `MD5()`      | 信息摘要算法 |
+| `PASSWORD()` | 密码算法   |
+
+----------
+
+### 第七章 自定义函数简介
+用户自定义函数(user-defined function, UDF)，是一种对MySQL扩展的途径，其用户与内置函数相同
+
+无参数  
+```
+mysql> create function f1() returns varchar(40)
+    -> return date_format(now(), '%Y年%m月%d日 %H点:%i分:%s秒');
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select f1();
++-------------------------------------+
+| f1()                                |
++-------------------------------------+
+| 2018年11月08日 16点:36分:10秒       |
++-------------------------------------+
+1 row in set (0.01 sec) 
+```
+
+有参数 
+```
+mysql> create function f2(num1 smallint unsigned, num2 smallint unsigned)
+    -> returns float(10, 2) unsigned
+    -> return (num1 + num2) / 2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select f2(12, 32);
++------------+
+| f2(12, 32) |
++------------+
+|      22.00 |
++------------+
+1 row in set (0.01 sec)
+```
+
+
+----------
+
+### 第八章 自定义函数简介
+1. 存储过程：是SQL语句和控制语句的预编译集合，以一个名称存储并作为一个单元处理。
+2. 参数：输入类型，输出类型，输入&&输出；
+3. 创建：CREATE...PROCEDURE...;
+4. 注意事项：
+    * 创建存储过程或者自定义函数时需要通过delimiter语句修改定界符。
+    * 如果函数体或过程体有多个语句，需要包含在BEGIN...END语句块中。
+    * 存储过程通过call调用。
+
+#### 一、创建存储过程
+##### 1) 语法结构
+```
+CREATE
+[DEFINER={user|CURRENT_USER}] 指定哪个用户创建的这个存储过程
+PROCEDURE sp_name([proc_paremeter[,…]])
+[characteristic…] routine_body
+
+proc_paremeter:
+[IN|OUT|INOUT]param_name type
+```
+
+##### 2) 参数释义
+1. in:表示该参数的值必须在调用存储过程时指定；
+2. out:表示该参数的值可以被存储过程改变，并且可以返回；
+3. inout:表示该参数在调用时指定，并且可以被改变和返回
+
+##### 3) 特性
+1. COMMENT:注释
+2. CONTAINS SQL:包含sql语句，但不包含读或者写数据的语句；
+3. NOT SQL：不包含sql语句；
+4. READS SQL DATA:包含读数据的语句；
+5. MODIFIES SQL DATEA:包含写数据的语句；
+6. SQL SECURITY{DEFINER|INVOKER}:指明谁有权限连执行
+ 
+##### 4) 过程体
+1. 过程体由合法的sql语句构成；
+2. 过程体可以是任意的sql语句；
+3. 过程体如果为复合结构则使用begin_end语句；
+4. 复合结构可以包含声明、循环、控制结构
+
+创建不带参数的存储过程  
+```
+mysql> create procedure sp1() select version();
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call sp1();
++-----------+
+| version() |
++-----------+
+| 5.7.24    |
++-----------+
+1 row in set (0.01 sec)
+```
+
+----------
+
+### 第九章 存储引擎
+####一、设置存储引擎
+##### 1) 通过修改mysql配置文件实现：
+default-storage-engine=engine;
+##### 2) 通过创建数据表命令来实现
+```
+create table table_name(
+……
+……
+)engine=engine;
+```
+##### 3) 修改数据表的存储引擎
+ALTER tb_name engine =engine
