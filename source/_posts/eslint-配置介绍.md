@@ -60,8 +60,8 @@ globals: {
 ```
 
 ### plugins —— 第三方插件
-插件名称可以省略 `eslint-plugin-` 前缀  
-引入第三方插件后即可在 extends 中指定使用
+1. `plugin` 可以 为当前 的 eslint 提供额外的功能，如 `eslint-plugin-vue`，其可支持校验 `html` 部分，单独的 `eslint` 则是仅能校验 `js` 的。
+2. 插件名称可以省略 `eslint-plugin-` 前缀
 ```
 "plugins": [
     "plugin1",
@@ -70,7 +70,10 @@ globals: {
 ```
 
 ### extends —— 基础配置
-用于引入某配置作为基础配置，然后再在后续的rules中对其进行扩展
+1. `eslint-config-prettier` 为例，其主代码就是 各种 `rules` 的开关，其本身并不是插件，更没有说提供一套规则（这是 plugin）的功能，`eslint-config-prettier` 本身既是基于 `eslint` 自带的规则进行开关罢了。  
+  其 github 介绍也说了 Turns off all rules that are unnecessary or might conflict with Prettier.
+2. 与 `eslint` 相类似的，如 `stylelint`，无论是 `plugin` 还是 `extends` 都是与 `eslint` 这里一致的
+3. extends 属性值，可以为字符串，或者字符串数组
 ```
 extends: 'eslint:recommended',
 ```
