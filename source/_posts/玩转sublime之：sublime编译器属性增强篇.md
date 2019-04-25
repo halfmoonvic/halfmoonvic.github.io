@@ -13,6 +13,7 @@ tags:
 > mac     -- super+alt+n
 ##### 3) 偏好设置
 可以创建别名及其默认别名以在不同的目录下快速的创建文件
+
 ```
 User/AdvancedNewFile.sublime-settings
 {
@@ -135,13 +136,15 @@ User\dired.sublime-settings
     ]
 }
 ```
+
 ##### 4) 主题色修改
-###### 4.1 `PackageResourceViwer` 插件修改
+###### 4.1 方式一： `PackageResourceViwer` 插件修改
 可通过 安装 `PackageResourceViwer` 插件直接修改 `FileBrowser dired-rename-mode.hidden-tmTheme and dired.hidden-tmTheme` 的主题颜色。 
-###### 4.2 偏好设置修改
+###### 4.2 方式二： 偏好设置修改
 1. 将修改好的 `dired-rename-mode.hidden-tmTheme` 和 `dired.hidden-tmTheme` 两个文件放置到 `User` 目录下面，
 2. `User\dired.sublime-settings` 中的偏好设置已经设置好了普通模式下所采用的 `tmTheme` 文件。
 3. `User\dired-rename-mode.sublime-settings` 中已经设置好了 修改名称模式下的 主题，直接将 `dired-rename-mode.sublime-settings` 文件放入到 `User\`目录下
+
 ###### 4.3 主题色文件 部分
 ```
 <key>background</key>
@@ -340,6 +343,11 @@ EOF
     fi
 fi  
 ```
+
+##### 4) windows下偏好设置（windows打开 C盘的cmder有管理员权限问题）
+1. 如果仅是设置 `c:\cmder.exe`　为管理员权限，sublime则无法直接打开
+2. 相应的如果将 `c:\sublime text.exe` 设置为管理员权限打开，sublime可以直接打开 cmder.exe，但是一些文件 无法 通过拖拽到 sublime 窗口完成打开操作
+3. 最为可行的办法则是将 `cmder.exe` 文件所在的目录的权限设置为 所有用户可访问的状态
 
 #### 十六、 `Terminus` [🔗️ 7k](https://packagecontrol.io/packages/Terminus)
 ##### 1) 简介

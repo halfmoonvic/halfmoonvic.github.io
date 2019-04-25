@@ -10,10 +10,11 @@ tags:
 1. 安装 gvm [🔗️](https://github.com/moovweb/gvm)   
     `bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 `
-2. `gvm install go1.7.3 -B`
-3. `gvm use go1.7.3`
-4. `export GOROOT_BOOSTRAP=/Users/john/.gvm/gos/go1.7.3`
-5. `gvm install goxxx`
+2. `.bash_profile`脚本中写入 `[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"`，以便在命令行中可以使用 gvm
+3. `gvm install go1.7.3 -B`
+4. `gvm use go1.7.3`
+5. `export GOROOT_BOOSTRAP=/Users/john/.gvm/gos/go1.7.3`
+6. `gvm install goxxx`
 
 ##### 2) gvm 使用注意事项
 1. 如果下载好 gvm 后，直接 `go install go1.11.4`，则会报编译报错。Go 1.5 发布，完全移除 C，使用 Go 编译 Go，所以，在下载安装最新的 go 的时候，需要先安装一个低版本的 的来编译
