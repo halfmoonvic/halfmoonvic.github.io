@@ -366,7 +366,17 @@ prettier@1.15.3 校验后为
 
 #### 三、 `Nodejs`  [🔗️ 286k](https://packagecontrol.io/packages/Nodejs)
 ##### 1) 简介
-1.  node 的一些常用 snippets. alt+r 运行当前js文件。 alt+d 以debug模式运行当前js文件
+1. Code Completion Nodejs
+2. Run current script in node (alt+r) 
+3. Run current script in node debug (Alt + D)
+
+##### 2) [No module name AIX ](https://github.com/tanepiper/SublimeText-Nodejs/issues/98)
+You need to add:  
+`AIX = sys.platform.startswith("aix")`  
+in `psutil\st3_windows_x32\psutil\_common.py and psutil\st3_windows_x64\psutil\_common.py` files  
+after:  
+`SUNOS = sys.platform.startswith("sunos") or sys.platform.startswith("solaris")`
+
 
 #### 四、 `React ES6 Snippets`  [🔗️ 63k](https://packagecontrol.io/packages/React%20ES6%20Snippets)
 ##### 1) 简介
