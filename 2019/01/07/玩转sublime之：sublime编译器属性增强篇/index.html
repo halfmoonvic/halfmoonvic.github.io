@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、 AdvancedNewFile 🔗️ 521k1) 简介快速创建文件 2) 快捷键 windows – ctrl+alt+nmac     – super+alt+n  3) 偏好设置可以创建别名及其默认别名以在不同的目录下快速的创建文件 1234567891011121314151617181920212223242526272829303132333435363738394041424">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩转sublime之：sublime工具增强篇">
+<meta property="og:url" content="http://yoursite.com/2019/01/07/玩转sublime之：sublime编译器属性增强篇/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="一、 AdvancedNewFile 🔗️ 521k1) 简介快速创建文件 2) 快捷键 windows – ctrl+alt+nmac     – super+alt+n  3) 偏好设置可以创建别名及其默认别名以在不同的目录下快速的创建文件 1234567891011121314151617181920212223242526272829303132333435363738394041424">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-03-14T05:35:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="玩转sublime之：sublime工具增强篇">
+<meta name="twitter:description" content="一、 AdvancedNewFile 🔗️ 521k1) 简介快速创建文件 2) 快捷键 windows – ctrl+alt+nmac     – super+alt+n  3) 偏好设置可以创建别名及其默认别名以在不同的目录下快速的创建文件 1234567891011121314151617181920212223242526272829303132333435363738394041424">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/07/玩转sublime之：sublime编译器属性增强篇/"/>
+
+
+
+
+
+  <title>玩转sublime之：sublime工具增强篇 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/07/玩转sublime之：sublime编译器属性增强篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">玩转sublime之：sublime工具增强篇</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-07T16:00:10+08:00">
+                2019-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IDE/" itemprop="url" rel="index">
+                    <span itemprop="name">IDE</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/07/玩转sublime之：sublime编译器属性增强篇/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/07/玩转sublime之：sublime编译器属性增强篇/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/01/07/玩转sublime之：sublime编译器属性增强篇/" class="leancloud_visitors" data-flag-title="玩转sublime之：sublime工具增强篇">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="一、-AdvancedNewFile-🔗️-521k"><a href="#一、-AdvancedNewFile-🔗️-521k" class="headerlink" title="一、 AdvancedNewFile 🔗️ 521k"></a>一、 <code>AdvancedNewFile</code> <a href="https://packagecontrol.io/packages/AdvancedNewFile" target="_blank" rel="noopener">🔗️ 521k</a></h4><h5 id="1-简介"><a href="#1-简介" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>快速创建文件</p>
+<h5 id="2-快捷键"><a href="#2-快捷键" class="headerlink" title="2) 快捷键"></a>2) 快捷键</h5><blockquote>
+<p>windows – ctrl+alt+n<br>mac     – super+alt+n</p>
+</blockquote>
+<h5 id="3-偏好设置"><a href="#3-偏好设置" class="headerlink" title="3) 偏好设置"></a>3) 偏好设置</h5><p>可以创建别名及其默认别名以在不同的目录下快速的创建文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">User/AdvancedNewFile.sublime-settings</span><br><span class="line">&#123;</span><br><span class="line">    // This setting contains a dictionary of aliases. The keys represent the</span><br><span class="line">    // alias names, the values represent the paths.</span><br><span class="line">    // NOTE: These should be absolute paths. Also, these paths should</span><br><span class="line">    // match your systems convention. For example, Windows machines should</span><br><span class="line">    // have paths similar to &quot;C:\\Users\\username\\Desktop&quot;. *nix systems should</span><br><span class="line">    // have paths similar to &quot;/home/username/desktop&quot;.</span><br><span class="line">    // 这个只能在单一的平台上使用，直接使用下面那个</span><br><span class="line">    &quot;alias&quot;: &#123;</span><br><span class="line">        // &quot;d&quot;: &quot;C:\\Users\\John\\Desktop&quot;,</span><br><span class="line">        // &quot;i&quot;: &quot;D:\\_Nutstore\\_Inbox&quot;</span><br><span class="line">        // &quot;j&quot;: &quot;~&quot;,</span><br><span class="line">        // &quot;i&quot;: &quot;~/_Nutstore/_Inbox&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    // This is a secondary field for aliases. These aliases will be platform specific.</span><br><span class="line">    // The key for the entry will still represent the name to be used for the alias.</span><br><span class="line">    // Rather than being just a string path, the value will be a nested dictionary.</span><br><span class="line">    // The dictionary may have one of three keys, &quot;windows&quot;, &quot;linux&quot;, or &quot;osx&quot;.</span><br><span class="line">    // The path used for this alias will be based on the operating system being used.</span><br><span class="line">    &quot;os_specific_alias&quot;: &#123;</span><br><span class="line">        &quot;subl_packages&quot;: &#123;</span><br><span class="line">            &quot;windows&quot;: &quot;~\\AppData\\Roaming\\Sublime Text 3\\Packages&quot;,</span><br><span class="line">            &quot;linux&quot;: &quot;~/.config/sublime-text-3/Packages&quot;,</span><br><span class="line">            &quot;osx&quot;: &quot;~/Library/Application Support/Sublime Text 3/Packages&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;d&quot;: &#123;</span><br><span class="line">            &quot;windows&quot;: &quot;C:\\Users\\John\\Desktop&quot;,</span><br><span class="line">            &quot;osx&quot;: &quot;~/Desktop&quot;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;h&quot;: &#123;</span><br><span class="line">            &quot;windows&quot;: &quot;C:\\Users\\John&quot;,</span><br><span class="line">            &quot;osx&quot;: &quot;~&quot;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;i&quot;: &#123;</span><br><span class="line">            &quot;windows&quot;: &quot;D:\\_Nutstore\\_Inbox&quot;,</span><br><span class="line">            &quot;osx&quot;: &quot;~/_Nutstore/_Inbox&quot;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;w&quot;: &#123;</span><br><span class="line">            &quot;windows&quot;: &quot;D:\\Work&quot;,</span><br><span class="line">            &quot;osx&quot;: &quot;~/Work&quot;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    // A default initial value to fill the create new file input path with.</span><br><span class="line">    &quot;default_initial&quot;: &quot;h:&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="二、-AutoFileName-🔗️-895k"><a href="#二、-AutoFileName-🔗️-895k" class="headerlink" title="二、 AutoFileName 🔗️ 895k"></a>二、 <code>AutoFileName</code> <a href="https://packagecontrol.io/packages/AutoFileName" target="_blank" rel="noopener">🔗️ 895k</a></h4><p>文件路径自动提示补全</p>
+<h5 id="1-快捷键"><a href="#1-快捷键" class="headerlink" title="1) 快捷键"></a>1) 快捷键</h5><p>无</p>
+<h5 id="2-偏好设置"><a href="#2-偏好设置" class="headerlink" title="2) 偏好设置"></a>2) 偏好设置</h5><p>无</p>
+<h4 id="三、-ConvertToUTF8-————-显示中文"><a href="#三、-ConvertToUTF8-————-显示中文" class="headerlink" title="三、 ConvertToUTF8 ———— 显示中文"></a>三、 <code>ConvertToUTF8</code> ———— 显示中文</h4><h5 id="1-简介-1"><a href="#1-简介-1" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>windows/mac 平台下中文乱码问题解决方案</p>
+<h5 id="2-快捷键设置"><a href="#2-快捷键设置" class="headerlink" title="2) 快捷键设置"></a>2) 快捷键设置</h5><p><code>ConvertToUTF8</code> 默认快捷键 <code>super+shift+c</code> 与 <code>colorPicker</code> 相冲突<br>将以下三个文件拖放到 <code>Packages\ConvertToUTF8</code> 中以覆盖默认的快捷键设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">\Packages\ConvertToUTF8\Default (Linux).sublime-keymap</span><br><span class="line">[</span><br><span class="line">    &#123; &quot;keys&quot;: [&quot;ctrl+shift+8&quot;], &quot;command&quot;: &quot;convert_to_utf8&quot;, &quot;args&quot;: &#123;&quot;encoding&quot;: &quot;GBK&quot;, &quot;stamp&quot;: &quot;0&quot; &#125; &#125;</span><br><span class="line">]</span><br><span class="line">\Packages\ConvertToUTF8\Default (OSX).sublime-keymap</span><br><span class="line">[</span><br><span class="line">    &#123; &quot;keys&quot;: [&quot;super+shift+8&quot;], &quot;command&quot;: &quot;convert_to_utf8&quot;, &quot;args&quot;: &#123;&quot;encoding&quot;: &quot;GBK&quot;, &quot;stamp&quot;: &quot;0&quot; &#125; &#125;</span><br><span class="line">]</span><br><span class="line">\Packages\ConvertToUTF8\Default (Windows).sublime-keymap</span><br><span class="line">[</span><br><span class="line">    &#123; &quot;keys&quot;: [&quot;ctrl+shift+8&quot;], &quot;command&quot;: &quot;convert_to_utf8&quot;, &quot;args&quot;: &#123;&quot;encoding&quot;: &quot;GBK&quot;, &quot;stamp&quot;: &quot;0&quot; &#125; &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、-Codecs​33-🔗️-895k"><a href="#四、-Codecs​33-🔗️-895k" class="headerlink" title="四、 Codecs​33 🔗️ 895k"></a>四、 <code>Codecs​33</code> <a href="https://packagecontrol.io/packages/AutoFileName" target="_blank" rel="noopener">🔗️ 895k</a></h4><h5 id="1-简介-2"><a href="#1-简介-2" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>由于 Sublime Text 3 内嵌的 Python 限制，ConvertToUTF8 可能无法正常工作。你可以安装本插件来解决这一问题</p>
+<h5 id="2-平台"><a href="#2-平台" class="headerlink" title="2) 平台"></a>2) 平台</h5><p><code>OS\LINUX</code></p>
+<h4 id="五、-FileBrowser-🔗️-50k"><a href="#五、-FileBrowser-🔗️-50k" class="headerlink" title="五、 FileBrowser 🔗️ 50k"></a>五、 <code>FileBrowser</code> <a href="https://packagecontrol.io/packages/FileBrowser" target="_blank" rel="noopener">🔗️ 50k</a></h4><h5 id="1-简介-3"><a href="#1-简介-3" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>文件浏览树，可通过vim的操作方式创建删除选择文件</p>
+<h5 id="2-快捷键-1"><a href="#2-快捷键-1" class="headerlink" title="2) 快捷键"></a>2) 快捷键</h5><p>在打开文件的情况下，<code>F1</code> 可直接打开当前文件所在目录树<br>在目录树下面按 <code>P</code> 键，可查看自己预订义的 <code>jump_points</code></p>
+<h5 id="3-偏好设置-1"><a href="#3-偏好设置-1" class="headerlink" title="3) 偏好设置"></a>3) 偏好设置</h5><p>此处的偏好设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">User\dired.sublime-settings</span><br><span class="line">----------</span><br><span class="line">&#123;</span><br><span class="line">    &quot;color_scheme&quot;: &quot;Packages/user/FileBrowser/dired.hidden-tmTheme&quot;,</span><br><span class="line">    &quot;dired_autorefresh&quot;: false,</span><br><span class="line">    &quot;dired_open_on_jump&quot;: true,</span><br><span class="line">    &quot;dired_jump_points&quot;:</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;* BLOG *&quot;: &quot;/Users/john/_Git/halfmoonvic.github.io/source/_posts/&quot;,</span><br><span class="line">        &quot;* FACE *&quot;: &quot;/Users/john/Work/fe-face/&quot;,</span><br><span class="line">        &quot;* Git *&quot;: &quot;/Users/john/_Git/&quot;,</span><br><span class="line">        &quot;* Go *&quot;: &quot;/Users/john/Go/src/&quot;,</span><br><span class="line">        &quot;* HOME *&quot;: &quot;/Users/john/&quot;,</span><br><span class="line">        &quot;* Nutstore *&quot;: &quot;/Users/john/_Nutstore/&quot;,</span><br><span class="line">        &quot;* Plum *&quot;: &quot;/Users/john/_Git/plum/&quot;,</span><br><span class="line">        &quot;* Rime *&quot;: &quot;/Users/john/Library/Rime/&quot;,</span><br><span class="line">        &quot;* RimeSync *&quot;: &quot;/Users/john/_Nutstore/Backups/RimeSync/&quot;,</span><br><span class="line">        &quot;* Subl *&quot;: &quot;/Users/john/Library/Application Support/Sublime Text 3/Packages/User/&quot;,</span><br><span class="line">        &quot;* Sublime *&quot;: &quot;/Users/john/_Nutstore/App/Sublime/&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;dired_to_copy&quot;:</span><br><span class="line">    [</span><br><span class="line">    ],</span><br><span class="line">    &quot;dired_to_move&quot;:</span><br><span class="line">    [</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="4-主题色修改"><a href="#4-主题色修改" class="headerlink" title="4) 主题色修改"></a>4) 主题色修改</h5><h6 id="4-1-方式一：-PackageResourceViwer-插件修改"><a href="#4-1-方式一：-PackageResourceViwer-插件修改" class="headerlink" title="4.1 方式一： PackageResourceViwer 插件修改"></a>4.1 方式一： <code>PackageResourceViwer</code> 插件修改</h6><p>可通过 安装 <code>PackageResourceViwer</code> 插件直接修改 <code>FileBrowser dired-rename-mode.hidden-tmTheme and dired.hidden-tmTheme</code> 的主题颜色。 </p>
+<h6 id="4-2-方式二：-偏好设置修改"><a href="#4-2-方式二：-偏好设置修改" class="headerlink" title="4.2 方式二： 偏好设置修改"></a>4.2 方式二： 偏好设置修改</h6><ol>
+<li>将修改好的 <code>dired-rename-mode.hidden-tmTheme</code> 和 <code>dired.hidden-tmTheme</code> 两个文件放置到 <code>User</code> 目录下面，</li>
+<li><code>User\dired.sublime-settings</code> 中的偏好设置已经设置好了普通模式下所采用的 <code>tmTheme</code> 文件。</li>
+<li><code>User\dired-rename-mode.sublime-settings</code> 中已经设置好了 修改名称模式下的 主题，直接将 <code>dired-rename-mode.sublime-settings</code> 文件放入到 <code>User\</code>目录下</li>
+</ol>
+<h6 id="4-3-主题色文件-部分"><a href="#4-3-主题色文件-部分" class="headerlink" title="4.3 主题色文件 部分"></a>4.3 主题色文件 部分</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;key&gt;background&lt;/key&gt;</span><br><span class="line">&lt;string&gt;#282C34&lt;/string&gt;         &lt;!-- ### 更改背景色 --&gt;</span><br><span class="line">&lt;key&gt;foreground&lt;/key&gt;</span><br><span class="line">&lt;string&gt;#ABB2BF&lt;/string&gt;         &lt;!-- ### 文字颜色 --&gt;</span><br><span class="line">&lt;key&gt;gutter&lt;/key&gt;</span><br><span class="line">&lt;string&gt;#282C34&lt;/string&gt;         &lt;!-- ### 修改凹槽的背景色 --&gt;</span><br><span class="line">&lt;key&gt;selection&lt;/key&gt;</span><br><span class="line">&lt;string&gt;#1C4BDB&lt;/string&gt;         &lt;!-- ### 选中区域的颜色 --&gt;</span><br><span class="line">&lt;key&gt;selectionBorder&lt;/key&gt;</span><br><span class="line">&lt;string&gt;#1C4BDB&lt;/string&gt;         &lt;!-- ### 选中区域的颜色 --&gt;</span><br><span class="line">&lt;key&gt;background&lt;/key&gt;</span><br><span class="line">&lt;string&gt;#282C34&lt;/string&gt;        &lt;!-- ### 修改文件的背景色 --&gt;</span><br><span class="line">&lt;key&gt;foreground&lt;/key&gt;</span><br><span class="line">&lt;string&gt;#F09609&lt;/string&gt;        &lt;!-- ### 修改的文件 绿色 00c406 --&gt;</span><br><span class="line">&lt;key&gt;background&lt;/key&gt;</span><br><span class="line">&lt;string&gt;#282C34&lt;/string&gt;        &lt;!-- ### 未追踪的文件 的背景色 --&gt;</span><br><span class="line">&lt;key&gt;foreground&lt;/key&gt;</span><br><span class="line">&lt;string&gt;#FF0000&lt;/string&gt;        &lt;!-- ### 未追踪的文件 --&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="六、-IMESupport-🔗️-219k"><a href="#六、-IMESupport-🔗️-219k" class="headerlink" title="六、 IMESupport 🔗️ 219k"></a>六、 <code>IMESupport</code> <a href="https://packagecontrol.io/packages/IMESupport" target="_blank" rel="noopener">🔗️ 219k</a></h4><h5 id="1-简介-4"><a href="#1-简介-4" class="headerlink" title="1) 简介"></a>1) 简介</h5><p><a href="https://github.com/SublimeTextIssues/Core/issues/468" target="_blank" rel="noopener">[CJK] Handling IME message on Windows for Chinese,Korean,Japanese user.</a><br>sublime本身不支 持输入法跟随光标，作者做此插件<br>上面作者未解决win10输入法跟随问题和新版小狼毫。国内达人fork其代码而制作的另外一份<br><a href="https://github.com/zcodes/IMESupport" target="_blank" rel="noopener">Sublime Text 3 Windows 下拼音输入法支持</a></p>
+<h4 id="七、-FindKeyConflicts-🔗️-33k"><a href="#七、-FindKeyConflicts-🔗️-33k" class="headerlink" title="七、 FindKeyConflicts 🔗️ 33k"></a>七、 <code>FindKeyConflicts</code> <a href="https://packagecontrol.io/packages/FindKeyConflicts" target="_blank" rel="noopener">🔗️ 33k</a></h4><h5 id="1-简介-5"><a href="#1-简介-5" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>找到冲突的 快捷键</p>
+<h4 id="八、-Local-History-🔗️-57k"><a href="#八、-Local-History-🔗️-57k" class="headerlink" title="八、 Local History 🔗️ 57k"></a>八、 <code>Local History</code> <a href="https://packagecontrol.io/packages/Local%20History" target="_blank" rel="noopener">🔗️ 57k</a></h4><h5 id="1-简介-6"><a href="#1-简介-6" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>文件历时更改记录保留，只保留关闭文件时的文件状态</p>
+<h4 id="九、-PackageResourceViewer-🔗️-213k"><a href="#九、-PackageResourceViewer-🔗️-213k" class="headerlink" title="九、 PackageResourceViewer 🔗️ 213k"></a>九、 <code>PackageResourceViewer</code> <a href="https://packagecontrol.io/packages/PackageResourceViewer" target="_blank" rel="noopener">🔗️ 213k</a></h4><h5 id="1-简介-7"><a href="#1-简介-7" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>Plugin to assist viewing and editing package resources in Sublime Text 3.</li>
+<li><code>Command Palette</code>命令下敲入 <code>package openresource</code> 后，可以迅速的查找更改插件的配置</li>
+</ol>
+<h4 id="十、-RawLineEdit-🔗️-15k"><a href="#十、-RawLineEdit-🔗️-15k" class="headerlink" title="十、 RawLineEdit 🔗️ 15k"></a>十、 <code>RawLineEdit</code> <a href="https://packagecontrol.io/packages/RawLineEdit" target="_blank" rel="noopener">🔗️ 15k</a></h4><h5 id="1-简介-8"><a href="#1-简介-8" class="headerlink" title="1) 简介"></a>1) 简介</h5><p><code>Command Palette</code> 命令下敲入 rawlineedit toggle，显示换行符</p>
+<h4 id="十一、-SideBarEnhancements-🔗️-2M"><a href="#十一、-SideBarEnhancements-🔗️-2M" class="headerlink" title="十一、 SideBarEnhancements 🔗️ 2M"></a>十一、 <code>SideBarEnhancements</code> <a href="https://packagecontrol.io/packages/SideBarEnhancements" target="_blank" rel="noopener">🔗️ 2M</a></h4><h5 id="1-简介-9"><a href="#1-简介-9" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>侧边栏增强工具，右键在资源管理器中打开、新建文件、新建文件夹、以…打开、在浏览器中打开。</p>
+<h5 id="2-偏好设置-1"><a href="#2-偏好设置-1" class="headerlink" title="2) 偏好设置"></a>2) 偏好设置</h5><p>借助<code>Appserv</code> 可直接在 sublime 当中以 <code>localhost</code> 形式打开文件<br><a href="https://my.oschina.net/u/925202/blog/542894" target="_blank" rel="noopener">https://my.oschina.net/u/925202/blog/542894</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SideBarEnhancements.json</span><br><span class="line">----------</span><br><span class="line">&#123;</span><br><span class="line">    &quot;C:\\Program Files (x86)\\AppServ\\www&quot;:&#123;</span><br><span class="line">        &quot;url_testing&quot;:&quot;http://localhost/&quot;,</span><br><span class="line">        &quot;url_production&quot;:&quot;http://domain.tld/&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;experimental/&quot;:&#123;</span><br><span class="line">        &quot;url_testing&quot;:&quot;http://experimental/&quot;,</span><br><span class="line">        &quot;url_production&quot;:&quot;http://domain.tld/&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;&quot;:&#123;</span><br><span class="line">        &quot;url_testing&quot;:&quot;http://the_url_for_the_project_root/&quot;,</span><br><span class="line">        &quot;url_production&quot;:&quot;http://the_url_for_the_project_root/&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十二、-Status-Bar-File-Size-🔗️-5k"><a href="#十二、-Status-Bar-File-Size-🔗️-5k" class="headerlink" title="十二、 Status Bar File Size 🔗️ 5k"></a>十二、 <code>Status Bar File Size</code> <a href="https://packagecontrol.io/packages/Status%20Bar%20File%20Size" target="_blank" rel="noopener">🔗️ 5k</a></h4><h5 id="1-简介-10"><a href="#1-简介-10" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>状态栏显示文件大小</p>
+<h4 id="十三、-Sublimerge-3-与-Sublimerge-Pro-🔗️-63k-🔗️-131k"><a href="#十三、-Sublimerge-3-与-Sublimerge-Pro-🔗️-63k-🔗️-131k" class="headerlink" title="十三、 Sublimerge 3 与 Sublimerge Pro 🔗️ 63k 🔗️ 131k"></a>十三、 <code>Sublimerge 3</code> 与 <code>Sublimerge Pro</code> <a href="https://packagecontrol.io/packages/Sublimerge%203" target="_blank" rel="noopener">🔗️ 63k</a> <a href="https://packagecontrol.io/packages/Sublimerge%20Pro" target="_blank" rel="noopener">🔗️ 131k</a></h4><h5 id="1-简介-11"><a href="#1-简介-11" class="headerlink" title="1) 简介"></a>1) 简介</h5><p><code>Sublimerge 3</code> 免费 <code>Sublimerge Pro</code> 付费<br>两者皆是文件差异比较工具，<code>Sublimerge Pro</code> 使用体验更佳</p>
+<h4 id="十四、-TabsExtra-🔗️-17k"><a href="#十四、-TabsExtra-🔗️-17k" class="headerlink" title="十四、 TabsExtra 🔗️ 17k"></a>十四、 <code>TabsExtra</code> <a href="https://packagecontrol.io/packages/TabsExtra" target="_blank" rel="noopener">🔗️ 17k</a></h4><h5 id="1-简介-12"><a href="#1-简介-12" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>安装后右键单击Sublime里的文件标签，选clone就能在新标签中打开同一文件。<br>配合Alt+Shift+2可以方便地分屏浏览</p>
+<h4 id="十五、-Terminal-🔗️-550k"><a href="#十五、-Terminal-🔗️-550k" class="headerlink" title="十五、 Terminal 🔗️ 550k"></a>十五、 <code>Terminal</code> <a href="https://packagecontrol.io/packages/Terminal" target="_blank" rel="noopener">🔗️ 550k</a></h4><h5 id="1-简介-13"><a href="#1-简介-13" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>在 sublime 处 直接调出 cmd 等命令行</p>
+<h5 id="2-快捷键-2"><a href="#2-快捷键-2" class="headerlink" title="2) 快捷键"></a>2) 快捷键</h5><h5 id="1-去除默认快捷键"><a href="#1-去除默认快捷键" class="headerlink" title="1. 去除默认快捷键"></a>1. 去除默认快捷键</h5><p><code>Packages\Terminal</code> 目录下 去除默认快捷键<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Default (Linux).sublime-keymap</span><br><span class="line">Default (OSX).sublime-keymap</span><br><span class="line">Default (Windows).sublime-keymap</span><br><span class="line">－－－－－－－－－－</span><br><span class="line">[</span><br><span class="line">    &#123; &quot;keys&quot;: [&quot;&quot;], &quot;command&quot;: &quot;open_terminal&quot; &#125;,</span><br><span class="line">    &#123; &quot;keys&quot;: [&quot;&quot;], &quot;command&quot;: &quot;open_terminal_project_folder&quot; &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h5 id="2-自定义快捷键"><a href="#2-自定义快捷键" class="headerlink" title="2. 自定义快捷键"></a>2. 自定义快捷键</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">windows</span><br><span class="line">&#123; &quot;keys&quot;: [&quot;ctrl+shift+e&quot;], &quot;command&quot;: &quot;open_terminal&quot; &#125;,</span><br><span class="line">&#123; &quot;keys&quot;: [&quot;ctrl+shift+alt+e&quot;], &quot;command&quot;: &quot;open_terminal_project_folder&quot; &#125;,</span><br><span class="line">mac </span><br><span class="line">&#123; &quot;keys&quot;: [&quot;super+shift+e&quot;], &quot;command&quot;: &quot;open_terminal&quot; &#125;,</span><br><span class="line">&#123; &quot;keys&quot;: [&quot;ctrl+shift+super+e&quot;], &quot;command&quot;: &quot;open_terminal_project_folder&quot; &#125;,</span><br></pre></td></tr></table></figure>
+<h5 id="3-mac下偏好设置（mac无法直接打开iterm2）"><a href="#3-mac下偏好设置（mac无法直接打开iterm2）" class="headerlink" title="3) mac下偏好设置（mac无法直接打开iterm2）"></a>3) mac下偏好设置（mac无法直接打开iterm2）</h5><ol>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    // &quot;terminal&quot;: &quot;C:\\WINDOWS\\system32\\cmd.exe&quot;,</span><br><span class="line">    // &quot;terminal&quot;: &quot;C:\\Program Files\\cmder\\Cmder.exe&quot;,</span><br><span class="line">    &quot;terminal&quot;: &quot;iTerm.sh&quot;,</span><br><span class="line">    // &quot;parameters&quot;: [&quot;/START&quot;, &quot;%CWD%&quot;]</span><br><span class="line">    &quot;parameters&quot;: [&quot;open_terminal_project_folder&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>packageOpenResource 找到 <code>iTerm.sh</code>，末尾添加如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">CD_CMD=&quot;cd &quot;\\\&quot;$(pwd)\\\&quot;&quot; &amp;&amp; clear&quot;  </span><br><span class="line">if echo &quot;$SHELL&quot; | grep -E &quot;/fish$&quot; &amp;&gt; /dev/null; then  </span><br><span class="line">  CD_CMD=&quot;cd &quot;\\\&quot;$(pwd)\\\&quot;&quot;; and clear&quot;</span><br><span class="line">fi  </span><br><span class="line">VERSION=$(sw_vers -productVersion)  </span><br><span class="line">OPEN_IN_TAB=0</span><br><span class="line"></span><br><span class="line">while [ &quot;$1&quot; != &quot;&quot; ]; do  </span><br><span class="line">    PARAM=&quot;$1&quot;</span><br><span class="line">    VALUE=&quot;$2&quot;</span><br><span class="line">    case &quot;$PARAM&quot; in</span><br><span class="line">        --open-in-tab)</span><br><span class="line">            OPEN_IN_TAB=1</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">    shift</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">if (( $(expr $VERSION &apos;&lt;&apos; 10.7) )); then  </span><br><span class="line">    RUNNING=$(osascript&lt;&lt;END</span><br><span class="line">    tell application &quot;System Events&quot;</span><br><span class="line">        count(processes whose name is &quot;iTerm&quot;)</span><br><span class="line">    end tell</span><br><span class="line">END  </span><br><span class="line">)</span><br><span class="line">else  </span><br><span class="line">    RUNNING=1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if (( ! $RUNNING )); then  </span><br><span class="line">    osascript&lt;&lt;END</span><br><span class="line">    tell application &quot;iTerm&quot;</span><br><span class="line">            tell current window</span><br><span class="line">                tell current session of (create tab with default profile)</span><br><span class="line">                    write text &quot;$CD_CMD&quot;</span><br><span class="line">                end tell</span><br><span class="line">            end tell</span><br><span class="line">            activate</span><br><span class="line">    end tell</span><br><span class="line">END  </span><br><span class="line">else  </span><br><span class="line">    if (( $OPEN_IN_TAB )); then</span><br><span class="line">        osascript &amp;&gt;/dev/null &lt;&lt;EOF</span><br><span class="line">        tell application &quot;iTerm&quot;</span><br><span class="line">                    if (count of windows) = 0 then</span><br><span class="line">                        set theWindow to (create window with default profile)</span><br><span class="line">                        set theSession to current session of theWindow</span><br><span class="line">                    else</span><br><span class="line">                        set theWindow to current window</span><br><span class="line">                        tell current window</span><br><span class="line">                            set theTab to create tab with default profile</span><br><span class="line">                            set theSession to current session of theTab</span><br><span class="line">                        end tell</span><br><span class="line">                    end if</span><br><span class="line">                    tell theSession</span><br><span class="line">                        write text &quot;$CD_CMD&quot;</span><br><span class="line">                    end tell</span><br><span class="line">                    activate</span><br><span class="line">        end tell</span><br><span class="line">EOF  </span><br><span class="line">    else</span><br><span class="line">        osascript &amp;&gt;/dev/null &lt;&lt;EOF</span><br><span class="line">        tell application &quot;iTerm&quot;</span><br><span class="line">                    tell (create window with default profile)</span><br><span class="line">                        tell the current session</span><br><span class="line">                            write text &quot;$CD_CMD&quot;</span><br><span class="line">                        end tell</span><br><span class="line">                    end tell</span><br><span class="line">                    activate</span><br><span class="line">        end tell</span><br><span class="line">EOF  </span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="4-windows下偏好设置（windows打开-C盘的cmder有管理员权限问题）"><a href="#4-windows下偏好设置（windows打开-C盘的cmder有管理员权限问题）" class="headerlink" title="4) windows下偏好设置（windows打开 C盘的cmder有管理员权限问题）"></a>4) windows下偏好设置（windows打开 C盘的cmder有管理员权限问题）</h5><ol>
+<li>如果仅是设置 <code>c:\cmder.exe</code>　为管理员权限，sublime则无法直接打开</li>
+<li>相应的如果将 <code>c:\sublime text.exe</code> 设置为管理员权限打开，sublime可以直接打开 cmder.exe，但是一些文件 无法 通过拖拽到 sublime 窗口完成打开操作</li>
+<li>最为可行的办法则是将 <code>cmder.exe</code> 文件所在的目录的权限设置为 所有用户可访问的状态</li>
+</ol>
+<h4 id="十六、-Terminus-🔗️-7k"><a href="#十六、-Terminus-🔗️-7k" class="headerlink" title="十六、 Terminus 🔗️ 7k"></a>十六、 <code>Terminus</code> <a href="https://packagecontrol.io/packages/Terminus" target="_blank" rel="noopener">🔗️ 7k</a></h4><h5 id="1-简介-14"><a href="#1-简介-14" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>向 vscode 那样调出terminal</p>
+<h5 id="2-快捷键-3"><a href="#2-快捷键-3" class="headerlink" title="2) 快捷键"></a>2) 快捷键</h5><p><code>super+grave</code></p>
+<h4 id="十六、-BracketHighlighter-🔗️-1-72M"><a href="#十六、-BracketHighlighter-🔗️-1-72M" class="headerlink" title="十六、 BracketHighlighter 🔗️ 1.72M"></a>十六、 <code>BracketHighlighter</code> <a href="https://packagecontrol.io/packages/BracketHighlighter" target="_blank" rel="noopener">🔗️ 1.72M</a></h4><h5 id="1-简介-15"><a href="#1-简介-15" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>侧边栏成对出现相匹配的括号，放括弧花括弧等</li>
+<li>HTML tag 标签成对高亮　　<h5 id="2-偏好设置-2"><a href="#2-偏好设置-2" class="headerlink" title="2) 偏好设置"></a>2) 偏好设置</h5></li>
+<li><code>bh_core.sublime-settings</code> 当中记录了 不同 <code>{} － curly, () － round, [] － square, &lt;&gt; － angle, “” ” － quote</code> 对应不同的颜色设置</li>
+<li><code>bh_tag.sublime-settings</code> 则设置了tag匹配校验设置</li>
+<li>通过 PackageResourceViewer 插件 打开相应的主题文件 粘贴主题修改配置<code>tmThemeCode.json</code>中的内容<br> package openresource → monkai → Monokai - Spacegray Eighties.tmTheme</li>
+<li>主题修改配置 code 中的内容<br>有时候粘贴进去不生效的时候 等一下。进行 color theme  重新选择一下</li>
+</ol>
+<h4 id="十七、-EditorConfig-🔗️-163k"><a href="#十七、-EditorConfig-🔗️-163k" class="headerlink" title="十七、 EditorConfig 🔗️ 163k"></a>十七、 <code>EditorConfig</code> <a href="https://packagecontrol.io/packages/EditorConfig" target="_blank" rel="noopener">🔗️ 163k</a></h4><h5 id="1-简介-16"><a href="#1-简介-16" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>默认读取根目录下的 .editorconfig 配置，并且将会覆盖 sublime 默认的一些配置</li>
+<li>只有安装了此插件 才会 读取 根目录下的 <code>.editorconfig</code> 文件内容</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/07/玩转sublime之：前端系列环境搭建/" rel="next" title="玩转sublime之：前端系列环境搭建">
+                <i class="fa fa-chevron-left"></i> 玩转sublime之：前端系列环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/07/玩转sublime之：golang环境搭建/" rel="prev" title="玩转sublime之：golang环境搭建">
+                玩转sublime之：golang环境搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-AdvancedNewFile-🔗️-521k"><span class="nav-number">1.</span> <span class="nav-text">一、 AdvancedNewFile 🔗️ 521k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介"><span class="nav-number">1.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-快捷键"><span class="nav-number">1.2.</span> <span class="nav-text">2) 快捷键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-偏好设置"><span class="nav-number">1.3.</span> <span class="nav-text">3) 偏好设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-AutoFileName-🔗️-895k"><span class="nav-number">2.</span> <span class="nav-text">二、 AutoFileName 🔗️ 895k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-快捷键"><span class="nav-number">2.1.</span> <span class="nav-text">1) 快捷键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置"><span class="nav-number">2.2.</span> <span class="nav-text">2) 偏好设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-ConvertToUTF8-————-显示中文"><span class="nav-number">3.</span> <span class="nav-text">三、 ConvertToUTF8 ———— 显示中文</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-1"><span class="nav-number">3.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-快捷键设置"><span class="nav-number">3.2.</span> <span class="nav-text">2) 快捷键设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、-Codecs​33-🔗️-895k"><span class="nav-number">4.</span> <span class="nav-text">四、 Codecs​33 🔗️ 895k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-2"><span class="nav-number">4.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-平台"><span class="nav-number">4.2.</span> <span class="nav-text">2) 平台</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、-FileBrowser-🔗️-50k"><span class="nav-number">5.</span> <span class="nav-text">五、 FileBrowser 🔗️ 50k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-3"><span class="nav-number">5.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-快捷键-1"><span class="nav-number">5.2.</span> <span class="nav-text">2) 快捷键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-偏好设置-1"><span class="nav-number">5.3.</span> <span class="nav-text">3) 偏好设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-主题色修改"><span class="nav-number">5.4.</span> <span class="nav-text">4) 主题色修改</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#4-1-方式一：-PackageResourceViwer-插件修改"><span class="nav-number">5.4.1.</span> <span class="nav-text">4.1 方式一： PackageResourceViwer 插件修改</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-2-方式二：-偏好设置修改"><span class="nav-number">5.4.2.</span> <span class="nav-text">4.2 方式二： 偏好设置修改</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-3-主题色文件-部分"><span class="nav-number">5.4.3.</span> <span class="nav-text">4.3 主题色文件 部分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、-IMESupport-🔗️-219k"><span class="nav-number">6.</span> <span class="nav-text">六、 IMESupport 🔗️ 219k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-4"><span class="nav-number">6.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、-FindKeyConflicts-🔗️-33k"><span class="nav-number">7.</span> <span class="nav-text">七、 FindKeyConflicts 🔗️ 33k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-5"><span class="nav-number">7.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八、-Local-History-🔗️-57k"><span class="nav-number">8.</span> <span class="nav-text">八、 Local History 🔗️ 57k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-6"><span class="nav-number">8.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#九、-PackageResourceViewer-🔗️-213k"><span class="nav-number">9.</span> <span class="nav-text">九、 PackageResourceViewer 🔗️ 213k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-7"><span class="nav-number">9.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十、-RawLineEdit-🔗️-15k"><span class="nav-number">10.</span> <span class="nav-text">十、 RawLineEdit 🔗️ 15k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-8"><span class="nav-number">10.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十一、-SideBarEnhancements-🔗️-2M"><span class="nav-number">11.</span> <span class="nav-text">十一、 SideBarEnhancements 🔗️ 2M</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-9"><span class="nav-number">11.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置-1"><span class="nav-number">11.2.</span> <span class="nav-text">2) 偏好设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十二、-Status-Bar-File-Size-🔗️-5k"><span class="nav-number">12.</span> <span class="nav-text">十二、 Status Bar File Size 🔗️ 5k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-10"><span class="nav-number">12.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十三、-Sublimerge-3-与-Sublimerge-Pro-🔗️-63k-🔗️-131k"><span class="nav-number">13.</span> <span class="nav-text">十三、 Sublimerge 3 与 Sublimerge Pro 🔗️ 63k 🔗️ 131k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-11"><span class="nav-number">13.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十四、-TabsExtra-🔗️-17k"><span class="nav-number">14.</span> <span class="nav-text">十四、 TabsExtra 🔗️ 17k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-12"><span class="nav-number">14.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十五、-Terminal-🔗️-550k"><span class="nav-number">15.</span> <span class="nav-text">十五、 Terminal 🔗️ 550k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-13"><span class="nav-number">15.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-快捷键-2"><span class="nav-number">15.2.</span> <span class="nav-text">2) 快捷键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-去除默认快捷键"><span class="nav-number">15.3.</span> <span class="nav-text">1. 去除默认快捷键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-自定义快捷键"><span class="nav-number">15.4.</span> <span class="nav-text">2. 自定义快捷键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-mac下偏好设置（mac无法直接打开iterm2）"><span class="nav-number">15.5.</span> <span class="nav-text">3) mac下偏好设置（mac无法直接打开iterm2）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-windows下偏好设置（windows打开-C盘的cmder有管理员权限问题）"><span class="nav-number">15.6.</span> <span class="nav-text">4) windows下偏好设置（windows打开 C盘的cmder有管理员权限问题）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十六、-Terminus-🔗️-7k"><span class="nav-number">16.</span> <span class="nav-text">十六、 Terminus 🔗️ 7k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-14"><span class="nav-number">16.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-快捷键-3"><span class="nav-number">16.2.</span> <span class="nav-text">2) 快捷键</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十六、-BracketHighlighter-🔗️-1-72M"><span class="nav-number">17.</span> <span class="nav-text">十六、 BracketHighlighter 🔗️ 1.72M</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-15"><span class="nav-number">17.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置-2"><span class="nav-number">17.2.</span> <span class="nav-text">2) 偏好设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十七、-EditorConfig-🔗️-163k"><span class="nav-number">18.</span> <span class="nav-text">十七、 EditorConfig 🔗️ 163k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-16"><span class="nav-number">18.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/01/07/玩转sublime之：sublime编译器属性增强篇/';
+          this.page.identifier = '2019/01/07/玩转sublime之：sublime编译器属性增强篇/';
+          this.page.title = '玩转sublime之：sublime工具增强篇';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

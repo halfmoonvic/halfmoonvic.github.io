@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="苹果大屏展示项目适配问题总结一、布局篇1） flex 方案：布局统一使用 flex 进行布局。以首页为例。其中每一个Echats实例容器均通过 flex: 1 1 1px 的方式进行等比缩放方式 2） css3 方案：部分布局使用 calc(100% - 10px) 方式做的弹性布局 二、 关于rem1） rem使用场景 个人理解上，rem的使用场景仅是针对诸如一些button按钮之类的小元素展现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="苹果大屏展示项目适配问题总结">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/苹果大屏展示项目适配问题总结/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="苹果大屏展示项目适配问题总结一、布局篇1） flex 方案：布局统一使用 flex 进行布局。以首页为例。其中每一个Echats实例容器均通过 flex: 1 1 1px 的方式进行等比缩放方式 2） css3 方案：部分布局使用 calc(100% - 10px) 方式做的弹性布局 二、 关于rem1） rem使用场景 个人理解上，rem的使用场景仅是针对诸如一些button按钮之类的小元素展现">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-31T06:36:03.472Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="苹果大屏展示项目适配问题总结">
+<meta name="twitter:description" content="苹果大屏展示项目适配问题总结一、布局篇1） flex 方案：布局统一使用 flex 进行布局。以首页为例。其中每一个Echats实例容器均通过 flex: 1 1 1px 的方式进行等比缩放方式 2） css3 方案：部分布局使用 calc(100% - 10px) 方式做的弹性布局 二、 关于rem1） rem使用场景 个人理解上，rem的使用场景仅是针对诸如一些button按钮之类的小元素展现">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/27/苹果大屏展示项目适配问题总结/"/>
+
+
+
+
+
+  <title>苹果大屏展示项目适配问题总结 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/苹果大屏展示项目适配问题总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">苹果大屏展示项目适配问题总结</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-27T16:01:48+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/summary/" itemprop="url" rel="index">
+                    <span itemprop="name">summary</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/27/苹果大屏展示项目适配问题总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/27/苹果大屏展示项目适配问题总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/27/苹果大屏展示项目适配问题总结/" class="leancloud_visitors" data-flag-title="苹果大屏展示项目适配问题总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="苹果大屏展示项目适配问题总结"><a href="#苹果大屏展示项目适配问题总结" class="headerlink" title="苹果大屏展示项目适配问题总结"></a>苹果大屏展示项目适配问题总结</h3><h4 id="一、布局篇"><a href="#一、布局篇" class="headerlink" title="一、布局篇"></a>一、布局篇</h4><h5 id="1）-flex-方案："><a href="#1）-flex-方案：" class="headerlink" title="1） flex 方案："></a>1） flex 方案：</h5><p>布局统一使用 flex 进行布局。以首页为例。其中每一个<code>Echats</code>实例容器均通过 flex: 1 1 1px 的方式进行等比缩放方式</p>
+<h5 id="2）-css3-方案："><a href="#2）-css3-方案：" class="headerlink" title="2） css3 方案："></a>2） css3 方案：</h5><p>部分布局使用 <code>calc(100% - 10px)</code> 方式做的弹性布局</p>
+<h4 id="二、-关于rem"><a href="#二、-关于rem" class="headerlink" title="二、 关于rem"></a>二、 关于rem</h4><h5 id="1）-rem使用场景"><a href="#1）-rem使用场景" class="headerlink" title="1） rem使用场景"></a>1） rem使用场景</h5><ol>
+<li>个人理解上，rem的使用场景仅是针对诸如一些<code>button</code>按钮之类的小元素展现而用。对于大的区块性元素则会在布局当中使用flex亦或百分比的方式设置其大小。</li>
+<li>针对不同分辨率的屏幕设置不同大小根元素<code>font-size</code>。其所谓的兼容适配多个屏幕事实上在设计之初便是针对一个特定屏幕分辨率而做的，而对于其它不同分辨率的屏幕，只是做兼容处理。<code>font-size</code> 会有微调，但不大。这样造成视觉上的变化亦是那些<code>button</code>按钮这类的小元素微调上的些许变化。</li>
+</ol>
+<h5 id="2）PC端使用rem做兼容适配的建议"><a href="#2）PC端使用rem做兼容适配的建议" class="headerlink" title="2）PC端使用rem做兼容适配的建议"></a>2）PC端使用rem做兼容适配的建议</h5><ol>
+<li>兼容适配屏幕的问题最初来源是高清屏的出现，也即<code>dpr!=1</code>的情况的出现。</li>
+<li>由于手机端不同屏幕涌现，同时出现了多重设备独立像素与dpr值的屏幕。在此情况下如果元素大小依然使用固定的px，则会造成高清屏上元素变大（设备独立像素变小了）的情况。</li>
+<li>PC端关于屏幕dpr的数据暂无资料但应该都是1 吧</li>
+<li>基本PC端用户可以及方便的缩放浏览器这一行为。建议是只在页面初始化时进行根元素font-size的计算。并不监控<code>window.onresize</code>来实时设置根元素font-size大小，若不然则会造成性能上的浪费</li>
+</ol>
+<h5 id="3）关于自适应我的思考，暂不建议做PC端的多屏幕适配"><a href="#3）关于自适应我的思考，暂不建议做PC端的多屏幕适配" class="headerlink" title="3）关于自适应我的思考，暂不建议做PC端的多屏幕适配"></a>3）关于自适应我的思考，暂不建议做PC端的多屏幕适配</h5><ol>
+<li>PC端视窗大小与手机端视窗大小完全不是一个级别。 <span style="color:red">手机上之所以需做适配是因为在有限的视觉空间下，一个元素如果固定px大小，伴随着高清屏的出现（其独立像素变小了），则会造成元素占用空间变大。有限的设备视觉空间决定其要做适配。</span>而pc端目前大多数均是1920的屏幕分辨率，在小就是1344的分辨率。无论是哪个我们都可以保证一个最小的单元（如<code>button</code>按钮）也能够清晰显示</li>
+<li><p>浏览器适配是一个比较麻烦的事情。我们普通所做的仅是针对一些元素的大小适配，不包含字体的。在 <a href="https://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html" target="_blank" rel="noopener">使用Flexible实现手淘H5页面的终端适配</a> 一文当中有这样一句话</p>
+<blockquote>
+<p>现在绝大多数的字体文件都自带一些点阵尺寸，通常是16px和24px，所以我们不希望出现13px和15px这样的奇葩尺寸</p>
+</blockquote>
+<p> 即文字是不适合做rem适配的。详见上文。另外一点，我们可以保证 1344 分辨率下文字大小清晰可见，私以为这便可满足用户的需求了</p>
+</li>
+<li><p>PC端兼容适配问题面临的问题还很多，苹果项目当中所做的比较简单粗暴。rem的使用我认为可以在实践当中做单位的统一使用，而不是适配，如此的话那就是另外一回事儿了。</p>
+</li>
+</ol>
+<h4 id="三、-关于Echats图表"><a href="#三、-关于Echats图表" class="headerlink" title="三、 关于Echats图表"></a>三、 关于Echats图表</h4><p>大屏展示当中因布局采用弹性布局，Echarts图表均做了自适应的处理。因图表较多。我写了一个 vue 的mixin宏。代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">export const resizeMixin = &#123;</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      window.addEventListener(&apos;resize&apos;, this._windowResizeHandler)</span><br><span class="line">    &#125;, 21)</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    _windowResizeHandler() &#123;</span><br><span class="line">      throw new Error(&apos;_windowResizeHandler must be implement in current component&apos;)</span><br><span class="line">    &#125;,</span><br><span class="line">    _destroyEchart() &#123;</span><br><span class="line">      throw new Error(&apos;you must destroy your echatrs instance in current component!&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeDestroy() &#123;</span><br><span class="line">    window.removeEventListener(&apos;resize&apos;, this._windowResizeHandler)</span><br><span class="line">    this._destroyEchart()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、大屏展示总结"><a href="#四、大屏展示总结" class="headerlink" title="四、大屏展示总结"></a>四、大屏展示总结</h4><ol>
+<li>布局上使用 flex 布局即可解决大部分问题。<br>详见此处实例 <a href="https://halfmoonvic.github.io/vue-big-screen/dist/#/home" target="_blank" rel="noopener">大屏展示</a> 。github地址 <code>https://github.com/halfmoonvic/vue-big-screen</code></li>
+<li>其它只是平时编码的一些注意事项，如模块话引入等等</li>
+</ol>
+<h3 id="常见需求"><a href="#常见需求" class="headerlink" title="常见需求"></a>常见需求</h3><h4 id="一、-错误处理机制"><a href="#一、-错误处理机制" class="headerlink" title="一、 错误处理机制"></a>一、 错误处理机制</h4><p>问题： 后台数据请求数据失败处理<br>处理： 页面显示样式，默认返回一组数据，或为空或是其它识别码，需保证组件正常流转下去</p>
+<h4 id="二、-数据更新方式"><a href="#二、-数据更新方式" class="headerlink" title="二、 数据更新方式"></a>二、 数据更新方式</h4><p>问题： 数据从后台获取更新后，前端页面是刷新页面显示最新的选择项，还是保留原因的选择项<br>处理： 传值判断处理，各种逻辑均需封装在函数当中</p>
+<h4 id="三、-样式兼容处理"><a href="#三、-样式兼容处理" class="headerlink" title="三、 样式兼容处理"></a>三、 样式兼容处理</h4><ol>
+<li>单行文本显示样式不得折行，不可以固定宽度，宽度需自适应于文本宽度，可给定最小宽度，最大宽度按实际情况考虑</li>
+<li>文本显示需考虑到不同选项文字数目不一样，需做最优化处理</li>
+</ol>
+<h4 id="四、-默认选项机制"><a href="#四、-默认选项机制" class="headerlink" title="四、 默认选项机制"></a>四、 默认选项机制</h4><ol>
+<li>未传参数： 未传参数情况默认返回第一项参数</li>
+<li>第几项参数： 返回指定项参数</li>
+<li>同时传递处多个参数</li>
+<li>传出指定参数： 存储上次条件选项，待到数据更新变化时，遍历新的数据查找是否包含新数据，若含有前端显示上保留不变，另外选项当中默认激活项亦应显示正确</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/27/正则表达式必知必会笔记/" rel="next" title="正则表达式必知必会笔记“">
+                <i class="fa fa-chevron-left"></i> 正则表达式必知必会笔记“
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/27/flex布局中-注意几点事项/" rel="prev" title="flex布局中 注意几点事项">
+                flex布局中 注意几点事项 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#苹果大屏展示项目适配问题总结"><span class="nav-number">1.</span> <span class="nav-text">苹果大屏展示项目适配问题总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、布局篇"><span class="nav-number">1.1.</span> <span class="nav-text">一、布局篇</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1）-flex-方案："><span class="nav-number">1.1.1.</span> <span class="nav-text">1） flex 方案：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2）-css3-方案："><span class="nav-number">1.1.2.</span> <span class="nav-text">2） css3 方案：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-关于rem"><span class="nav-number">1.2.</span> <span class="nav-text">二、 关于rem</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1）-rem使用场景"><span class="nav-number">1.2.1.</span> <span class="nav-text">1） rem使用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2）PC端使用rem做兼容适配的建议"><span class="nav-number">1.2.2.</span> <span class="nav-text">2）PC端使用rem做兼容适配的建议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3）关于自适应我的思考，暂不建议做PC端的多屏幕适配"><span class="nav-number">1.2.3.</span> <span class="nav-text">3）关于自适应我的思考，暂不建议做PC端的多屏幕适配</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-关于Echats图表"><span class="nav-number">1.3.</span> <span class="nav-text">三、 关于Echats图表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、大屏展示总结"><span class="nav-number">1.4.</span> <span class="nav-text">四、大屏展示总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见需求"><span class="nav-number">2.</span> <span class="nav-text">常见需求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-错误处理机制"><span class="nav-number">2.1.</span> <span class="nav-text">一、 错误处理机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-数据更新方式"><span class="nav-number">2.2.</span> <span class="nav-text">二、 数据更新方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-样式兼容处理"><span class="nav-number">2.3.</span> <span class="nav-text">三、 样式兼容处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、-默认选项机制"><span class="nav-number">2.4.</span> <span class="nav-text">四、 默认选项机制</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/05/27/苹果大屏展示项目适配问题总结/';
+          this.page.identifier = '2018/05/27/苹果大屏展示项目适配问题总结/';
+          this.page.title = '苹果大屏展示项目适配问题总结';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="redux,vuex," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、手动触发 dispatchindex.redux.js12345678910111213141516171819202122const ADD_TYPE = &amp;apos;increase&amp;apos;const REMOGE_TYPE = &amp;apos;decrease&amp;apos;// action creatorexport function addCounter(val = 1) &amp;#123;">
+<meta name="keywords" content="redux,vuex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux 基础学习">
+<meta property="og:url" content="http://yoursite.com/2017/11/18/Redux-基础学习/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="一、手动触发 dispatchindex.redux.js12345678910111213141516171819202122const ADD_TYPE = &amp;apos;increase&amp;apos;const REMOGE_TYPE = &amp;apos;decrease&amp;apos;// action creatorexport function addCounter(val = 1) &amp;#123;">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/2017-11-18-redux/dispatch.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2017-11-18-redux/connect.jpg">
+<meta property="og:updated_time" content="2019-07-31T06:36:03.466Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redux 基础学习">
+<meta name="twitter:description" content="一、手动触发 dispatchindex.redux.js12345678910111213141516171819202122const ADD_TYPE = &amp;apos;increase&amp;apos;const REMOGE_TYPE = &amp;apos;decrease&amp;apos;// action creatorexport function addCounter(val = 1) &amp;#123;">
+<meta name="twitter:image" content="http://yoursite.com/images/2017-11-18-redux/dispatch.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/18/Redux-基础学习/"/>
+
+
+
+
+
+  <title>Redux 基础学习 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/18/Redux-基础学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redux 基础学习</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-18T18:25:18+08:00">
+                2017-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/18/Redux-基础学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/18/Redux-基础学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/11/18/Redux-基础学习/" class="leancloud_visitors" data-flag-title="Redux 基础学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、手动触发-dispatch"><a href="#一、手动触发-dispatch" class="headerlink" title="一、手动触发 dispatch"></a>一、手动触发 dispatch</h3><p><strong>index.redux.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const ADD_TYPE = &apos;increase&apos;</span><br><span class="line">const REMOGE_TYPE = &apos;decrease&apos;</span><br><span class="line"></span><br><span class="line">// action creator</span><br><span class="line">export function addCounter(val = 1) &#123;</span><br><span class="line">  return &#123; type: ADD_TYPE, payload: val &#125;</span><br><span class="line">&#125;</span><br><span class="line">export function removeCounter(val = 1) &#123;</span><br><span class="line">  return &#123; type: REMOGE_TYPE, payload: val &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// reducer</span><br><span class="line">export function counter(state = 0, action) &#123;</span><br><span class="line">  switch (action.type) &#123;</span><br><span class="line">    case ADD_TYPE:</span><br><span class="line">      return state + action.payload</span><br><span class="line">    case REMOGE_TYPE:</span><br><span class="line">      return state - action.payload</span><br><span class="line">    default:</span><br><span class="line">      return 0</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>index.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import ReactDom from &apos;react-dom&apos;</span><br><span class="line"></span><br><span class="line">import &#123; createStore &#125; from &apos;redux&apos;</span><br><span class="line">import &#123; counter, addCounter, removeCounter &#125; from &apos;./index.redux.js&apos;</span><br><span class="line"></span><br><span class="line">import App from &apos;./app&apos;</span><br><span class="line"></span><br><span class="line">const store = createStore(</span><br><span class="line">  counter,</span><br><span class="line">  window.devToolsExtension ? window.devToolsExtension() : ()=&gt;&#123;&#125;   // 使谷歌扩展redux插件能够记录变化</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">function render() &#123;</span><br><span class="line">  ReactDom.render(</span><br><span class="line">    &lt;App store=&#123;store&#125; propAdd=&#123;addCounter&#125; propRemove=&#123;removeCounter&#125; /&gt;,</span><br><span class="line">    document.getElementById(&apos;root&apos;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line">render()</span><br><span class="line"></span><br><span class="line">store.subscribe(render)</span><br></pre></td></tr></table></figure></p>
+<p><strong>app.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    const store = this.props.store</span><br><span class="line"></span><br><span class="line">    console.log(&apos;渲染ing&apos;)</span><br><span class="line">    console.log(this.props)</span><br><span class="line">    console.log(store.getState())</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;总数：&#123;store.getState()&#125;&lt;/h1&gt;</span><br><span class="line">        &lt;button onClick=&#123;() =&gt; store.dispatch(this.props.propAdd(2))&#125;&gt;加&lt;/button&gt;</span><br><span class="line">        &lt;button onClick=&#123;() =&gt; store.dispatch(this.props.propRemove(2))&#125;&gt;减&lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App</span><br></pre></td></tr></table></figure></p>
+<h4 id="执行过程："><a href="#执行过程：" class="headerlink" title="执行过程："></a>执行过程：</h4><h6 id="1-index-redux-js"><a href="#1-index-redux-js" class="headerlink" title="1) index.redux.js"></a>1) index.redux.js</h6><p>index.redux.js 文件中声明好各个 action(返回对象，描述发生的事情) 与 reducer（处理action当中的描述，针对action做出回应，生成新的state）</p>
+<h6 id="2-index-js"><a href="#2-index-js" class="headerlink" title="2) index.js"></a>2) index.js</h6><ol>
+<li>index.js 当中引入 reducer，通过 createStore(reducer) 来生成 store 实例。</li>
+<li>引入 各个action，并作为 prop 属性挂载到组件实例上面，方便以后实例直接通过 this.props.XXX 来获取 action<h6 id="3-app-js"><a href="#3-app-js" class="headerlink" title="3) app.js"></a>3) app.js</h6>手动执行触发 dispatch。<br>store.dispatch 可自行触发 reducer 的执行。 propsAdd() 执行后，也就是 index.redux.js 当中的 action函数执行后，返回的是action对象{type: ADD_TYPE}。dispatch将action传给 reducer，执行更新</li>
+</ol>
+<p><img src="/images/2017-11-18-redux/dispatch.jpg" alt="this.props输出结果"><br>上图为 this.props 和 store.getState() 输出结果</p>
+<hr>
+<hr>
+<h3 id="拆分reducer"><a href="#拆分reducer" class="headerlink" title="拆分reducer"></a>拆分reducer</h3><h6 id="1-store-getState"><a href="#1-store-getState" class="headerlink" title="1) store.getState()"></a>1) store.getState()</h6><p>此函数即是获取 reducer 的返回值！</p>
+<p><strong>index.redux.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">import &#123; combineReducers &#125; from &apos;redux&apos;;</span><br><span class="line"></span><br><span class="line">const ADD_TYPE = &apos;increase&apos;</span><br><span class="line">const REMOGE_TYPE = &apos;decrease&apos;</span><br><span class="line">const CHENG_TYPE = &apos;cheng&apos;</span><br><span class="line">const CHU_TYPE = &apos;chu&apos;</span><br><span class="line"></span><br><span class="line">// action creator</span><br><span class="line">export function addCounter(val = 1) &#123;</span><br><span class="line">  return &#123; type: ADD_TYPE, payload: val &#125;</span><br><span class="line">&#125;</span><br><span class="line">export function removeCounter(val = 1) &#123;</span><br><span class="line">  return &#123; type: REMOGE_TYPE, payload: val &#125;</span><br><span class="line">&#125;</span><br><span class="line">export function chengCounter(val = 1) &#123;</span><br><span class="line">  return &#123; type: CHENG_TYPE, payload: val &#125;</span><br><span class="line">&#125;</span><br><span class="line">export function chuCounter(val = 1) &#123;</span><br><span class="line">  return &#123; type: CHU_TYPE, payload: val &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// reducer</span><br><span class="line">export function addRemoveCounter(state, action) &#123;</span><br><span class="line">  switch (action.type) &#123;</span><br><span class="line">    case ADD_TYPE:</span><br><span class="line">      return state + action.payload</span><br><span class="line">    case REMOGE_TYPE:</span><br><span class="line">      return state - action.payload</span><br><span class="line">    default:</span><br><span class="line">      return 0</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// reducer</span><br><span class="line">export function chengChuCounter(state, action) &#123;</span><br><span class="line">  switch (action.type) &#123;</span><br><span class="line">    case CHENG_TYPE:</span><br><span class="line">      return state * action.payload</span><br><span class="line">    case CHU_TYPE:</span><br><span class="line">      return state / action.payload</span><br><span class="line">    default:</span><br><span class="line">      return 1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * reducers 手动合并</span><br><span class="line"> */</span><br><span class="line">// export function counter(state = 1, action) &#123;</span><br><span class="line">//   return &#123;</span><br><span class="line">//     addRemoveCounter: addRemoveCounter(state.addRemoveCounter, action),</span><br><span class="line">//     chengChuCounter: chengChuCounter(state.chengChuCounter, action)</span><br><span class="line">//   &#125;</span><br><span class="line">// &#125;</span><br><span class="line">// redux 方法的 combineReducers 结果与上面的书写的函数是一样一样的</span><br><span class="line">/**</span><br><span class="line"> * 利用 redux 的 combineReducers 方法进行合并</span><br><span class="line"> * 效果与上面是一样的</span><br><span class="line"> */</span><br><span class="line">export const counter = combineReducers(&#123;</span><br><span class="line">  addRemoveCounter,</span><br><span class="line">  chengChuCounter</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><strong>index.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import ReactDom from &apos;react-dom&apos;</span><br><span class="line"></span><br><span class="line">import &#123; createStore &#125; from &apos;redux&apos;</span><br><span class="line">import &#123; counter, addCounter, removeCounter, chengCounter, chuCounter &#125; from &apos;./index.redux.js&apos;</span><br><span class="line"></span><br><span class="line">import App from &apos;./app&apos;</span><br><span class="line"></span><br><span class="line">const store = createStore(</span><br><span class="line">  counter,</span><br><span class="line">  window.devToolsExtension ? window.devToolsExtension() : ()=&gt;&#123;&#125;   // 使谷歌扩展redux插件能够记录变化</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">function render() &#123;</span><br><span class="line">  ReactDom.render(</span><br><span class="line">    &lt;App store=&#123;store&#125; propAdd=&#123;addCounter&#125; propRemove=&#123;removeCounter&#125; propCheng=&#123;chengCounter&#125; propChu=&#123;chuCounter&#125; /&gt;,</span><br><span class="line">    document.getElementById(&apos;root&apos;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line">render()</span><br><span class="line"></span><br><span class="line">store.subscribe(render)</span><br></pre></td></tr></table></figure></p>
+<p><strong>app.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    const store = this.props.store</span><br><span class="line">    console.log(&apos;渲染ing&apos;)</span><br><span class="line">    console.log(this.props)</span><br><span class="line">    console.log(store.getState())</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;加减state：&#123;store.getState().addRemoveCounter&#125;&lt;/h1&gt;</span><br><span class="line">        &lt;h1&gt;乘除state：&#123;store.getState().chengChuCounter&#125;&lt;/h1&gt;</span><br><span class="line">        &lt;button onClick=&#123;() =&gt; store.dispatch(this.props.propAdd(2))&#125;&gt;加&lt;/button&gt;</span><br><span class="line">        &lt;button onClick=&#123;() =&gt; store.dispatch(this.props.propRemove(2))&#125;&gt;减&lt;/button&gt;</span><br><span class="line">        &lt;button onClick=&#123;() =&gt; store.dispatch(this.props.propCheng(2))&#125;&gt;乘&lt;/button&gt;</span><br><span class="line">        &lt;button onClick=&#123;() =&gt; store.dispatch(this.props.propChu(2))&#125;&gt;除&lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App</span><br></pre></td></tr></table></figure></p>
+<h4 id="执行过程：-1"><a href="#执行过程：-1" class="headerlink" title="执行过程："></a>执行过程：</h4><h6 id="1-index-redux-js-1"><a href="#1-index-redux-js-1" class="headerlink" title="1) index.redux.js"></a>1) index.redux.js</h6><ol>
+<li>index.redux.js 文件中声明好各个 action(返回对象，描述发生的事情) </li>
+<li>声明好子reducer，手动或者通过 combineReducers 来将各个子 reducer 合并成一个 大的reducer。</li>
+<li>仅记一点，store.getState() 即是 这个大 reducer的返回值</li>
+<li>各个 子reducer 是不同的 state 相互之间没关系<h6 id="2-index-js-1"><a href="#2-index-js-1" class="headerlink" title="2) index.js"></a>2) index.js</h6></li>
+<li>index.js 当中引入 reducer，通过 createStore(reducer) 来生成 store 实例。</li>
+<li>引入 各个action，并作为 prop 属性挂载到组件实例上面，方便以后实例直接通过 this.props.XXX 来获取 action<h6 id="3-app-js-1"><a href="#3-app-js-1" class="headerlink" title="3) app.js"></a>3) app.js</h6></li>
+<li>状态展现要依据 store.getState() 的值 即 {addRemoveCounter: 0, chengChuCounter: 1}，故一开始是声明了两个 state 状态</li>
+<li>手动执行触发 dispatch。<br>store.dispatch 可自行触发 reducer 的执行。 propsAdd() 执行后，也就是 index.redux.js 当中的 action函数执行后，返回的是action对象{type: ADD_TYPE}。dispatch将action传给 reducer，执行更新</li>
+</ol>
+<p><img src="/images/2017-11-18-redux/connect.jpg" alt="this.props输出结果"><br>上图为 this.props 输出结果</p>
+<hr>
+<hr>
+<h3 id="异步的-action"><a href="#异步的-action" class="headerlink" title="异步的 action"></a>异步的 action</h3><p>action 必须是一个 plain object, 需要一些插件的支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import thunk from &apos;redux-thunk&apos;</span><br><span class="line">import &#123; createStore, applyMiddleware, compose &#125; from &apos;redux&apos;</span><br><span class="line"></span><br><span class="line">创建 store </span><br><span class="line">const store = createStore(</span><br><span class="line">  counter,</span><br><span class="line">  compose(</span><br><span class="line">    applyMiddleware(thunk),</span><br><span class="line">    window.devToolsExtension ? window.devToolsExtension() : ()=&gt;&#123;&#125;</span><br><span class="line">  )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">// action creator</span><br><span class="line">export function addCounter(val = 1) &#123;</span><br><span class="line">  return dispatch =&gt; dispatch(&#123; type: ADD_TYPE, payload: val &#125;)</span><br><span class="line">&#125;</span><br><span class="line">export function removeCounter(val = 1) &#123;</span><br><span class="line">  return dispatch =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      dispatch(&#123; type: REMOGE_TYPE, payload: val &#125;)</span><br><span class="line">    &#125;, 2000)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/redux/" rel="tag"># redux</a>
+          
+            <a href="/tags/vuex/" rel="tag"># vuex</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/06/MongoDB-Windows-下的配置/" rel="next" title="MongoDB Windows 下的配置">
+                <i class="fa fa-chevron-left"></i> MongoDB Windows 下的配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/27/Redux-Vs-Vuex-学习与比较/" rel="prev" title="Redux Vs Vuex 学习与比较">
+                Redux Vs Vuex 学习与比较 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、手动触发-dispatch"><span class="nav-number">1.</span> <span class="nav-text">一、手动触发 dispatch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#执行过程："><span class="nav-number">1.1.</span> <span class="nav-text">执行过程：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-index-redux-js"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">1) index.redux.js</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-index-js"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">2) index.js</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-app-js"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">3) app.js</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拆分reducer"><span class="nav-number">2.</span> <span class="nav-text">拆分reducer</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-store-getState"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">1) store.getState()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行过程：-1"><span class="nav-number">2.1.</span> <span class="nav-text">执行过程：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-index-redux-js-1"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">1) index.redux.js</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-index-js-1"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">2) index.js</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-app-js-1"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">3) app.js</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步的-action"><span class="nav-number">3.</span> <span class="nav-text">异步的 action</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/18/Redux-基础学习/';
+          this.page.identifier = '2017/11/18/Redux-基础学习/';
+          this.page.title = 'Redux 基础学习';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

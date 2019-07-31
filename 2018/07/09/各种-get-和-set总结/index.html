@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、 vue 计算属性当中的 get 与 set 勾子123calculateAttr() &amp;#123;  return &amp;apos;get值&amp;apos;&amp;#125;, 如上代码，当我试图更改 calculateAttr 值时，在控制台将会报错 Computed property &amp;quot;calculateAttr&amp;quot; was assigned to but it has no set">
+<meta property="og:type" content="article">
+<meta property="og:title" content="各种 get 和 set总结">
+<meta property="og:url" content="http://yoursite.com/2018/07/09/各种-get-和-set总结/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="一、 vue 计算属性当中的 get 与 set 勾子123calculateAttr() &amp;#123;  return &amp;apos;get值&amp;apos;&amp;#125;, 如上代码，当我试图更改 calculateAttr 值时，在控制台将会报错 Computed property &amp;quot;calculateAttr&amp;quot; was assigned to but it has no set">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-31T06:36:03.469Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="各种 get 和 set总结">
+<meta name="twitter:description" content="一、 vue 计算属性当中的 get 与 set 勾子123calculateAttr() &amp;#123;  return &amp;apos;get值&amp;apos;&amp;#125;, 如上代码，当我试图更改 calculateAttr 值时，在控制台将会报错 Computed property &amp;quot;calculateAttr&amp;quot; was assigned to but it has no set">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/09/各种-get-和-set总结/"/>
+
+
+
+
+
+  <title>各种 get 和 set总结 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/各种-get-和-set总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">各种 get 和 set总结</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T22:28:52+08:00">
+                2018-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/09/各种-get-和-set总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/07/09/各种-get-和-set总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/09/各种-get-和-set总结/" class="leancloud_visitors" data-flag-title="各种 get 和 set总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、-vue-计算属性当中的-get-与-set-勾子"><a href="#一、-vue-计算属性当中的-get-与-set-勾子" class="headerlink" title="一、 vue 计算属性当中的 get 与 set 勾子"></a>一、 vue 计算属性当中的 get 与 set 勾子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">calculateAttr() &#123;</span><br><span class="line">  return &apos;get值&apos;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>如上代码，当我试图更改 <code>calculateAttr</code> 值时，在控制台将会报错 <code>Computed property &quot;calculateAttr&quot; was assigned to but it has no setter.</code>。 简介讲，我们只是 给 <code>calculateAttr</code> 设置了get属性，而未设置其set勾子。<br>事实上，计算属性简单做字面理解既是：这个值是被计算出来的，来做展示的，而不是设置的。所以当我们想要设置计算属性的值的时候，应该单独的设置其set勾子。亦如vue文档中所说的  </p>
+<blockquote>
+<p>计算属性默认只有 getter ，不过在需要时你也可以提供一个 setter<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  fullName: &#123;</span><br><span class="line">    // getter</span><br><span class="line">    get: function () &#123;</span><br><span class="line">      return this.firstName + &apos; &apos; + this.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    // setter</span><br><span class="line">    set: function (newValue) &#123;</span><br><span class="line">      var names = newValue.split(&apos; &apos;)</span><br><span class="line">      this.firstName = names[0]</span><br><span class="line">      this.lastName = names[names.length - 1]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>对其值的设置也是借助与 <code>firstName lastName</code> 而进行的</p>
+<h3 id="二、-Object-defineProperty-obj-prop-descriptor"><a href="#二、-Object-defineProperty-obj-prop-descriptor" class="headerlink" title="二、 Object.defineProperty(obj, prop, descriptor)"></a>二、 Object.defineProperty(obj, prop, descriptor)</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">Object.defineProperty()</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var Book = &#123;&#125;</span><br><span class="line">var tempName = &apos;&apos;;</span><br><span class="line">Object.defineProperty(Book, &apos;name&apos;, &#123;</span><br><span class="line">  set: function (value) &#123;</span><br><span class="line">    tempName = value;</span><br><span class="line">    console.log(&apos;你取了一个书名叫做&apos; + value);</span><br><span class="line">  &#125;,</span><br><span class="line">  get: function () &#123;</span><br><span class="line">    return &apos;《&apos; + tempName + &apos;》&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Book.name = &apos;vue权威指南&apos;;  // 你取了一个书名叫做vue权威指南</span><br><span class="line">console.log(Book.name);  // 《vue权威指南》</span><br></pre></td></tr></table></figure></p>
+<p>与 vue 的计算属性差不多，只不过vue上面的计算属性 都是 <code>this</code> 对象的</p>
+<h3 id="三、-对象初始化器在创建对象的时候指明"><a href="#三、-对象初始化器在创建对象的时候指明" class="headerlink" title="三、 对象初始化器在创建对象的时候指明"></a>三、 对象初始化器在创建对象的时候指明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">  _age: 18,</span><br><span class="line">  get age ()  &#123;</span><br><span class="line">    return `I&apos;m $&#123;this._age&#125; years old`</span><br><span class="line">  &#125;,</span><br><span class="line">  set age (val) &#123;</span><br><span class="line">    this._age = Number(val)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(obj.age) // I&apos;m 18 years old</span><br><span class="line">obj.age = 19</span><br><span class="line">console.log(obj.age) // I&apos;m 19 years old</span><br></pre></td></tr></table></figure>
+<h3 id="四、-Proxy-代理"><a href="#四、-Proxy-代理" class="headerlink" title="四、 Proxy 代理"></a>四、 Proxy 代理</h3><p><a href="https://segmentfault.com/a/1190000015009255" target="_blank" rel="noopener">拿Proxy可以做哪些有意思的事儿</a><br>与对象本身自有的get勾子不同地方在于。对象自有的get主要是针对当前对象并不存在的key，get 可以生成这个key(如果get的是已存在的key，则读取的时候是读get的值)<br>而代理 如其名一般，只要你对对象设置了代理，那么，当读取该对象属性的时候自然会访问代理<br>访问代理的前提是，你为该对象设置了代理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let target = &#123; age: 18, name: &apos;Niko Bellic&apos; &#125;</span><br><span class="line">let handlers = &#123;</span><br><span class="line">  get (target, property) &#123;</span><br><span class="line">    return `$&#123;property&#125;: $&#123;target[property]&#125;`</span><br><span class="line">  &#125;,</span><br><span class="line">  set (target, property, value) &#123;</span><br><span class="line">    target[property] = value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">let proxy = new Proxy(target, handlers)</span><br><span class="line"></span><br><span class="line">proxy.age = 19</span><br><span class="line">console.log(target.age, proxy.age)   // 19,          age : 19</span><br><span class="line">console.log(target.name, proxy.name) // Niko Bellic, name: Niko Bellic</span><br></pre></td></tr></table></figure></p>
+<p>解决对象属性为undefined的问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">let target = &#123;&#125;</span><br><span class="line">let handlers = &#123;</span><br><span class="line">  get: (target, property) =&gt; &#123;</span><br><span class="line">    target[property] = property in target ? target[property] : &#123;&#125;</span><br><span class="line">      if (typeof target[property] === &apos;object&apos;) &#123;</span><br><span class="line">        return new Proxy(target[property], handlers)  </span><br><span class="line">        // 如果读取的某一key值也是一个对象（A对象），那么为 A对象 设置代理  </span><br><span class="line">        // 从而当读取A对象的某一属性的时候，也会走代理，执行此get勾子</span><br><span class="line">      &#125;</span><br><span class="line">    return target[property]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">let proxy = new Proxy(target, handlers)</span><br><span class="line">// console.log(&apos;z&apos; in proxy.x.y) // false (其实这一步已经针对`target`创建了一个x.y的属性)</span><br><span class="line">// proxy.x 默认调用了 get 方法（生成了针对该key的value值（即一个空对象））</span><br><span class="line">// 而 在 .y 的话，如果不在继续代理，就没有调用get,返回的自然是一个 undefied</span><br><span class="line">// proxy.x.y.z = &apos;hello&apos;</span><br><span class="line">// console.log(&apos;z&apos; in proxy.x.y) // true</span><br><span class="line">// console.log(target.x.y.z) // hello</span><br></pre></td></tr></table></figure></p>
+<h3 id="五、-作用于类属性的装饰器"><a href="#五、-作用于类属性的装饰器" class="headerlink" title="五、 作用于类属性的装饰器"></a>五、 作用于类属性的装饰器</h3><p><a href="https://aotu.io/notes/2016/10/24/decorator/index.html" target="_blank" rel="noopener">Javascript 中的装饰器</a><br>装饰器在作用于属性的时候，实际上是通过 Object.defineProperty 来进行扩展和封装的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function readonly(target, name, descriptor) &#123;</span><br><span class="line">    discriptor.writable = false;</span><br><span class="line">    return discriptor;</span><br><span class="line">&#125;</span><br><span class="line">class Cat &#123;</span><br><span class="line">    @readonly</span><br><span class="line">    say() &#123;</span><br><span class="line">        console.log(&quot;meow ~&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var kitty = new Cat();</span><br><span class="line">kitty.say = function() &#123;</span><br><span class="line">    console.log(&quot;woof !&quot;);</span><br><span class="line">&#125;</span><br><span class="line">kitty.say()    // meow ~</span><br></pre></td></tr></table></figure></p>
+<p>上面的这段代码中，装饰器实际的作用形式是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let descriptor = &#123;</span><br><span class="line">    value: function() &#123;</span><br><span class="line">        console.log(&quot;meow ~&quot;);</span><br><span class="line">    &#125;,</span><br><span class="line">    enumerable: false,</span><br><span class="line">    configurable: true,</span><br><span class="line">    writable: true</span><br><span class="line">&#125;;</span><br><span class="line">descriptor = readonly(Cat.prototype, &quot;say&quot;, descriptor) || descriptor;</span><br><span class="line">Object.defineProperty(Cat.prototype, &quot;say&quot;, descriptor);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/27/好问收藏/" rel="next" title="好问收藏">
+                <i class="fa fa-chevron-left"></i> 好问收藏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/05/eslint-配置介绍/" rel="prev" title="eslint 配置介绍">
+                eslint 配置介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、-vue-计算属性当中的-get-与-set-勾子"><span class="nav-number">1.</span> <span class="nav-text">一、 vue 计算属性当中的 get 与 set 勾子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、-Object-defineProperty-obj-prop-descriptor"><span class="nav-number">2.</span> <span class="nav-text">二、 Object.defineProperty(obj, prop, descriptor)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、-对象初始化器在创建对象的时候指明"><span class="nav-number">3.</span> <span class="nav-text">三、 对象初始化器在创建对象的时候指明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、-Proxy-代理"><span class="nav-number">4.</span> <span class="nav-text">四、 Proxy 代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、-作用于类属性的装饰器"><span class="nav-number">5.</span> <span class="nav-text">五、 作用于类属性的装饰器</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/07/09/各种-get-和-set总结/';
+          this.page.identifier = '2018/07/09/各种-get-和-set总结/';
+          this.page.title = '各种 get 和 set总结';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="git," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="对 Git 的学习一直处于学了忘，忘了学的状态。主要是第一次学会的时候没有好好进行运用，当想要使用的时，发现，大半都已经忘记了。重新拾起来的时候，又是发现了大量问题。然后再次学习→忘记→学习→忘记，死循环。所以，我还是将自己一直陷进去的坑给填好吧，这样，下次忘记的时候容易→学习→忘记→学习。 1、 三个区看了许多关于 Git 的教程，大多是先说工作目录、暂存目录（索引）和版本库（仓库或者HEAD）">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git reset checkout commit 命令详解">
+<meta property="og:url" content="http://yoursite.com/2017/07/20/Git-reset-checkout-commit-命令详解/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="对 Git 的学习一直处于学了忘，忘了学的状态。主要是第一次学会的时候没有好好进行运用，当想要使用的时，发现，大半都已经忘记了。重新拾起来的时候，又是发现了大量问题。然后再次学习→忘记→学习→忘记，死循环。所以，我还是将自己一直陷进去的坑给填好吧，这样，下次忘记的时候容易→学习→忘记→学习。 1、 三个区看了许多关于 Git 的教程，大多是先说工作目录、暂存目录（索引）和版本库（仓库或者HEAD）">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/1.three_area.svg">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/2.git-status.jpg">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/mixed.gif">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/hard.gif">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/soft.gif">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/3.git-reset.jpg">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/4.git-reset--commitID.jpg">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/5.git-reset-commitID-file_path.jpg">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/6.git-reset-hard.jpg">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/7.git-reset-hard-head.jpg">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/8.git-checkout-commitID.jpg">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/9.git-checkout-file_path.jpg">
+<meta property="og:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/10.git-checkout-commitID-file_path.jpg">
+<meta property="og:updated_time" content="2019-07-31T06:36:03.466Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git reset checkout commit 命令详解">
+<meta name="twitter:description" content="对 Git 的学习一直处于学了忘，忘了学的状态。主要是第一次学会的时候没有好好进行运用，当想要使用的时，发现，大半都已经忘记了。重新拾起来的时候，又是发现了大量问题。然后再次学习→忘记→学习→忘记，死循环。所以，我还是将自己一直陷进去的坑给填好吧，这样，下次忘记的时候容易→学习→忘记→学习。 1、 三个区看了许多关于 Git 的教程，大多是先说工作目录、暂存目录（索引）和版本库（仓库或者HEAD）">
+<meta name="twitter:image" content="https://halfmoonvic.github.io/images/git-reset-checkout/1.three_area.svg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/20/Git-reset-checkout-commit-命令详解/"/>
+
+
+
+
+
+  <title>Git reset checkout commit 命令详解 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/20/Git-reset-checkout-commit-命令详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git reset checkout commit 命令详解</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-20T17:09:23+08:00">
+                2017-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/20/Git-reset-checkout-commit-命令详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/20/Git-reset-checkout-commit-命令详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/07/20/Git-reset-checkout-commit-命令详解/" class="leancloud_visitors" data-flag-title="Git reset checkout commit 命令详解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对 Git 的学习一直处于学了忘，忘了学的状态。主要是第一次学会的时候没有好好进行运用，当想要使用的时，发现，大半都已经忘记了。重新拾起来的时候，又是发现了大量问题。然后再次学习→忘记→学习→忘记，死循环。所以，我还是将自己一直陷进去的坑给填好吧，这样，下次忘记的时候容易→学习→忘记→学习。</p>
+<h3 id="1、-三个区"><a href="#1、-三个区" class="headerlink" title="1、 三个区"></a>1、 三个区</h3><p>看了许多关于 Git 的教程，大多是先说工作目录、暂存目录（索引）和版本库（仓库或者HEAD）。都会配些图片，看来看去，我觉得在<a href="https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting/" target="_blank" rel="noopener">Reset, Checkout, and Revert</a>一文中就三个区的概念最为恰当。一图以蔽之<img src="https://halfmoonvic.github.io/images/git-reset-checkout/1.three_area.svg" alt="">  </p>
+<ul>
+<li>Working Directory —— 工作目录<br>视力所及处皆是 Working Directory</li>
+<li>Staged Snapshot<br>有的将这里称为暂存目录，有的称为索引区。而在<a href="https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting/" target="_blank" rel="noopener">Reset, Checkout, and Revert</a>一文中就是简单称之为“快照区”，在下实在是认同。原因以下讲。</li>
+<li><p>Commit History<br>其它文章看到过有将其为版本库或是仓库的，这个让人糊涂。因为 Git 本身就是一个版本控制系统，私以为这三者联合起来才能称之为版本库。而至于 HEAD，说的还是比较贴切的。HEAD 只能在这里游动，跑不了。  </p>
+<p>  而将其称为 Commit Histroy 最为贴切处是因为它很好的描述了这个区域的作用 —— 保存 commit 历史。</p>
+</li>
+</ul>
+<h3 id="2、commit"><a href="#2、commit" class="headerlink" title="2、commit"></a>2、commit</h3><p>初学 Git 时，只是简单的学习 <code>add commit</code> 等等基本操作命名，进而去学习各种远程库的推送等等操作，以为这些好复杂。可等到学完的时候，才发现，自己还是不怎么懂最为基本的 <code>commit</code> 概念。我自己在学习的过程中逐渐认识到 <code>commit</code> 的厉害之处，对它的认识也是一直处于变化当中。到现在根本不在乎它的中文意思应该是什么，而只是简单称它为 <code>commit</code> ，动词性的或者名词性质的，统统称之为 <code>commit</code>。  </p>
+<p>而我就 Git 的个人理解，我认为其思想就是<strong>基于 <code>commit</code> 的各种控制操作</strong>。</p>
+<h5 id="2-1、-基于-commit-的版本操作控制思想"><a href="#2-1、-基于-commit-的版本操作控制思想" class="headerlink" title="2.1、 基于 commit 的版本操作控制思想"></a>2.1、 基于 commit 的版本操作控制思想</h5><ol>
+<li><p>最开始对 <code>commit</code> 的理解就是简单的认为其为中文释义——提交。<br>在我们修改了文件之后进行<code>git add &lt;file_path&gt;</code>操作，进而进行<code>git commit &lt;file_path&gt;</code>。从 <code>Staged Snapshot</code> 到 <code>Commit History</code> 的操作，这看起来很像一个提交。</p>
+</li>
+<li><p>继续学习当中，即涉及到第三个区 <code>Commit History</code> 中的 <code>commit</code> 时，让人沉醉 —— 快照。<br>我们可以通过 <code>checkout</code> 命名轻松的移动HEAD到不同的 <code>&lt;commitID&gt;</code> 上，在上一处对 <code>commit</code> 的理解还是一个动词性的（提交）。这里 <code>commit</code> 却好像是变成了一个名词——快照（个人跟乐意用<code>&lt;commitID&gt;</code>来表示)。</p>
+</li>
+<li><p>怀疑阶段——我究竟在 提交（<code>git commit &lt;file_path&gt;</code>）什么？<br><code>git commit &lt;file_path&gt;</code>操作，开始会认为是提交了你在 <code>Working Dir</code> 中<code>add</code>的文件。这个非常对，没有半点错误。可是，你<code>commit</code>操作是 <code>Staged Snapshot</code> 与 <code>Commit History</code> 两者之间的操作。这个叉跨的太大！  </p>
+</li>
+<li><p>释疑阶段 —— 合体啊～<br><strong><code>commit</code>既是提交又是快照</strong><br>这里所谓的既是提交又是快照指的仅仅是<code>git commit &lt;file_path&gt;</code>一处操作。什么意思？<br>我在将文件<code>git add &lt;file_path&gt;</code>操作后，我在进行<code>git commit &lt;file_path&gt;</code>操作时，事实上是先对<code>add</code>进 <code>Staged Snapshot</code> 来的文件进行拍照（快照），然后提交给 <code>Commit History</code>。  </p>
+</li>
+<li><p>处处皆是 <strong>commit</strong><br>私以为，快照这个动作是时时进行的。如你在 <code>Working Dir</code> 中对文件的<code>add</code>操作，是将 <code>Working Dir</code> 拍照了一下，传给了 <code>Staged Snapshot</code> 了。然后 <code>Staged Snapshot</code> 在将传过来的快照传给 <code>Commit History</code>。这样，从工作目录开始就是<strong>快照</strong>级别的操作。这些命令操作当中也就不用纠结这个文件到底是怎样的一副状态了。因为它远在你<code>add</code>的时候就已经被固定为快照了。</p>
+</li>
+</ol>
+<h5 id="2-2、-根据颜色辨别状态"><a href="#2-2、-根据颜色辨别状态" class="headerlink" title="2.2、 根据颜色辨别状态"></a>2.2、 根据颜色辨别状态</h5><p><code>git status</code>时，那个 modified 是显示红色还是绿色，是依据于 commit 所处状态来决定的。  </p>
+<ol>
+<li>显示 红色 就是 「Woring Dir 区的 commit」 与 「Staged Snapshot 的 commit / Commit History 的 commit」 有区别。<br>红色 modified 即为「Woring Dir 区的 commit」中内容还未被 add。  </li>
+<li>显示 绿色 是 「Woring Dir 区的 commit / Staged Snapshot 的 commit」 与 「Commit History 的 commit」 有区别。<br>绿色 modified 即为「Staged Snapshot 的 commit」还未被 commit。</li>
+</ol>
+<p>印象加深图：<br><img src="https://halfmoonvic.github.io/images/git-reset-checkout/2.git-status.jpg" alt="modified"></p>
+<h5 id="2-3、-总结-commit"><a href="#2-3、-总结-commit" class="headerlink" title="2.3、 总结 commit"></a>2.3、 总结 commit</h5><p>到现在，我已经不在乎 <code>commit</code> 到底是什么意思了，只是简单称为 <code>commit</code>，如果一定让我翻译一下。我更为乐意称之为「快照」。<br>至于那种 <code>commit</code> 的传递，我将其认为是 Git 自己内部命令的结果。<br>而涉及到「提交」一概念大概只有<code>git commit &lt;file_path&gt;</code>中的<code>commit</code>。</p>
+<h3 id="3、reset-命令"><a href="#3、reset-命令" class="headerlink" title="3、reset 命令"></a>3、reset 命令</h3><p>与<code>checkout</code>命令相比，我认为<code>reset</code>简单的多，但此命令有危险。除非，你知道自己在做什么。</p>
+<p><strong>reset</strong> 许多命令模式会变更 <code>master</code>（或者其它分支名，本文只以 <code>master</code> 分支举例）分支位置</p>
+<h5 id="3-1、-reset-的三种命令模式："><a href="#3-1、-reset-的三种命令模式：" class="headerlink" title="3.1、 reset 的三种命令模式："></a>3.1、 reset 的三种命令模式：</h5><table>
+<thead>
+<tr>
+<th style="text-align:left">模式名称</th>
+<th style="text-align:center">master的位置</th>
+<th style="text-align:center">暂存区</th>
+<th style="text-align:center">工作目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">情况1.1 <code>--mixed</code> 无<code>&lt;file_path&gt;</code> 操控 <code>Commit History 和 Staged Snapshot</code></td>
+<td style="text-align:center">修改</td>
+<td style="text-align:center">修改</td>
+<td style="text-align:center">不修改</td>
+</tr>
+<tr>
+<td style="text-align:left">情况1.2 <code>--mixed</code> 有<code>&lt;file_path&gt;</code> 操控 <code>Staged Snapshot</code></td>
+<td style="text-align:center">不修改</td>
+<td style="text-align:center">修改</td>
+<td style="text-align:center">不修改</td>
+</tr>
+<tr>
+<td style="text-align:left">情况 2   <code>--hard</code> 操控 <code>Commit History、Staged Snapshot、Working Directory</code></td>
+<td style="text-align:center">修改</td>
+<td style="text-align:center">修改</td>
+<td style="text-align:center">修改</td>
+</tr>
+<tr>
+<td style="text-align:left">情况 3   <code>--soft</code> 操控 <code>Commit History</code></td>
+<td style="text-align:center">修改</td>
+<td style="text-align:center">不修改</td>
+<td style="text-align:center">不修改</td>
+</tr>
+</tbody>
+</table>
+<p>示意如下三图，从左至右依次为：mixed(操作对象为HEAD、情况1.1)、hard、soft三种模式。  </p>
+<ul>
+<li><code>mixed</code>模式的时候操作对象即可是 <code>HEAD</code> 也可以是 <code>Staged Snapshop</code>。  </li>
+<li><code>soft hard</code>模式针对的操作对象均是 <code>HEAD</code>。<br>如果强行添加<code>&lt;file_path&gt;</code>，则会报错<code>fatal: Cannot do (hard, soft) reset with paths</code></li>
+<li>三种模式操作<code>HEAD</code>时，均可以移动<code>HEAD</code>及其<code>HEAD</code>所处的当前<code>&lt;branch&gt;</code>。<code>mixed</code>模式带有<code>&lt;file_path&gt;</code>时则不可以,其操作控制影响的 是 <code>Staged Snapshop</code> 区。</li>
+</ul>
+<p><img src="https://halfmoonvic.github.io/images/git-reset-checkout/mixed.gif" alt="情况1.1" title="--mixed 无 file_path 操控 Commit History 和 Staged Snapshot" style="width: 300px"><br><img src="https://halfmoonvic.github.io/images/git-reset-checkout/hard.gif" alt="情况2" title="--hard 操控 Commit History、Staged Snapshot、Working Directory" style="width: 300px"><br><img src="https://halfmoonvic.github.io/images/git-reset-checkout/soft.gif" alt="情况3" title="--soft 操控 Commit History" style="width: 300px"></p>
+<h2 id="ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ-分割线-ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ"><a href="#ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ-分割线-ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ" class="headerlink" title="ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ 分割线 ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ"></a>ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ 分割线 ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ</h2><p>关于本人所做图片有两处需要阐述，请看下大图：<br><img src="https://halfmoonvic.github.io/images/git-reset-checkout/3.git-reset.jpg" alt="高清无码大图！！！"></p>
+<ol>
+<li>在 <code>Working Dir</code> 与 <code>Staged Snapshot</code> 两区，我依然画出了历史 <code>commit</code>。不过，未处于激活状态时，是以灰蒙状态般显示的。这个灰蒙状态实际意义上就是不存在的意思，此处是为理解上文中「处处皆 <code>commit</code>」之意而做。真正有多个 <code>commit</code> 的只有 <code>Commit History</code>区。</li>
+<li><p>在我多方多查看参考资料时，发现大多是以箭头形式来指向，如 <code>Commit History</code> → <code>Staged Snapshot</code>。箭头性的示意图给了我一个误会，那就是 <code>Commit History</code> 控制着 <code>Staged Snapshot</code> 区，<code>Staged Snapshot</code> 区控制着 <code>Working Dir</code> 区。  </p>
+<p> 而事实上，我更乐意用<font style="color: red;"><strong>同步</strong></font>一词来做比喻。  </p>
+<ul>
+<li><code>reset hard</code>的时候，是三区的 <code>commit</code> 相同步的； </li>
+<li><code>reset mixed</code>的时候则是 <code>Commit History</code> 与 <code>Staged Snapshot</code> 之间的同步； </li>
+<li><p><code>reset soft</code>就只有 <code>Commit History</code> 自己玩耍了。</p>
+<p>可是，光是这样还不够。如<code>git reset hard HEAD^^</code>模式的时候，是将<code>HEAD^^</code>所在的 <code>&lt;commitID&gt;</code>同步至 <code>Staged Snapshot</code> 和 <code>Staged Snapshot</code> 区。看起来还是用箭头来指示比较合适。<br>这里箭头容易造成的误导是这看起来像是 <code>Commit History</code> 在发号施令，故放弃使用箭头形式。那么是谁在发号施令呢？答：是 <code>reset</code> 命令（亦或者说是 <code>reset</code> 在使三者相同步）。<br>施术者不同，职务不同，采用的形式不同。而我，我更偏向于这种<strong>同步</strong>性的符号，而非箭头这种指示性的符号。</p>
+</li>
+</ul>
+</li>
+<li><p>三副动图中，在 <code>Commit History</code> 区变化的是 <code>master</code> 对不同的 <code>commit</code> 的指向。三个区的所依据的同步状态既是 <code>HEAD</code> 所处的位置。亦可以说是，HEAD指向哪里，master 跟着到哪里。主导的可以说是通过 <code>master</code> 分支 指向 <code>commit</code> 的 <code>HEAD</code>。</p>
+</li>
+</ol>
+<h5 id="3-2、-情况1-1-情况1-2-mixed模式"><a href="#3-2、-情况1-1-情况1-2-mixed模式" class="headerlink" title="3.2、 情况1.1 情况1.2 --mixed模式"></a>3.2、 情况1.1 情况1.2 <code>--mixed</code>模式</h5><p>当为注明<code>reset</code>采用何种模式的时候，默认是采用<code>--mixed</code>模式<br>此命令常常被用于撤销 <code>Staged Snapshot</code> 中的 <code>add</code> 进来的文件，一些教程如是说。可事实上，这个命令从始至终都没 <code>Working Dir</code> 啥事。  </p>
+<h6 id="1-git-reset-lt-commitID-gt"><a href="#1-git-reset-lt-commitID-gt" class="headerlink" title="1. git reset &lt;commitID&gt;"></a>1. <strong><code>git reset &lt;commitID&gt;</code></strong></h6><p>此种情况会移动<code>master</code>位置。<br>如下图所示，其作用是将 <code>Commit History</code> 区<code>HEAD^^</code>处的 <code>&lt;commitID&gt;</code> 同步至 <code>Staged Snapshot</code> 区。<br><img src="https://halfmoonvic.github.io/images/git-reset-checkout/4.git-reset--commitID.jpg" alt=""></p>
+<h6 id="2-git-reset-lt-commitID-gt-lt-file-path-gt"><a href="#2-git-reset-lt-commitID-gt-lt-file-path-gt" class="headerlink" title="2. git reset &lt;commitID&gt; &lt;file_path&gt;"></a>2. <strong><code>git reset &lt;commitID&gt; &lt;file_path&gt;</code></strong></h6><p>如下图所示，<code>HEAD</code>位置是不变的,自然<code>HEAD</code>所指向的分支位置也是不变的。变化的只有 <code>Staged Snapshot</code> 区。<br><img src="https://halfmoonvic.github.io/images/git-reset-checkout/5.git-reset-commitID-file_path.jpg" alt=""><br>如此，当你进行的<code>add</code>操作时，一般情况下，<code>Working Dir</code> 的 <code>commit</code> 是会超前于 <code>Commit History</code> 区 的 <code>commit</code>。<br>当进行 <code>git reset &lt;file_path&gt;</code>（当未注明 <code>&lt;commitID&gt;</code> 时，默认采用 <code>HEAD</code>） 操作时，<code>Staged Snapshot</code> 区的 <code>commit</code> 恢复到上个状态。<br>这看起来像是撤销操作，实质上是覆盖操作。即是如上图中的<code>6</code>跑到了现在的<code>7&#39;</code>位置上</p>
+<h6 id="3-其它无关杂项"><a href="#3-其它无关杂项" class="headerlink" title="3. 其它无关杂项"></a>3. 其它无关杂项</h6><ol>
+<li>事实上， <code>HEAD</code> <code>&lt;file_path&gt;</code> 均可省略书写，<ul>
+<li><code>git reset &lt;file_path&gt;</code>  等价于 <code>git reset HEAD &lt;file_path&gt;</code></li>
+<li><code>git reset</code>              等价于 <code>git reset HEAD</code></li>
+</ul>
+</li>
+<li><code>git reset &lt;commitID&gt; .</code> 并不等价于 <code>git reset &lt;commitID&gt;</code><br><code>git reset HEAD^^ .</code> 也不会移动 <code>HEAD</code>，因为 <code>.</code> 就是代表了所有文件。这样，<code>reset</code> 的操作对象又变成了 <code>Staged Snapshot</code> 区。</li>
+</ol>
+<h5 id="3-3-情况2-hard-——-git-reset-hard-lt-commitID-gt"><a href="#3-3-情况2-hard-——-git-reset-hard-lt-commitID-gt" class="headerlink" title="3.3 情况2 hard —— git reset --hard &lt;commitID&gt;"></a>3.3 情况2 <strong>hard —— <code>git reset --hard &lt;commitID&gt;</code></strong></h5><p>此命令用于你做错了事情，想要彻底抹除踪迹。<br>采用<code>hard</code>模式的时候，意味着你想要丢弃在 <code>Working Dir</code> 区中的修改。之后继续进行你的工作。详细的 <code>commit</code> 步骤不讲了，对照第一条看即可。放张图给你。<br><img src="https://halfmoonvic.github.io/images/git-reset-checkout/6.git-reset-hard.jpg" alt="">  </p>
+<ol>
+<li><p><code>git reset --hard HEAD^^</code>命令使得 <code>master</code> 分支情况发生改变，版本回退了两个，这里就有危险要发生了。  </p>
+<p> 假如你已经将最新的<code>「6commit」</code>推送到远程库。这个时候，你通过<code>hard</code>回退了两个版本，<code>「5commit」</code>与<code>「6commit」</code>已被在本地 Commit History 区 删除掉（我亦用了灰蒙状态来表示）。这个时候，你再次进行<code>git commit &lt;file_path&gt;</code>操作时，新的 commit 将是<code>「55commit」</code>。至此，你已与远程库的 <code>Commit History</code> 历史相冲突了。反正，我能想到的解决办法只有将远程库删除掉，重新推送本地库，除此之外没有其它招了。</p>
+</li>
+<li><p><code>git reset --hard HEAD</code>命令<br>与<code>git reset --hard HEAD^^</code>命令相比，<code>git reset --hard HEAD</code>命令要柔和的多。如下图所示：<br><img src="https://halfmoonvic.github.io/images/git-reset-checkout/7.git-reset-hard-head.jpg" alt=""><br>这个是恢复当前 HEAD 所在的 commit 到以下两个区。也就不存在与远程库相冲突的问题了。</p>
+</li>
+</ol>
+<h5 id="3-4-情况3-soft-——-git-reset-soft-HEAD"><a href="#3-4-情况3-soft-——-git-reset-soft-HEAD" class="headerlink" title="3.4 情况3 soft —— git reset --soft HEAD^^"></a>3.4 情况3 <strong>soft —— <code>git reset --soft HEAD^^</code></strong></h5><p>soft 仅仅是移动 <code>Commit History</code>区的 <code>master</code> 就不同的 <code>commit</code> 的指向。没什么好说的了。</p>
+<h3 id="4、checkout-命令"><a href="#4、checkout-命令" class="headerlink" title="4、checkout 命令"></a>4、checkout 命令</h3><ul>
+<li>情况1.1: <strong>切换<code>HEAD</code>到具体分支</strong>「如 <code>git checkout dev</code>」</li>
+<li>情况1.2: <strong>切换<code>HEAD</code>到匿名分支</strong>「如 <code>git checkout &lt;commitID&gt;</code>」</li>
+<li>情况2:  <strong><code>Staged Snapshop 区 &lt;commitID&gt;</code>的同步操作，未有分支切换</strong>「如 <code>git checkout &lt;file_path&gt;</code>」</li>
+<li>情况3: <strong><code>Commit History 区 &lt;commitID&gt;</code>同步操作，未有分支切换</strong> 如「<code>git checkout &lt;commitID&gt; &lt;file_path&gt;</code>」</li>
+</ul>
+<h5 id="4-1、-checkout-作用对象是谁？答：看你写谁"><a href="#4-1、-checkout-作用对象是谁？答：看你写谁" class="headerlink" title="4.1、 checkout 作用对象是谁？答：看你写谁"></a>4.1、 checkout 作用对象是谁？答：看你写谁</h5><ol>
+<li>当 <code>checkout</code> 用于「情况1.1」，或者「情况1.2」时，那么其作用对象就是 <strong>Commit History 中的 HEAD</strong>。<br>其作用是让 <code>HEAD</code> 指向某一个 <code>&lt;commitID&gt;</code> 并将 此 <code>&lt;commitID&gt;</code> 的内容同步至 <code>Staged Snapshot</code> 与 <code>Working Dir</code>  </li>
+<li>而当 checkout 用于「情况2」，其作用对象为当前 <strong>Staged Snapshot 区的 commitID</strong>。<br>其作用是让 <strong>当前 <code>Staged Snapshop</code></strong> 区的 <code>&lt;commitID&gt;</code> 同步进 <strong>当前 <code>Woring Dir</code></strong></li>
+<li>而当 <code>checkout</code> 用于「情况3」，其作用对象为 <strong>Commit History 中 的 <code>&lt;commitID&gt;</code>，而非 HEAD</strong>。<br>其作用是 同步<code>Commit History</code>上某一个<code>&lt;commitID&gt;</code>的内容至当下的<code>Staged Snapshop</code> 与 <code>Woring Dir</code> 区</li>
+</ol>
+<h5 id="4-2、-情况1-1-amp-amp-1-2"><a href="#4-2、-情况1-1-amp-amp-1-2" class="headerlink" title="4.2、 情况1.1 &amp;&amp; 1.2"></a>4.2、 情况1.1 &amp;&amp; 1.2</h5><p><strong>HEAD基本上是一直处于指向某一分支的情况的（HEAD指针指向发生过变动），如 HEAD → master、HEAD → dev 亦或是 HEAD → 匿名分支</strong></p>
+<ol>
+<li><code>git checkout dev</code><br>我们可以使用诸如<code>git branch dev</code>般的命令达到切换分支的效果。这里可以注意一下，所谓的分支切换，<strong>其实质只不过是更改 HEAD 的指向</strong>。切换分支的时候就是在更改 HEAD 指向哪个分支</li>
+<li><code>git checkout &lt;commitID&gt;</code><br>当我们不写明具体的分支名称的时，而却是写了一个 <code>Commit History</code> 中的一个 <code>&lt;commitID&gt;</code>。那么，<code>HEAD</code> 将被直接切换指向到这个 <code>&lt;commitID&gt;</code>。这个时候我们可以称其为<strong>匿名分支</strong><br>修改 bug 的时候会常常这么做吧。<br>如下图，此时，你可以通过<code>git branch fix_bug</code>命令新建分支，之后在<code>merge</code>到主分支。</li>
+</ol>
+<p><img src="https://halfmoonvic.github.io/images/git-reset-checkout/8.git-checkout-commitID.jpg" alt=""></p>
+<h5 id="4-3、-情况2-git-checkout-lt-file-path-gt"><a href="#4-3、-情况2-git-checkout-lt-file-path-gt" class="headerlink" title="4.3、 情况2: git checkout &lt;file_path&gt;"></a>4.3、 情况2: <code>git checkout &lt;file_path&gt;</code></h5><p><strong>HEAD 未发生过变动，一直处于当前分支。</strong></p>
+<p><code>git checkout &lt;file_path&gt;</code>命令常常被用于丢弃本地修改。<br><strong><span style="color:red">实质上这是一个 Staged Snapshot 区 与 Working Dir 区 两区相同步的一个操作。同步的方向是由 Staged Snapshot 区 → Working Dir 区。</span></strong><br><img src="https://halfmoonvic.github.io/images/git-reset-checkout/9.git-checkout-file_path.jpg" alt=""></p>
+<p>其作用效果与<code>git reset --hard test.txt</code>差不多，只是在<code>git reset --hard test.txt</code>中，Staged Snapshot 区的 <code>commit</code> 被更新了一次，但它和原来一样。</p>
+<h5 id="4-4、-情况3-命令组合git-checkout-lt-commitID-gt-lt-file-path-gt"><a href="#4-4、-情况3-命令组合git-checkout-lt-commitID-gt-lt-file-path-gt" class="headerlink" title="4.4、 情况3: 命令组合git checkout &lt;commitID&gt; &lt;file_path&gt;"></a>4.4、 情况3: 命令组合<code>git checkout &lt;commitID&gt; &lt;file_path&gt;</code></h5><p><strong>HEAD 未发生过变动，一直处于当前分支。</strong></p>
+<p><strong><span style="color:red"><code>git checkout HEAD^^ &lt;file_path&gt;</code>命令是将 Commit History 中 的 commit 同步到 Staged Snapshot 和 Working Dir 区。而 Commit History 中的 HEAD 并未发生移动。</span></strong>  </p>
+<p><code>git checkout HEAD^^ &lt;file_path&gt;</code>命令造成的结果是 Staged Snapshot 区的 commit 与 Working Dir 区的 commit 保持一致，而与 Commit History 当前的 commit 不同（HEAD未移动的原因）<br>如下图，即 4’ = 4’’ ≠ 6<br><img src="https://halfmoonvic.github.io/images/git-reset-checkout/10.git-checkout-commitID-file_path.jpg" alt="">  </p>
+<p>同时，我们可以通过 <strong style="color:red"><code>git checkout HEAD^^ .</code></strong> 命令将过去的某一版本下的所有文件放置当前的文件目录下面，而不更改 <code>HEAD</code> 指针</p>
+<h5 id="4-5-总结"><a href="#4-5-总结" class="headerlink" title="4.5 总结"></a>4.5 总结</h5><p>情况1.1，情况1.2，未有指定 <code>&lt;file_path&gt;</code> 这时，会发生 <code>HEAD</code> 的变动，其指向自然也是由 <code>Commit History</code> 指向 <code>Staged Snapshot</code> 和 <code>Woring Dir</code><br>情况2，情况3 指定了 <code>&lt;file_path&gt;</code>时（针对操作是特定文件），如果没有指定 Commit Id，则默认从 <code>Staged Snapshot</code> → <code>Woring Dir</code><br>如果指定了 <code>&lt;commitID&gt;</code>, 则是 在 <code>&lt;commitID&gt;</code> → <code>Staged Snapshot</code>， <code>&lt;commitID&gt;</code> → <code>Woring Dir</code>  </p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>个人对git的基本命令的理解就是这些。平常使用 Git 过程当中，大致上可以随心所欲的控制各个 commit 版本了。<br>以上均是学习过程当中个人总结，如有纰漏之处，请一定指出来啊。。。</p>
+<h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><p><a href="https://marklodato.github.io/visual-git-guide/index-zh-cn.html" target="_blank" rel="noopener">图解Git</a></p>
+<p><a href="https://medicineyeh.wordpress.com/2015/01/22/%E7%B4%B0%E8%AA%AAgit-reset%E5%92%8Cgit-checkout%E7%9A%84%E4%B8%8D%E5%90%8C%E4%B9%8B%E8%99%95/" target="_blank" rel="noopener">細說git reset和git checkout的不同之處</a></p>
+<p><a href="https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting" target="_blank" rel="noopener">Reset, Checkout, and Revert</a></p>
+<p><a href="https://stackoverflow.com/questions/11200839/why-git-cant-do-hard-soft-resets-by-path" target="_blank" rel="noopener">Why git can’t do hard/soft resets by path?</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/20/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/29/多行弹性布局/" rel="prev" title="多行弹性布局">
+                多行弹性布局 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-三个区"><span class="nav-number">1.</span> <span class="nav-text">1、 三个区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、commit"><span class="nav-number">2.</span> <span class="nav-text">2、commit</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1、-基于-commit-的版本操作控制思想"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1、 基于 commit 的版本操作控制思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2、-根据颜色辨别状态"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.2、 根据颜色辨别状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3、-总结-commit"><span class="nav-number">2.0.3.</span> <span class="nav-text">2.3、 总结 commit</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、reset-命令"><span class="nav-number">3.</span> <span class="nav-text">3、reset 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1、-reset-的三种命令模式："><span class="nav-number">3.0.1.</span> <span class="nav-text">3.1、 reset 的三种命令模式：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ-分割线-ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ"><span class="nav-number"></span> <span class="nav-text">ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ 分割线 ᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂᶂ</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2、-情况1-1-情况1-2-mixed模式"><span class="nav-number">0.0.1.</span> <span class="nav-text">3.2、 情况1.1 情况1.2 --mixed模式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-git-reset-lt-commitID-gt"><span class="nav-number">0.0.1.1.</span> <span class="nav-text">1. git reset &lt;commitID&gt;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-git-reset-lt-commitID-gt-lt-file-path-gt"><span class="nav-number">0.0.1.2.</span> <span class="nav-text">2. git reset &lt;commitID&gt; &lt;file_path&gt;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-其它无关杂项"><span class="nav-number">0.0.1.3.</span> <span class="nav-text">3. 其它无关杂项</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-情况2-hard-——-git-reset-hard-lt-commitID-gt"><span class="nav-number">0.0.2.</span> <span class="nav-text">3.3 情况2 hard —— git reset --hard &lt;commitID&gt;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-情况3-soft-——-git-reset-soft-HEAD"><span class="nav-number">0.0.3.</span> <span class="nav-text">3.4 情况3 soft —— git reset --soft HEAD^^</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、checkout-命令"><span class="nav-number">1.</span> <span class="nav-text">4、checkout 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1、-checkout-作用对象是谁？答：看你写谁"><span class="nav-number">1.0.1.</span> <span class="nav-text">4.1、 checkout 作用对象是谁？答：看你写谁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2、-情况1-1-amp-amp-1-2"><span class="nav-number">1.0.2.</span> <span class="nav-text">4.2、 情况1.1 &amp;&amp; 1.2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3、-情况2-git-checkout-lt-file-path-gt"><span class="nav-number">1.0.3.</span> <span class="nav-text">4.3、 情况2: git checkout &lt;file_path&gt;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-4、-情况3-命令组合git-checkout-lt-commitID-gt-lt-file-path-gt"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.4、 情况3: 命令组合git checkout &lt;commitID&gt; &lt;file_path&gt;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-5-总结"><span class="nav-number">1.0.5.</span> <span class="nav-text">4.5 总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">2.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料："><span class="nav-number">3.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/07/20/Git-reset-checkout-commit-命令详解/';
+          this.page.identifier = '2017/07/20/Git-reset-checkout-commit-命令详解/';
+          this.page.title = 'Git reset checkout commit 命令详解';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

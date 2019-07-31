@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="版本管理工具一、 Git 🔗️ 932k1) 基础功能完善方便 二、 GitSavvy 🔗️ 50kGit 工具 status 很好，add 功能 有问题 三、 GitGutter 🔗️ 678k在左边栏的位置显示一个小图标，用以表示在最后一次提交以后，代码是否有追加，修改或者删除 四、 TortoiseSVN 🔗️ 63k直接调出 TortoiseSVN，Windows 专用 五、 SV">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩转sublime之：sublime工具增强篇">
+<meta property="og:url" content="http://yoursite.com/2019/01/07/玩转sublime之：sublime工具增强篇/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="版本管理工具一、 Git 🔗️ 932k1) 基础功能完善方便 二、 GitSavvy 🔗️ 50kGit 工具 status 很好，add 功能 有问题 三、 GitGutter 🔗️ 678k在左边栏的位置显示一个小图标，用以表示在最后一次提交以后，代码是否有追加，修改或者删除 四、 TortoiseSVN 🔗️ 63k直接调出 TortoiseSVN，Windows 专用 五、 SV">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-01-07T06:46:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="玩转sublime之：sublime工具增强篇">
+<meta name="twitter:description" content="版本管理工具一、 Git 🔗️ 932k1) 基础功能完善方便 二、 GitSavvy 🔗️ 50kGit 工具 status 很好，add 功能 有问题 三、 GitGutter 🔗️ 678k在左边栏的位置显示一个小图标，用以表示在最后一次提交以后，代码是否有追加，修改或者删除 四、 TortoiseSVN 🔗️ 63k直接调出 TortoiseSVN，Windows 专用 五、 SV">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/07/玩转sublime之：sublime工具增强篇/"/>
+
+
+
+
+
+  <title>玩转sublime之：sublime工具增强篇 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/07/玩转sublime之：sublime工具增强篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">玩转sublime之：sublime工具增强篇</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-07T16:00:10+08:00">
+                2019-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IDE/" itemprop="url" rel="index">
+                    <span itemprop="name">IDE</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/07/玩转sublime之：sublime工具增强篇/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/07/玩转sublime之：sublime工具增强篇/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/01/07/玩转sublime之：sublime工具增强篇/" class="leancloud_visitors" data-flag-title="玩转sublime之：sublime工具增强篇">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="版本管理工具"><a href="#版本管理工具" class="headerlink" title="版本管理工具"></a>版本管理工具</h3><h4 id="一、-Git-🔗️-932k"><a href="#一、-Git-🔗️-932k" class="headerlink" title="一、 Git 🔗️ 932k"></a>一、 <code>Git</code> <a href="https://packagecontrol.io/packages/Git" target="_blank" rel="noopener">🔗️ 932k</a></h4><p>1) 基础功能完善方便</p>
+<h4 id="二、-GitSavvy-🔗️-50k"><a href="#二、-GitSavvy-🔗️-50k" class="headerlink" title="二、 GitSavvy 🔗️ 50k"></a>二、 <code>GitSavvy</code> <a href="https://packagecontrol.io/packages/GitSavvy" target="_blank" rel="noopener">🔗️ 50k</a></h4><p>Git 工具 status 很好，add 功能 有问题</p>
+<h4 id="三、-GitGutter-🔗️-678k"><a href="#三、-GitGutter-🔗️-678k" class="headerlink" title="三、 GitGutter 🔗️ 678k"></a>三、 <code>GitGutter</code> <a href="https://packagecontrol.io/packages/GitGutter" target="_blank" rel="noopener">🔗️ 678k</a></h4><p>在左边栏的位置显示一个小图标，用以表示在最后一次提交以后，代码是否有追加，修改或者删除</p>
+<h4 id="四、-TortoiseSVN-🔗️-63k"><a href="#四、-TortoiseSVN-🔗️-63k" class="headerlink" title="四、 TortoiseSVN 🔗️ 63k"></a>四、 <code>TortoiseSVN</code> <a href="https://packagecontrol.io/packages/TortoiseSVN" target="_blank" rel="noopener">🔗️ 63k</a></h4><p>直接调出 TortoiseSVN，Windows 专用</p>
+<h4 id="五、-SVN-🔗️-100k"><a href="#五、-SVN-🔗️-100k" class="headerlink" title="五、 SVN 🔗️ 100k"></a>五、 <code>SVN</code> <a href="https://packagecontrol.io/packages/SVN" target="_blank" rel="noopener">🔗️ 100k</a></h4><p>sublime 调用 svn 命令行</p>
+<h4 id="六、-Modific-🔗️-49k"><a href="#六、-Modific-🔗️-49k" class="headerlink" title="六、 Modific 🔗️ 49k"></a>六、 <code>Modific</code> <a href="https://packagecontrol.io/packages/Modific" target="_blank" rel="noopener">🔗️ 49k</a></h4><p>Highlight lines changed since the last commit (supports Git, SVN, Bazaar, Mercurial and TFS) / ST2(3) plugin</p>
+<hr>
+<h3 id="todolist"><a href="#todolist" class="headerlink" title="todolist"></a>todolist</h3><ol>
+<li><code>todolist</code> 代办事项列表</li>
+<li>todolist 与 OmniMarkupPreviewer 插件 存在冲突</li>
+</ol>
+<h3 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h3><h4 id="一、-MarkdownEditing-🔗️-415k"><a href="#一、-MarkdownEditing-🔗️-415k" class="headerlink" title="一、 MarkdownEditing 🔗️ 415k"></a>一、 <code>MarkdownEditing</code> <a href="https://packagecontrol.io/packages/MarkdownEditing" target="_blank" rel="noopener">🔗️ 415k</a></h4><p>高亮 Markdown 语法</p>
+<h4 id="二、-Markdown-Preview-🔗️-568k"><a href="#二、-Markdown-Preview-🔗️-568k" class="headerlink" title="二、 Markdown Preview 🔗️ 568k"></a>二、 <code>Markdown Preview</code> <a href="https://packagecontrol.io/packages/MarkdownPreview" target="_blank" rel="noopener">🔗️ 568k</a></h4><p>Alt + M 预览 MarkDown 文档，但排版样式丑，故忽略之</p>
+<h4 id="三、-OmniMarkupPreviewer-🔗️-82k"><a href="#三、-OmniMarkupPreviewer-🔗️-82k" class="headerlink" title="三、 OmniMarkupPreviewer 🔗️ 82k"></a>三、 <code>OmniMarkupPreviewer</code> <a href="https://packagecontrol.io/packages/OmniMarkupPreviewer" target="_blank" rel="noopener">🔗️ 82k</a></h4><p>Ctrl + Alt + O 或者 右键实时预览 MarkDown 文档</p>
+<h4 id="四、-Markdown-Table-Formatter-🔗️-6k"><a href="#四、-Markdown-Table-Formatter-🔗️-6k" class="headerlink" title="四、 Markdown Table Formatter 🔗️ 6k"></a>四、 <code>Markdown Table Formatter</code> <a href="https://packagecontrol.io/packages/Markdown%20Table%20Formatter" target="_blank" rel="noopener">🔗️ 6k</a></h4><p>markdown plugin that offers table formatting</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/07/玩转sublime之：golang环境搭建/" rel="next" title="玩转sublime之：golang环境搭建">
+                <i class="fa fa-chevron-left"></i> 玩转sublime之：golang环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/07/玩转sublime之：vue react 环境搭建/" rel="prev" title="玩转sublime之：vue react 环境搭建">
+                玩转sublime之：vue react 环境搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本管理工具"><span class="nav-number">1.</span> <span class="nav-text">版本管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-Git-🔗️-932k"><span class="nav-number">1.1.</span> <span class="nav-text">一、 Git 🔗️ 932k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-GitSavvy-🔗️-50k"><span class="nav-number">1.2.</span> <span class="nav-text">二、 GitSavvy 🔗️ 50k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-GitGutter-🔗️-678k"><span class="nav-number">1.3.</span> <span class="nav-text">三、 GitGutter 🔗️ 678k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、-TortoiseSVN-🔗️-63k"><span class="nav-number">1.4.</span> <span class="nav-text">四、 TortoiseSVN 🔗️ 63k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、-SVN-🔗️-100k"><span class="nav-number">1.5.</span> <span class="nav-text">五、 SVN 🔗️ 100k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、-Modific-🔗️-49k"><span class="nav-number">1.6.</span> <span class="nav-text">六、 Modific 🔗️ 49k</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#todolist"><span class="nav-number">2.</span> <span class="nav-text">todolist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown"><span class="nav-number">3.</span> <span class="nav-text">Markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-MarkdownEditing-🔗️-415k"><span class="nav-number">3.1.</span> <span class="nav-text">一、 MarkdownEditing 🔗️ 415k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-Markdown-Preview-🔗️-568k"><span class="nav-number">3.2.</span> <span class="nav-text">二、 Markdown Preview 🔗️ 568k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-OmniMarkupPreviewer-🔗️-82k"><span class="nav-number">3.3.</span> <span class="nav-text">三、 OmniMarkupPreviewer 🔗️ 82k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、-Markdown-Table-Formatter-🔗️-6k"><span class="nav-number">3.4.</span> <span class="nav-text">四、 Markdown Table Formatter 🔗️ 6k</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/01/07/玩转sublime之：sublime工具增强篇/';
+          this.page.identifier = '2019/01/07/玩转sublime之：sublime工具增强篇/';
+          this.page.title = '玩转sublime之：sublime工具增强篇';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

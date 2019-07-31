@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="react," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、 创建项目 create-react-app 项目名称 npm run eject  二、 别名配置1. 添加函数123function resolveDir (dir) &amp;#123;  return path.join(__dirname, &amp;apos;..&amp;apos;, dir)&amp;#125; 2. resolve.alias 下进行别名配置(自行进行追加操作)12345678alias:">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="create-react-app 项目框架搭建">
+<meta property="og:url" content="http://yoursite.com/2017/12/15/create-react-app-项目框架搭建/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="一、 创建项目 create-react-app 项目名称 npm run eject  二、 别名配置1. 添加函数123function resolveDir (dir) &amp;#123;  return path.join(__dirname, &amp;apos;..&amp;apos;, dir)&amp;#125; 2. resolve.alias 下进行别名配置(自行进行追加操作)12345678alias:">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-31T06:36:03.467Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="create-react-app 项目框架搭建">
+<meta name="twitter:description" content="一、 创建项目 create-react-app 项目名称 npm run eject  二、 别名配置1. 添加函数123function resolveDir (dir) &amp;#123;  return path.join(__dirname, &amp;apos;..&amp;apos;, dir)&amp;#125; 2. resolve.alias 下进行别名配置(自行进行追加操作)12345678alias:">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/15/create-react-app-项目框架搭建/"/>
+
+
+
+
+
+  <title>create-react-app 项目框架搭建 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/15/create-react-app-项目框架搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">create-react-app 项目框架搭建</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-15T14:53:09+08:00">
+                2017-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/" itemprop="url" rel="index">
+                    <span itemprop="name">框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/15/create-react-app-项目框架搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/15/create-react-app-项目框架搭建/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/12/15/create-react-app-项目框架搭建/" class="leancloud_visitors" data-flag-title="create-react-app 项目框架搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="一、-创建项目"><a href="#一、-创建项目" class="headerlink" title="一、 创建项目"></a>一、 创建项目</h4><ol>
+<li><code>create-react-app 项目名称</code></li>
+<li><code>npm run eject</code></li>
+</ol>
+<h4 id="二、-别名配置"><a href="#二、-别名配置" class="headerlink" title="二、 别名配置"></a>二、 别名配置</h4><h6 id="1-添加函数"><a href="#1-添加函数" class="headerlink" title="1. 添加函数"></a>1. 添加函数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function resolveDir (dir) &#123;</span><br><span class="line">  return path.join(__dirname, &apos;..&apos;, dir)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="2-resolve-alias-下进行别名配置-自行进行追加操作"><a href="#2-resolve-alias-下进行别名配置-自行进行追加操作" class="headerlink" title="2. resolve.alias 下进行别名配置(自行进行追加操作)"></a>2. resolve.alias 下进行别名配置(自行进行追加操作)</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">alias: &#123;</span><br><span class="line">  &apos;@&apos;: resolveDir(&apos;src&apos;),</span><br><span class="line">  &apos;component&apos;: resolveDir(&apos;src/component&apos;),</span><br><span class="line">  &apos;container&apos;: resolveDir(&apos;src/container&apos;),</span><br><span class="line">  &apos;store&apos;: resolveDir(&apos;src/store&apos;),</span><br><span class="line">  &apos;common&apos;: resolveDir(&apos;src/common&apos;),</span><br><span class="line">  &apos;api&apos;: resolveDir(&apos;src/api&apos;),</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="三、-装饰器-支持"><a href="#三、-装饰器-支持" class="headerlink" title="三、 装饰器 @ 支持"></a>三、 装饰器 @ 支持</h4><h6 id="1-安装-babel-plugin-transform-decorators-legacy"><a href="#1-安装-babel-plugin-transform-decorators-legacy" class="headerlink" title="1. 安装 babel-plugin-transform-decorators-legacy"></a>1. 安装 <code>babel-plugin-transform-decorators-legacy</code></h6><h6 id="2-修改babel处plugins配置"><a href="#2-修改babel处plugins配置" class="headerlink" title="2. 修改babel处plugins配置"></a>2. 修改babel处plugins配置</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&quot;babel&quot;: &#123;</span><br><span class="line">  &quot;presets&quot;: [</span><br><span class="line">    &quot;react-app&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;plugins&quot;: [</span><br><span class="line">    &quot;transform-decorators-legacy&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="四、-redux支持"><a href="#四、-redux支持" class="headerlink" title="四、 redux支持"></a>四、 redux支持</h4><h6 id="1-安装包-react-redux-redux-redux-thunk"><a href="#1-安装包-react-redux-redux-redux-thunk" class="headerlink" title="1. 安装包 react-redux redux redux-thunk"></a>1. 安装包 <code>react-redux redux redux-thunk</code></h6><h6 id="2-文件目录结构"><a href="#2-文件目录结构" class="headerlink" title="2. 文件目录结构"></a>2. 文件目录结构</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">▾ src\</span><br><span class="line">   ▸ api\</span><br><span class="line">   ▸ common\</span><br><span class="line">   ▾ store\</span><br><span class="line">      ≡ action-types.js         // 常量文件，存放 action-type</span><br><span class="line">      ≡ actions.js              // 存放普通的 action-creator</span><br><span class="line">      ≡ async-actions.js        // 存放 含有异步的 action-creator, 其返回值是一个 action-creator</span><br><span class="line">      ≡ index.js                // 输出 store</span><br><span class="line">      ≡ reducers.js             // 存放所有的 reducer</span><br><span class="line">      ≡ states.js               // 存放所有的 initState 值</span><br><span class="line">   ≡ App.js</span><br></pre></td></tr></table></figure>
+<h4 id="五、-react-router-dom"><a href="#五、-react-router-dom" class="headerlink" title="五、 react-router-dom"></a>五、 react-router-dom</h4><p>安装 <code>react-router-dom</code></p>
+<h4 id="六、-scss-语法支持"><a href="#六、-scss-语法支持" class="headerlink" title="六、 scss 语法支持"></a>六、 scss 语法支持</h4><h6 id="1-安装-node-sass-sass-loader-两个包"><a href="#1-安装-node-sass-sass-loader-两个包" class="headerlink" title="1. 安装 node-sass sass-loader 两个包"></a>1. 安装 <code>node-sass sass-loader</code> 两个包</h6><h6 id="2-修改-webpack-config-dev-js-webpack-config-prod-js-下面的-rules-配置"><a href="#2-修改-webpack-config-dev-js-webpack-config-prod-js-下面的-rules-配置" class="headerlink" title="2. 修改 webpack.config.dev.js webpack.config.prod.js 下面的 rules 配置"></a>2. 修改 <code>webpack.config.dev.js webpack.config.prod.js</code> 下面的 rules 配置</h6><p>下面的配置修改放置到 oneOf 数组下面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test: /\.scss$/,</span><br><span class="line">  use: [&#123;</span><br><span class="line">      loader: &quot;style-loader&quot; // 将 JS 字符串生成为 style 节点</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      loader: &quot;css-loader&quot;, // 将 CSS 转化成 CommonJS 模块</span><br><span class="line">      options: &#123;</span><br><span class="line">        sourceMap: true</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      loader: &quot;sass-loader&quot;, // 将 Sass 编译成 CSS</span><br><span class="line">      options: &#123;</span><br><span class="line">        sourceMap: true</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、-antd-库按需引入"><a href="#七、-antd-库按需引入" class="headerlink" title="七、 antd 库按需引入"></a>七、 antd 库按需引入</h4><h6 id="1-安装-antd-mobile-babel-plugin-import"><a href="#1-安装-antd-mobile-babel-plugin-import" class="headerlink" title="1. 安装 antd-mobile babel-plugin-import"></a>1. 安装 <code>antd-mobile babel-plugin-import</code></h6><h6 id="2-按需引入配置-修改babel处plugins配置"><a href="#2-按需引入配置-修改babel处plugins配置" class="headerlink" title="2. 按需引入配置 修改babel处plugins配置"></a>2. 按需引入配置 修改babel处plugins配置</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&quot;babel&quot;: &#123;</span><br><span class="line">  &quot;presets&quot;: [</span><br><span class="line">    &quot;react-app&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;plugins&quot;: [</span><br><span class="line">    [</span><br><span class="line">      &quot;import&quot;, &#123;</span><br><span class="line">        &quot;libraryName&quot;: &quot;antd-mobile&quot;,</span><br><span class="line">        &quot;style&quot;: &quot;css&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">  ]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="八、-其它依赖包安装"><a href="#八、-其它依赖包安装" class="headerlink" title="八、 其它依赖包安装"></a>八、 其它依赖包安装</h4><ol>
+<li><code>prop-types</code></li>
+<li><code>axios</code></li>
+<li><code>qs</code></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/14/JavaScript-Promise迷你书-笔记/" rel="next" title="JavaScript Promise迷你书--笔记">
+                <i class="fa fa-chevron-left"></i> JavaScript Promise迷你书--笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/10/redux-执行原理/" rel="prev" title="react-redux 执行原理">
+                react-redux 执行原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-创建项目"><span class="nav-number">1.</span> <span class="nav-text">一、 创建项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-别名配置"><span class="nav-number">2.</span> <span class="nav-text">二、 别名配置</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-添加函数"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. 添加函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-resolve-alias-下进行别名配置-自行进行追加操作"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. resolve.alias 下进行别名配置(自行进行追加操作)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-装饰器-支持"><span class="nav-number">3.</span> <span class="nav-text">三、 装饰器 @ 支持</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-安装-babel-plugin-transform-decorators-legacy"><span class="nav-number">3.0.1.</span> <span class="nav-text">1. 安装 babel-plugin-transform-decorators-legacy</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-修改babel处plugins配置"><span class="nav-number">3.0.2.</span> <span class="nav-text">2. 修改babel处plugins配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、-redux支持"><span class="nav-number">4.</span> <span class="nav-text">四、 redux支持</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-安装包-react-redux-redux-redux-thunk"><span class="nav-number">4.0.1.</span> <span class="nav-text">1. 安装包 react-redux redux redux-thunk</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-文件目录结构"><span class="nav-number">4.0.2.</span> <span class="nav-text">2. 文件目录结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、-react-router-dom"><span class="nav-number">5.</span> <span class="nav-text">五、 react-router-dom</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、-scss-语法支持"><span class="nav-number">6.</span> <span class="nav-text">六、 scss 语法支持</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-安装-node-sass-sass-loader-两个包"><span class="nav-number">6.0.1.</span> <span class="nav-text">1. 安装 node-sass sass-loader 两个包</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-修改-webpack-config-dev-js-webpack-config-prod-js-下面的-rules-配置"><span class="nav-number">6.0.2.</span> <span class="nav-text">2. 修改 webpack.config.dev.js webpack.config.prod.js 下面的 rules 配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、-antd-库按需引入"><span class="nav-number">7.</span> <span class="nav-text">七、 antd 库按需引入</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-安装-antd-mobile-babel-plugin-import"><span class="nav-number">7.0.1.</span> <span class="nav-text">1. 安装 antd-mobile babel-plugin-import</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-按需引入配置-修改babel处plugins配置"><span class="nav-number">7.0.2.</span> <span class="nav-text">2. 按需引入配置 修改babel处plugins配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八、-其它依赖包安装"><span class="nav-number">8.</span> <span class="nav-text">八、 其它依赖包安装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/12/15/create-react-app-项目框架搭建/';
+          this.page.identifier = '2017/12/15/create-react-app-项目框架搭建/';
+          this.page.title = 'create-react-app 项目框架搭建';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="api," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="parser —— 解析器浅入浅出eslint 与实作parser 就是将我们语法的理解给「程式化」成一个树状的结构1parser: &amp;apos;babel-eslint&amp;apos;, parserOptions —— 解析器选选项 ecmaVersion - 默认设置为5（默认），你可以使用 6、7、8 或 9 来指定你想要使用的 ECMAScript 版本。你也可以用使用年份命名的版本号指定为">
+<meta name="keywords" content="api">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eslint 配置介绍">
+<meta property="og:url" content="http://yoursite.com/2018/08/05/eslint-配置介绍/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="parser —— 解析器浅入浅出eslint 与实作parser 就是将我们语法的理解给「程式化」成一个树状的结构1parser: &amp;apos;babel-eslint&amp;apos;, parserOptions —— 解析器选选项 ecmaVersion - 默认设置为5（默认），你可以使用 6、7、8 或 9 来指定你想要使用的 ECMAScript 版本。你也可以用使用年份命名的版本号指定为">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-31T06:36:03.467Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="eslint 配置介绍">
+<meta name="twitter:description" content="parser —— 解析器浅入浅出eslint 与实作parser 就是将我们语法的理解给「程式化」成一个树状的结构1parser: &amp;apos;babel-eslint&amp;apos;, parserOptions —— 解析器选选项 ecmaVersion - 默认设置为5（默认），你可以使用 6、7、8 或 9 来指定你想要使用的 ECMAScript 版本。你也可以用使用年份命名的版本号指定为">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/05/eslint-配置介绍/"/>
+
+
+
+
+
+  <title>eslint 配置介绍 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/eslint-配置介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">eslint 配置介绍</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-05T20:50:13+08:00">
+                2018-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/05/eslint-配置介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/08/05/eslint-配置介绍/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/08/05/eslint-配置介绍/" class="leancloud_visitors" data-flag-title="eslint 配置介绍">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="parser-——-解析器"><a href="#parser-——-解析器" class="headerlink" title="parser —— 解析器"></a>parser —— 解析器</h3><p><a href="https://denny.qollie.com/2016/07/11/eslint-fxcking-setup/" target="_blank" rel="noopener">浅入浅出eslint 与实作</a><br>parser 就是将我们语法的理解给「程式化」成一个树状的结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser: &apos;babel-eslint&apos;,</span><br></pre></td></tr></table></figure></p>
+<h3 id="parserOptions-——-解析器选选项"><a href="#parserOptions-——-解析器选选项" class="headerlink" title="parserOptions —— 解析器选选项"></a>parserOptions —— 解析器选选项</h3><ol>
+<li>ecmaVersion - 默认设置为5（默认），你可以使用 6、7、8 或 9 来指定你想要使用的 ECMAScript 版本。你也可以用使用年份命名的版本号指定为 2015（同 6），2016（同 7），或 2017（同 8）或 2018  </li>
+<li>sourceType - 设置为 “script” (默认) 或 “module”（如果你的代码是 ECMAScript 模块)。</li>
+<li>ecmaFeatures - 这是个对象，表示你想使用的额外的语言特性<ul>
+<li>globalReturn - 允许在全局作用域下使用 return 语句</li>
+<li>impliedStrict - 启用全局 strict mode (如果 ecmaVersion 是 5 或更高)</li>
+<li>jsx - 启用 JSX<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">parserOptions: &#123;</span><br><span class="line">  ecmaVersion: 6,</span><br><span class="line">  sourceType: &apos;module&apos;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="env-运行环境"><a href="#env-运行环境" class="headerlink" title="env 运行环境"></a>env 运行环境</h3><p>An environment defines global variables that are predefined.<br>指定脚本的运行环境。每种环境都有一组特定的预定义全局变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&quot;env&quot;: &#123;</span><br><span class="line">    &quot;browser&quot;: true,</span><br><span class="line">    &quot;node&quot;: true,</span><br><span class="line">    &quot;es6&quot;:true,</span><br><span class="line">    commonjs: true</span><br><span class="line">    &quot;mocha&quot;:&quot;true&quot;,</span><br><span class="line">    &quot;qunit&quot;:true,</span><br><span class="line">    &quot;jquery&quot;:true,</span><br><span class="line">    &quot;mongo&quot;:true,</span><br><span class="line">    //通过插件名命名空间引入插件中的环境</span><br><span class="line">    &quot;example/custom&quot;: true</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h3 id="二、-globals-——-全局变量"><a href="#二、-globals-——-全局变量" class="headerlink" title="二、 globals —— 全局变量"></a>二、 globals —— 全局变量</h3><p>脚本在执行期间访问的额外的全局变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">globals: &#123;</span><br><span class="line">  __DEV__: true,</span><br><span class="line">  __WECHAT__: true,</span><br><span class="line">  __ALIPAY__: true,</span><br><span class="line">  App: true,</span><br><span class="line">  Page: true,</span><br><span class="line">  Component: true,</span><br><span class="line">  Behavior: true,</span><br><span class="line">  wx: true,</span><br><span class="line">  getApp: true</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h3 id="plugins-——-第三方插件"><a href="#plugins-——-第三方插件" class="headerlink" title="plugins —— 第三方插件"></a>plugins —— 第三方插件</h3><ol>
+<li><code>plugin</code> 可以 为当前 的 eslint 提供额外的功能，如 <code>eslint-plugin-vue</code>，其可支持校验 <code>html</code> 部分，单独的 <code>eslint</code> 则是仅能校验 <code>js</code> 的。</li>
+<li>插件名称可以省略 <code>eslint-plugin-</code> 前缀<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;plugins&quot;: [</span><br><span class="line">    &quot;plugin1&quot;,</span><br><span class="line">    &quot;eslint-plugin-plugin2&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="extends-——-基础配置"><a href="#extends-——-基础配置" class="headerlink" title="extends —— 基础配置"></a>extends —— 基础配置</h3><ol>
+<li><code>eslint-config-prettier</code> 为例，其主代码就是 各种 <code>rules</code> 的开关，其本身并不是插件，更没有说提供一套规则（这是 plugin）的功能，<code>eslint-config-prettier</code> 本身既是基于 <code>eslint</code> 自带的规则进行开关罢了。<br>其 github 介绍也说了 Turns off all rules that are unnecessary or might conflict with Prettier.</li>
+<li>与 <code>eslint</code> 相类似的，如 <code>stylelint</code>，无论是 <code>plugin</code> 还是 <code>extends</code> 都是与 <code>eslint</code> 这里一致的</li>
+<li>extends 属性值，可以为字符串，或者字符串数组<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extends: &apos;eslint:recommended&apos;,</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="rules-——-个性化配置"><a href="#rules-——-个性化配置" class="headerlink" title="rules —— 个性化配置"></a>rules —— 个性化配置</h3><p>扩展（或覆盖）extends 中预定义的规则<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">rules: &#123;</span><br><span class="line">  &apos;comma-dangle&apos;: [1, &apos;never&apos;],</span><br><span class="line">  eqeqeq: 1,</span><br><span class="line">  indent: [1, 2],</span><br><span class="line">  &apos;generator-star-spacing&apos;: 0,</span><br><span class="line">  &apos;no-console&apos;: 0,</span><br><span class="line">  &apos;no-debugger&apos;: process.env.NODE_ENV === &apos;production&apos; ? 0 : 1,</span><br><span class="line">  &apos;no-multiple-empty-lines&apos;: [1, &#123; max: 2 &#125;],</span><br><span class="line">  &apos;no-multi-spaces&apos;: 1,</span><br><span class="line">  &apos;no-unused-vars&apos;: 1,</span><br><span class="line">  semi: [1, &apos;never&apos;],</span><br><span class="line">  &apos;space-before-function-paren&apos;: [</span><br><span class="line">    1,</span><br><span class="line">    &#123;</span><br><span class="line">      anonymous: &apos;never&apos;,</span><br><span class="line">      named: &apos;never&apos;,</span><br><span class="line">      asyncArrow: &apos;always&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  &apos;spaced-comment&apos;: 1,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h3 id="通用配置"><a href="#通用配置" class="headerlink" title="通用配置"></a>通用配置</h3><p>插件依赖： <code>eslint babel-eslint</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  root: true,</span><br><span class="line">  parser: &apos;babel-eslint&apos;,</span><br><span class="line">  parserOptions: &#123;</span><br><span class="line">    ecmaVersion: 6,</span><br><span class="line">    sourceType: &apos;module&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  env: &#123;</span><br><span class="line">    browser: true,</span><br><span class="line">    node: true,</span><br><span class="line">    es6: true,</span><br><span class="line">    commonjs: true</span><br><span class="line">  &#125;,</span><br><span class="line">  globals: &#123;&#125;,</span><br><span class="line">  plugins: [],</span><br><span class="line">  extends: &apos;eslint:recommended&apos;,</span><br><span class="line">  rules: &#123;</span><br><span class="line">    eqeqeq: 1,</span><br><span class="line">    &apos;no-console&apos;: 0,</span><br><span class="line">    &apos;space-before-function-paren&apos;: [</span><br><span class="line">      1,</span><br><span class="line">      &#123;</span><br><span class="line">        anonymous: &apos;always&apos;,</span><br><span class="line">        named: &apos;never&apos;,</span><br><span class="line">        asyncArrow: &apos;always&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    &apos;generator-star-spacing&apos;: 0,</span><br><span class="line">    &apos;spaced-comment&apos;: 1,</span><br><span class="line">    indent: [1, 2],</span><br><span class="line">    &apos;no-unused-vars&apos;: 1,</span><br><span class="line">    semi: [1, &apos;never&apos;],</span><br><span class="line">    &apos;no-multiple-empty-lines&apos;: [1, &#123; max: 2 &#125;],</span><br><span class="line">    &apos;comma-dangle&apos;: [1, &apos;never&apos;],</span><br><span class="line">    &apos;no-multi-spaces&apos;: 1,</span><br><span class="line">    &apos;no-debugger&apos;: process.env.NODE_ENV === &apos;production&apos; ? 0 : 1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p>依赖插件 <code>eslint-plugin-jsx-a11y</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">parser: &apos;babel-eslint&apos;,</span><br><span class="line">plugins: [&apos;jsx-a11y&apos;],</span><br><span class="line">extends: [&apos;react-app&apos;, &apos;plugin:jsx-a11y/recommended&apos;],</span><br></pre></td></tr></table></figure></p>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p><a href="https://github.com/vuejs/eslint-plugin-vue" target="_blank" rel="noopener">eslint-plugin-vue</a><br>依赖 <code>eslint-plugin-vue</code> 插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">parserOptions: &#123;</span><br><span class="line">  sourceType: &apos;module&apos;,</span><br><span class="line">  parser: &apos;babel-eslint&apos;,</span><br><span class="line">&#125;,</span><br><span class="line">plugins: [&apos;vue&apos;],</span><br><span class="line">extends: [&apos;plugin:vue/essential&apos;, &apos;eslint:recommended&apos;],</span><br></pre></td></tr></table></figure></p>
+<h3 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">globals: &#123;</span><br><span class="line">  __DEV__: true,</span><br><span class="line">  __WECHAT__: true,</span><br><span class="line">  __ALIPAY__: true,</span><br><span class="line">  App: true,</span><br><span class="line">  Page: true,</span><br><span class="line">  Component: true,</span><br><span class="line">  Behavior: true,</span><br><span class="line">  wx: true,</span><br><span class="line">  getApp: true</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/api/" rel="tag"># api</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/09/各种-get-和-set总结/" rel="next" title="各种 get 和 set总结">
+                <i class="fa fa-chevron-left"></i> 各种 get 和 set总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/27/iTerm2配置/" rel="prev" title="iTerm2配置">
+                iTerm2配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#parser-——-解析器"><span class="nav-number">1.</span> <span class="nav-text">parser —— 解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parserOptions-——-解析器选选项"><span class="nav-number">2.</span> <span class="nav-text">parserOptions —— 解析器选选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#env-运行环境"><span class="nav-number">3.</span> <span class="nav-text">env 运行环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、-globals-——-全局变量"><span class="nav-number">4.</span> <span class="nav-text">二、 globals —— 全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plugins-——-第三方插件"><span class="nav-number">5.</span> <span class="nav-text">plugins —— 第三方插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extends-——-基础配置"><span class="nav-number">6.</span> <span class="nav-text">extends —— 基础配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rules-——-个性化配置"><span class="nav-number">7.</span> <span class="nav-text">rules —— 个性化配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通用配置"><span class="nav-number">8.</span> <span class="nav-text">通用配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React"><span class="nav-number">9.</span> <span class="nav-text">React</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue"><span class="nav-number">10.</span> <span class="nav-text">Vue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微信小程序"><span class="nav-number">11.</span> <span class="nav-text">微信小程序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/08/05/eslint-配置介绍/';
+          this.page.identifier = '2018/08/05/eslint-配置介绍/';
+          this.page.title = 'eslint 配置介绍';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

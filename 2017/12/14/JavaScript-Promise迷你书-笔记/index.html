@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="promise,异步,doc," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="promise123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051class FakePromise &amp;#123;  constructor(fn) &amp;#123;    this.status = &amp;apos;pendding&amp;apos;    this.value">
+<meta name="keywords" content="promise,异步,doc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript Promise迷你书--笔记">
+<meta property="og:url" content="http://yoursite.com/2017/12/14/JavaScript-Promise迷你书-笔记/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="promise123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051class FakePromise &amp;#123;  constructor(fn) &amp;#123;    this.status = &amp;apos;pendding&amp;apos;    this.value">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-31T06:36:03.466Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript Promise迷你书--笔记">
+<meta name="twitter:description" content="promise123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051class FakePromise &amp;#123;  constructor(fn) &amp;#123;    this.status = &amp;apos;pendding&amp;apos;    this.value">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/14/JavaScript-Promise迷你书-笔记/"/>
+
+
+
+
+
+  <title>JavaScript Promise迷你书--笔记 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/JavaScript-Promise迷你书-笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript Promise迷你书--笔记</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-14T09:49:08+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/14/JavaScript-Promise迷你书-笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/14/JavaScript-Promise迷你书-笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/12/14/JavaScript-Promise迷你书-笔记/" class="leancloud_visitors" data-flag-title="JavaScript Promise迷你书--笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">class FakePromise &#123;</span><br><span class="line">  constructor(fn) &#123;</span><br><span class="line">    this.status = &apos;pendding&apos;</span><br><span class="line">    this.value = &apos;&apos;</span><br><span class="line">    this.onFulledCallBack = []</span><br><span class="line">    this.onRejectCallBack = []</span><br><span class="line"></span><br><span class="line">    fn(this.resolve.bind(this), this.reject.bind(this))</span><br><span class="line">  &#125;</span><br><span class="line">  resolve(value) &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      if (this.status === &apos;pendding&apos;) &#123;</span><br><span class="line">        this.status = &apos;fulfilled&apos;</span><br><span class="line">        this.value = value</span><br><span class="line">        this.onFulledCallBack.forEach(cb =&gt; cb(this.value))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  reject(value) &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      if (this.status === &apos;pendding&apos;) &#123;</span><br><span class="line">        this.status = &apos;rejected&apos;</span><br><span class="line">        this.value = value</span><br><span class="line">        this.onRejectCallBack.forEach(cb =&gt; cb(this.value))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  then(_success, _failed) &#123;</span><br><span class="line">    if (this.status === &apos;pendding&apos;) &#123;</span><br><span class="line">      return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        this.onFulledCallBack.push((value) =&gt; &#123;</span><br><span class="line">          let x = _success(value)</span><br><span class="line">          resolve(x)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        this.onRejectCallBack.push((err) =&gt; &#123;</span><br><span class="line">          let x = _failed(err)</span><br><span class="line">          reject(x)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">new FakePromise(function (resolve, reject) &#123;</span><br><span class="line">    resolve(&apos;feaw&apos;)</span><br><span class="line">&#125;).then(function (val) &#123;</span><br><span class="line">    return &apos;ffffff&apos;</span><br><span class="line">&#125;).then((val) =&gt; &#123;</span><br><span class="line">  console.log(val)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="1-then-catch-更像是-回调函数罢了"><a href="#1-then-catch-更像是-回调函数罢了" class="headerlink" title="1. .then .catch 更像是 回调函数罢了"></a>1. <code>.then .catch</code> 更像是 回调函数罢了</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var promise = new Promise(function(resolve, reject) &#123;</span><br><span class="line">    // 异步处理</span><br><span class="line">    let getDataSuccess = false</span><br><span class="line">    if (getDataSuccess) &#123;</span><br><span class="line">      resolve(&apos;response&apos;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      reject(&apos;error&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.then(undefined, (error) =&gt; &#123;</span><br><span class="line">  console.log(error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="2-其实-catch-只是-promise-then-undefined-onRejected-的别名而已"><a href="#2-其实-catch-只是-promise-then-undefined-onRejected-的别名而已" class="headerlink" title="2. 其实 .catch 只是 promise.then(undefined, onRejected) 的别名而已"></a>2. 其实 <code>.catch</code> 只是 <code>promise.then(undefined, onRejected)</code> 的别名而已</h5><p>到目前为止我们已经学习了如何通过 .then 和 .catch 来注册回调函数，这些回调函数会在promise对象变为 FulFilled 或 Rejected 状态之后被调用。</p>
+<h5 id="3-Promise-resolve-方法的话，可以认为它的作用就是将传递给它的参数填充（Fulfilled）到promise对象后并返回这个promise对象"><a href="#3-Promise-resolve-方法的话，可以认为它的作用就是将传递给它的参数填充（Fulfilled）到promise对象后并返回这个promise对象" class="headerlink" title="3. Promise.resolve 方法的话，可以认为它的作用就是将传递给它的参数填充（Fulfilled）到promise对象后并返回这个promise对象"></a>3. Promise.resolve 方法的话，可以认为它的作用就是将传递给它的参数填充（Fulfilled）到promise对象后并返回这个promise对象</h5><h5 id="4-Promise-reject-error-是和-Promise-resolve-value-类似的静态方法，是-new-Promise-方法的快捷方式。"><a href="#4-Promise-reject-error-是和-Promise-resolve-value-类似的静态方法，是-new-Promise-方法的快捷方式。" class="headerlink" title="4. Promise.reject(error)是和 Promise.resolve(value) 类似的静态方法，是 new Promise() 方法的快捷方式。"></a>4. Promise.reject(error)是和 Promise.resolve(value) 类似的静态方法，是 new Promise() 方法的快捷方式。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">比如 Promise.reject(new Error(&quot;出错了&quot;)) 就是下面代码的语法糖形式。</span><br><span class="line"></span><br><span class="line">new Promise(function(resolve,reject)&#123;</span><br><span class="line">    reject(new Error(&quot;出错了&quot;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="5-new-一个promise的时候，其内部的一些程序就已经执行了。就像是在-constructor当中直接执行某些代码"><a href="#5-new-一个promise的时候，其内部的一些程序就已经执行了。就像是在-constructor当中直接执行某些代码" class="headerlink" title="5. new 一个promise的时候，其内部的一些程序就已经执行了。就像是在 constructor当中直接执行某些代码"></a>5. new 一个promise的时候，其内部的一些程序就已经执行了。就像是在 constructor当中直接执行某些代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">  console.log(&apos;inner&apos;)</span><br><span class="line">  resolve(&apos;hehe&apos;)</span><br><span class="line">&#125;).then((res) =&gt; &#123;</span><br><span class="line">  console.log(res)</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&apos;outer&apos;)</span><br><span class="line"></span><br><span class="line">inner promise // 1</span><br><span class="line">outer promise // 2</span><br><span class="line">42            // 3</span><br></pre></td></tr></table></figure>
+<h5 id="6-Promise在规范上规定-Promise只能使用异步调用方式-。"><a href="#6-Promise在规范上规定-Promise只能使用异步调用方式-。" class="headerlink" title="6. Promise在规范上规定 Promise只能使用异步调用方式 。"></a>6. Promise在规范上规定 Promise只能使用异步调用方式 。</h5><h5 id="7-Promise-then-不仅仅是注册一个回调函数那么简单，它还会将回调函数的返回值进行变换，创建并返回一个promise对象"><a href="#7-Promise-then-不仅仅是注册一个回调函数那么简单，它还会将回调函数的返回值进行变换，创建并返回一个promise对象" class="headerlink" title="7. Promise#then 不仅仅是注册一个回调函数那么简单，它还会将回调函数的返回值进行变换，创建并返回一个promise对象"></a>7. Promise#then 不仅仅是注册一个回调函数那么简单，它还会将回调函数的返回值进行变换，创建并返回一个promise对象</h5><h5 id="8-这里我们再说一遍，实际上-Promise-catch-只是-promise-then-undefined-onRejected-方法的一个别名而已。-也就是说，这个方法用来注册当promise对象状态变为Rejected时的回调函数。"><a href="#8-这里我们再说一遍，实际上-Promise-catch-只是-promise-then-undefined-onRejected-方法的一个别名而已。-也就是说，这个方法用来注册当promise对象状态变为Rejected时的回调函数。" class="headerlink" title="8. 这里我们再说一遍，实际上 Promise#catch 只是 promise.then(undefined, onRejected); 方法的一个别名而已。 也就是说，这个方法用来注册当promise对象状态变为Rejected时的回调函数。"></a>8. 这里我们再说一遍，实际上 Promise#catch 只是 promise.then(undefined, onRejected); 方法的一个别名而已。 也就是说，这个方法用来注册当promise对象状态变为Rejected时的回调函数。</h5><h5 id="9-return的值会由-Promise-resolve-return的返回值-进行相应的包装处理，因此不管回调函数中会返回一个什么样的值，最终-then-的结果都是返回一个新创建的promise对象。"><a href="#9-return的值会由-Promise-resolve-return的返回值-进行相应的包装处理，因此不管回调函数中会返回一个什么样的值，最终-then-的结果都是返回一个新创建的promise对象。" class="headerlink" title="9. return的值会由 Promise.resolve(return的返回值); 进行相应的包装处理，因此不管回调函数中会返回一个什么样的值，最终 then 的结果都是返回一个新创建的promise对象。"></a>9. return的值会由 Promise.resolve(return的返回值); 进行相应的包装处理，因此不管回调函数中会返回一个什么样的值，最终 then 的结果都是返回一个新创建的promise对象。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var bPromise = new Promise(function (resolve) &#123;</span><br><span class="line">    resolve(100);</span><br><span class="line">&#125;);</span><br><span class="line">bPromise.then(function (value) &#123;</span><br><span class="line">    return value * 2;  // 默认使用的是 Promise.resolve(), 除非 显示的调用 Promise.catch()， 否则 一直 then下去</span><br><span class="line">&#125;).then(function (value) &#123;</span><br><span class="line">    return value * 2;</span><br><span class="line">&#125;).then(function (value) &#123;</span><br><span class="line">    console.log(&quot;2: &quot; + value); // =&gt; 100 * 2 * 2</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="第二遍看，重要语句概念摘抄"><a href="#第二遍看，重要语句概念摘抄" class="headerlink" title="第二遍看，重要语句概念摘抄"></a>第二遍看，重要语句概念摘抄</h5><ol>
+<li>promise的功能是可以将复杂的异步处理轻松地进行模式化， 这也可以说得上是使用promise的理由之一</li>
+<li>new生成的promise对象为了设置其值在 resolve(成功) / reject(失败)时调用的回调函数 可以使用promise.then() 实例方法。<br>promise.then(onFulfilled, onRejected)</li>
+<li>promise.then 成功和失败时都可以使用。 另外在只想对异常进行处理时可以采用 promise.then(undefined, onRejected) 这种方式，只指定reject时的回调函数即可。 不过这种情况下 promise.catch(onRejected) 应该是个更好的选择。</li>
+<li><p>用new Promise 实例化的promise对象有以下三个状态。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&quot;has-resolution&quot; - Fulfilled</span><br><span class="line">resolve(成功)时。此时会调用 onFulfilled</span><br><span class="line"></span><br><span class="line">&quot;has-rejection&quot; - Rejected</span><br><span class="line">reject(失败)时。此时会调用 onRejected</span><br><span class="line"></span><br><span class="line">&quot;unresolved&quot; - Pending</span><br><span class="line">既不是resolve也不是reject的状态。也就是promise对象刚被创建后的初始化状态等</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一般情况下我们都会使用 new Promise() 来创建promise对象，但是除此之外我们也可以使用其他方法。 在这里，我们将会学习如何使用 Promise.resolve 和 Promise.reject这两个方法。<br>静态方法Promise.resolve(value) 可以认为是 new Promise() 方法的快捷方式。</p>
+</li>
+</ol>
+<p>比如 <code>Promise.resolve(42)</code>; 可以认为是以下代码的语法糖。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new Promise(function(resolve)&#123;</span><br><span class="line">    resolve(42);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://liubin.org/promises-book/" target="_blank" rel="noopener">JavaScript Promise迷你书（中文版）</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/promise/" rel="tag"># promise</a>
+          
+            <a href="/tags/异步/" rel="tag"># 异步</a>
+          
+            <a href="/tags/doc/" rel="tag"># doc</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/06/vue-杂记/" rel="next" title="vue 杂记">
+                <i class="fa fa-chevron-left"></i> vue 杂记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/15/create-react-app-项目框架搭建/" rel="prev" title="create-react-app 项目框架搭建">
+                create-react-app 项目框架搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#promise"><span class="nav-number">1.</span> <span class="nav-text">promise</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-then-catch-更像是-回调函数罢了"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. .then .catch 更像是 回调函数罢了</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-其实-catch-只是-promise-then-undefined-onRejected-的别名而已"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 其实 .catch 只是 promise.then(undefined, onRejected) 的别名而已</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Promise-resolve-方法的话，可以认为它的作用就是将传递给它的参数填充（Fulfilled）到promise对象后并返回这个promise对象"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. Promise.resolve 方法的话，可以认为它的作用就是将传递给它的参数填充（Fulfilled）到promise对象后并返回这个promise对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-Promise-reject-error-是和-Promise-resolve-value-类似的静态方法，是-new-Promise-方法的快捷方式。"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. Promise.reject(error)是和 Promise.resolve(value) 类似的静态方法，是 new Promise() 方法的快捷方式。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-new-一个promise的时候，其内部的一些程序就已经执行了。就像是在-constructor当中直接执行某些代码"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. new 一个promise的时候，其内部的一些程序就已经执行了。就像是在 constructor当中直接执行某些代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-Promise在规范上规定-Promise只能使用异步调用方式-。"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. Promise在规范上规定 Promise只能使用异步调用方式 。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-Promise-then-不仅仅是注册一个回调函数那么简单，它还会将回调函数的返回值进行变换，创建并返回一个promise对象"><span class="nav-number">1.0.7.</span> <span class="nav-text">7. Promise#then 不仅仅是注册一个回调函数那么简单，它还会将回调函数的返回值进行变换，创建并返回一个promise对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-这里我们再说一遍，实际上-Promise-catch-只是-promise-then-undefined-onRejected-方法的一个别名而已。-也就是说，这个方法用来注册当promise对象状态变为Rejected时的回调函数。"><span class="nav-number">1.0.8.</span> <span class="nav-text">8. 这里我们再说一遍，实际上 Promise#catch 只是 promise.then(undefined, onRejected); 方法的一个别名而已。 也就是说，这个方法用来注册当promise对象状态变为Rejected时的回调函数。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-return的值会由-Promise-resolve-return的返回值-进行相应的包装处理，因此不管回调函数中会返回一个什么样的值，最终-then-的结果都是返回一个新创建的promise对象。"><span class="nav-number">1.0.9.</span> <span class="nav-text">9. return的值会由 Promise.resolve(return的返回值); 进行相应的包装处理，因此不管回调函数中会返回一个什么样的值，最终 then 的结果都是返回一个新创建的promise对象。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二遍看，重要语句概念摘抄"><span class="nav-number">1.0.10.</span> <span class="nav-text">第二遍看，重要语句概念摘抄</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/12/14/JavaScript-Promise迷你书-笔记/';
+          this.page.identifier = '2017/12/14/JavaScript-Promise迷你书-笔记/';
+          this.page.title = 'JavaScript Promise迷你书--笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

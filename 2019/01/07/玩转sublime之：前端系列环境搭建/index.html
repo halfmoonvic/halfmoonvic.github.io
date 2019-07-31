@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="HTML 相关一、 Emmet 🔗️ 3.99m1) 简介 前端开发神器 可以快速补全HTML、css　　  2) 快捷键为使其在 jsx 当中依然起作用，需在 Default (OSX).sublime-keymap || Default (Windows).sublime-keymap 中做如下设置12345678910111213141516171819202122232425262728">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩转sublime之：前端系列环境搭建">
+<meta property="og:url" content="http://yoursite.com/2019/01/07/玩转sublime之：前端系列环境搭建/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="HTML 相关一、 Emmet 🔗️ 3.99m1) 简介 前端开发神器 可以快速补全HTML、css　　  2) 快捷键为使其在 jsx 当中依然起作用，需在 Default (OSX).sublime-keymap || Default (Windows).sublime-keymap 中做如下设置12345678910111213141516171819202122232425262728">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-31T02:32:54.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="玩转sublime之：前端系列环境搭建">
+<meta name="twitter:description" content="HTML 相关一、 Emmet 🔗️ 3.99m1) 简介 前端开发神器 可以快速补全HTML、css　　  2) 快捷键为使其在 jsx 当中依然起作用，需在 Default (OSX).sublime-keymap || Default (Windows).sublime-keymap 中做如下设置12345678910111213141516171819202122232425262728">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/07/玩转sublime之：前端系列环境搭建/"/>
+
+
+
+
+
+  <title>玩转sublime之：前端系列环境搭建 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/07/玩转sublime之：前端系列环境搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">玩转sublime之：前端系列环境搭建</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-07T16:00:10+08:00">
+                2019-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IDE/" itemprop="url" rel="index">
+                    <span itemprop="name">IDE</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/07/玩转sublime之：前端系列环境搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/07/玩转sublime之：前端系列环境搭建/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/01/07/玩转sublime之：前端系列环境搭建/" class="leancloud_visitors" data-flag-title="玩转sublime之：前端系列环境搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="HTML-相关"><a href="#HTML-相关" class="headerlink" title="HTML 相关"></a>HTML 相关</h3><h4 id="一、-Emmet-🔗️-3-99m"><a href="#一、-Emmet-🔗️-3-99m" class="headerlink" title="一、 Emmet 🔗️ 3.99m"></a>一、 <code>Emmet</code> <a href="https://packagecontrol.io/packages/Emmet" target="_blank" rel="noopener">🔗️ 3.99m</a></h4><h5 id="1-简介"><a href="#1-简介" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>前端开发神器</li>
+<li>可以快速补全HTML、css　　</li>
+</ol>
+<h5 id="2-快捷键"><a href="#2-快捷键" class="headerlink" title="2) 快捷键"></a>2) <a href="https://github.com/sergeche/emmet-sublime/blob/master/README.md#how-to-expand-abbreviations-with-tab-in-other-syntaxes" target="_blank" rel="noopener">快捷键</a></h5><p>为使其在 jsx 当中依然起作用，需在 <code>Default (OSX).sublime-keymap || Default (Windows).sublime-keymap</code> 中做如下设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;keys&quot;: [&quot;tab&quot;],</span><br><span class="line">    &quot;command&quot;: &quot;expand_abbreviation_by_tab&quot;,</span><br><span class="line"></span><br><span class="line">    // put comma-separated syntax selectors for which</span><br><span class="line">    // you want to expandEmmet abbreviations into &quot;operand&quot; key</span><br><span class="line">    // instead of SCOPE_SELECTOR.</span><br><span class="line">    // Examples: source.js, text.html - source</span><br><span class="line">    &quot;context&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;operand&quot;: &quot;source.js&quot;,</span><br><span class="line">            &quot;operator&quot;: &quot;equal&quot;,</span><br><span class="line">            &quot;match_all&quot;: true,</span><br><span class="line">            &quot;key&quot;: &quot;selector&quot;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        // run only if there&apos;s no selected text</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;match_all&quot;: true,</span><br><span class="line">            &quot;key&quot;: &quot;selection_empty&quot;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        // don&apos;t work if there are active tabstops</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;operator&quot;: &quot;equal&quot;,</span><br><span class="line">            &quot;operand&quot;: false,</span><br><span class="line">            &quot;match_all&quot;: true,</span><br><span class="line">            &quot;key&quot;: &quot;has_next_field&quot;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        // don&apos;t work if completion popup is visible and you</span><br><span class="line">        // want to insert completion with Tab. If you want to</span><br><span class="line">        // expand Emmet with Tab even if popup is visible --</span><br><span class="line">        // remove this section</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;operand&quot;: false,</span><br><span class="line">            &quot;operator&quot;: &quot;equal&quot;,</span><br><span class="line">            &quot;match_all&quot;: true,</span><br><span class="line">            &quot;key&quot;: &quot;auto_complete_visible&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;match_all&quot;: true,</span><br><span class="line">            &quot;key&quot;: &quot;is_abbreviation&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h4 id="一、-SublimeTmpl-🔗️-122k"><a href="#一、-SublimeTmpl-🔗️-122k" class="headerlink" title="一、 SublimeTmpl 🔗️ 122k"></a>一、 <code>SublimeTmpl</code> <a href="https://packagecontrol.io/packages/SublimeTmpl" target="_blank" rel="noopener">🔗️ 122k</a></h4><h5 id="1-简介-1"><a href="#1-简介-1" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>快速生成文件模板</li>
+<li>可以快速补全HTML、css</li>
+</ol>
+<h5 id="2-快捷键-1"><a href="#2-快捷键-1" class="headerlink" title="2) 快捷键"></a>2) 快捷键</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctrl+alt+h html</span><br><span class="line">ctrl+alt+j javascript</span><br><span class="line">ctrl+alt+c css</span><br><span class="line">ctrl+alt+p php</span><br><span class="line">ctrl+alt+r ruby</span><br><span class="line">ctrl+alt+shift+p python</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="CSS-相关"><a href="#CSS-相关" class="headerlink" title="CSS 相关"></a>CSS 相关</h3><h4 id="一、-cssrem-🔗️"><a href="#一、-cssrem-🔗️" class="headerlink" title="一、 cssrem 🔗️"></a>一、 <code>cssrem</code> <a href="https://github.com/flashlizi/cssrem" target="_blank" rel="noopener">🔗️</a></h4><h5 id="1-简介-2"><a href="#1-简介-2" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>将 CSS 的 px 值转 rem 值</li>
+<li>需手动安装在 package 目录下即可</li>
+</ol>
+<h5 id="2-偏好设置"><a href="#2-偏好设置" class="headerlink" title="2) 偏好设置"></a>2) 偏好设置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">User\cssrem.sublime-settings</span><br><span class="line">// CssRem 在 HTML 的 style 中 起作用</span><br><span class="line">&#123;</span><br><span class="line">    &quot;px_to_rem&quot;: 40,</span><br><span class="line">    &quot;max_rem_fraction_length&quot;: 6,</span><br><span class="line">    &quot;available_file_types&quot;: [&quot;.css&quot;, &quot;.less&quot;, &quot;.sass&quot;, &quot;.html&quot;, &quot;.vue&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="二、-Color-Highlighter-🔗️-834k"><a href="#二、-Color-Highlighter-🔗️-834k" class="headerlink" title="二、 Color Highlighter 🔗️ 834k"></a>二、 <code>Color Highlighter</code> <a href="https://packagecontrol.io/packages/Color%20Highlighter" target="_blank" rel="noopener">🔗️ 834k</a></h4><h5 id="1-简介-3"><a href="#1-简介-3" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>颜色提示插件,击代码中的颜色标记，就会在该标记上显示对应的颜色</li>
+<li>在颜色代码的后面显示颜色方块</li>
+</ol>
+<h5 id="2-偏好设置-1"><a href="#2-偏好设置-1" class="headerlink" title="2) 偏好设置"></a>2) 偏好设置</h5><details><br><summary>(点击查看)User\ColorHighlighter.sublime-settings</summary><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;file_extensions&quot;:</span><br><span class="line">    [</span><br><span class="line">        &quot;.css&quot;,</span><br><span class="line">        &quot;.less&quot;,</span><br><span class="line">        &quot;.scss&quot;,</span><br><span class="line">        &quot;.sass&quot;,</span><br><span class="line">        &quot;.styl&quot;,</span><br><span class="line">        &quot;.vue&quot;,</span><br><span class="line">        &quot;.wxss&quot;,</span><br><span class="line">        &quot;.js&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;search_colors_in&quot;:</span><br><span class="line">    &#123;</span><br><span class="line">        // 正常状态</span><br><span class="line">        &quot;all_content&quot;:</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;color_highlighters&quot;:</span><br><span class="line">            &#123;</span><br><span class="line">                // 填充 文字 下划线，哪个方式显示颜色</span><br><span class="line">                // filled text underlined_squiggly</span><br><span class="line">                &quot;color_scheme&quot;:</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;enabled&quot;: true,</span><br><span class="line">                    &quot;highlight_style&quot;: &quot;text&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                // 侧边栏显示颜色</span><br><span class="line">                // Circle or Square</span><br><span class="line">                &quot;gutter_icons&quot;:</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;enabled&quot;: true,</span><br><span class="line">                    &quot;icon_style&quot;: &quot;circle&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                // 显示颜色块</span><br><span class="line">                &quot;phantoms&quot;:</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;enabled&quot;: false,</span><br><span class="line">                    &quot;length&quot;: 2,</span><br><span class="line">                    &quot;style&quot;: &quot;right&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            // 总开关，是否启用这一项</span><br><span class="line">            &quot;enabled&quot;: true</span><br><span class="line">        &#125;,</span><br><span class="line">        // hover悬浮状态</span><br><span class="line">        &quot;hover&quot;:</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;color_highlighters&quot;:</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;color_scheme&quot;:</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;enabled&quot;: true,</span><br><span class="line">                    &quot;highlight_style&quot;: &quot;filled&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;gutter_icons&quot;:</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;enabled&quot;: true,</span><br><span class="line">                    &quot;icon_style&quot;: &quot;circle&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;phantoms&quot;:</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;enabled&quot;: true,</span><br><span class="line">                    &quot;length&quot;: 2,</span><br><span class="line">                    &quot;style&quot;: &quot;right&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;enabled&quot;: false</span><br><span class="line">        &#125;,</span><br><span class="line">        // 选中状态</span><br><span class="line">        &quot;selection&quot;:</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;color_highlighters&quot;:</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;color_scheme&quot;:</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;enabled&quot;: false,</span><br><span class="line">                    &quot;highlight_style&quot;: &quot;underlined_squiggly&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;gutter_icons&quot;:</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;enabled&quot;: true,</span><br><span class="line">                    &quot;icon_style&quot;: &quot;circle&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;phantoms&quot;:</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;enabled&quot;: true,</span><br><span class="line">                    &quot;length&quot;: 2,</span><br><span class="line">                    &quot;style&quot;: &quot;right&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;enabled&quot;: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br></details>
+
+
+<h4 id="二、-Minify-🔗️-89k"><a href="#二、-Minify-🔗️-89k" class="headerlink" title="二、 Minify 🔗️ 89k"></a>二、 <code>Minify</code> <a href="https://packagecontrol.io/packages/Minify" target="_blank" rel="noopener">🔗️ 89k</a></h4><h5 id="1-简介-4"><a href="#1-简介-4" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>Minify for Sublime Text allows you to quickly minify and/or beautify CSS, JavaScript, JSON, HTML and SVG files – compatible with ST2 and ST3</li>
+<li>Minify for Sublime Text can create a minified version of a currently open CSS, HTML, JavaScript, JSON or SVG file.</li>
+<li>这个很像之前早起的 gulp，生成 min 文件</li>
+</ol>
+<h5 id="2-使用"><a href="#2-使用" class="headerlink" title="2) 使用"></a>2) 使用</h5><ol>
+<li>安装 node　</li>
+<li>npm install -g clean-css-cli uglifycss js-beautify html-minifier uglify-js minjson svgo</li>
+</ol>
+<h5 id="3-快捷键"><a href="#3-快捷键" class="headerlink" title="3) 快捷键"></a>3) 快捷键</h5><ol>
+<li><code>Command Palette</code> 中 输入 minify，生成 name.min.ext</li>
+<li><code>Command Palette</code> 中 输入 beautify，生成 name.pretty.ext</li>
+</ol>
+<h4 id="三、-less-sass-scsss-stylus-语法高亮"><a href="#三、-less-sass-scsss-stylus-语法高亮" class="headerlink" title="三、 less sass scsss stylus 语法高亮"></a>三、 <code>less sass scsss stylus</code> 语法高亮</h4><ol>
+<li><code>LESS</code>      <a href="https://packagecontrol.io/packages/LESS" target="_blank" rel="noopener">🔗️ 599k</a></li>
+<li><code>Sass</code>      <a href="https://packagecontrol.io/packages/Sass" target="_blank" rel="noopener">🔗️ 996k</a></li>
+<li><code>SCSS</code>      <a href="https://packagecontrol.io/packages/SCSS" target="_blank" rel="noopener">🔗️ 484k</a></li>
+<li><code>Stylus</code>    <a href="https://packagecontrol.io/packages/Stylus" target="_blank" rel="noopener">🔗️ 141k</a></li>
+</ol>
+<h4 id="四、-SASS-Build-🔗️-169k"><a href="#四、-SASS-Build-🔗️-169k" class="headerlink" title="四、 SASS Build 🔗️ 169k"></a>四、 <code>SASS Build</code> <a href="https://packagecontrol.io/packages/SASS%20Build" target="_blank" rel="noopener">🔗️ 169k</a></h4><h5 id="1-简介-5"><a href="#1-简介-5" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>编译 scss sass 文件至 css</li>
+<li>当文件当中含有未在当前文件定义的 变量 宏等的时候无法编译通过</li>
+<li>Ctrl ＋ B 编译Sass文件，提示编译错误，前提是已经安装好了Ruby环境与sass.gem</li>
+</ol>
+<h5 id="2-使用-1"><a href="#2-使用-1" class="headerlink" title="2) 使用"></a>2) 使用</h5><ol>
+<li>安装 ruby</li>
+<li><code>gem install sass</code></li>
+<li>sublime 安装插件</li>
+<li><code>super + b</code> 即可运行</li>
+</ol>
+<h4 id="五、-Less2Css-🔗️-101k"><a href="#五、-Less2Css-🔗️-101k" class="headerlink" title="五、 Less2Css  🔗️ 101k"></a>五、 <code>Less2Css</code>  <a href="https://packagecontrol.io/packages/Less2Css" target="_blank" rel="noopener">🔗️ 101k</a></h4><h5 id="1-简介-6"><a href="#1-简介-6" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>编译 less 文件 至 css 文件,在保存的时候即自动编译</p>
+<h5 id="2-使用-2"><a href="#2-使用-2" class="headerlink" title="2) 使用"></a>2) 使用</h5><h6 id="1-Windows"><a href="#1-Windows" class="headerlink" title="1. Windows"></a>1. Windows</h6><ol>
+<li>下载 <a href="https://github.com/duncansmart/less.js-windows" target="_blank" rel="noopener">less.js-windows</a>至任意目录<code>aa</code>。</li>
+<li>将 目录 <code>aa</code> 添加至环境变量当中</li>
+<li>命令行 输入 <code>lessc</code>，输出 <code>lessc: no input files</code> 等信息则为成功</li>
+<li>sublime 安装相应的插件</li>
+<li>注意，在保存 less 文件时，如果报 找不到 node 之类的错误，可直接将 <code>node.exe</code> 放入 <code>less-js-windows\bin</code> 目录下</li>
+</ol>
+<h5 id="2-mac-安装-参考资料：lessc-is-not-avavailable"><a href="#2-mac-安装-参考资料：lessc-is-not-avavailable" class="headerlink" title="2. mac 安装 参考资料：lessc is not avavailable"></a>2. mac 安装 参考资料：<a href="https://github.com/timdouglas/sublime-less2css/issues/55" target="_blank" rel="noopener"><code>lessc</code> is not avavailable</a></h5><ol>
+<li>安装 node　<code>brew install node</code></li>
+<li>安装 less　<code>npm install less -gd</code></li>
+<li>如果报 <code>less2css error: lessc is not avavailable</code> 错误，则直接修改 <code>User\less2css.sublime-settings</code> 文件当中 的 <code>lesscCommand</code> 选项至 <code>lessc</code> 的安装路径</li>
+<li>还会报 <code>node env</code> 的问题，插件是更改系统的环境来修复的，遂不在操作，此问题可以通过 <code>node_env.py</code>脚本来设置环境变量已解决</li>
+<li><code>less2css.sublime-settings</code> 文件中 默认 <code>&quot;minify&quot;: true,</code>，固需 安装 <code>less-plugin-clean-css</code>，即 <code>npm install -g less-plugin-clean-css</code></li>
+<li>另外，在<code>build</code>当中 新建了 <code>lessc.sublime-build</code> 文件 以替代此插件</li>
+</ol>
+<hr>
+<h3 id="JS-相关"><a href="#JS-相关" class="headerlink" title="JS 相关"></a>JS 相关</h3><h4 id="一、-语法高亮"><a href="#一、-语法高亮" class="headerlink" title="一、 语法高亮"></a>一、 语法高亮</h4><ol>
+<li><code>Babel</code>                  <a href="https://packagecontrol.io/packages/Babel" target="_blank" rel="noopener">🔗️ 500k</a></li>
+<li><code>TypeScript</code>             <a href="https://packagecontrol.io/packages/TypeScript" target="_blank" rel="noopener">🔗️ 380k</a></li>
+</ol>
+<h4 id="二、-DocBlockr-🔗️-941k"><a href="#二、-DocBlockr-🔗️-941k" class="headerlink" title="二、 DocBlockr  🔗️ 941k"></a>二、 <code>DocBlockr</code>  <a href="https://packagecontrol.io/packages/DocBlockr" target="_blank" rel="noopener">🔗️ 941k</a></h4><h5 id="1-简介-7"><a href="#1-简介-7" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>自动生成PHPDoc风格的注释。Javascript, PHP, ActionScript, Java, Objective C, C, C++</p>
+<h5 id="2-偏好设置-2"><a href="#2-偏好设置-2" class="headerlink" title="2) 偏好设置"></a>2) 偏好设置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">User/Base File.sublime-settings</span><br><span class="line">----------</span><br><span class="line">// DocBlockr设置 ctrl+enter,放到 package.user目录下</span><br><span class="line">&#123;</span><br><span class="line">  // If true, then pressing enter while in a double-slash comment (like this one)</span><br><span class="line">  // will automatically add two slashes to the next line as well</span><br><span class="line">  &quot;jsdocs_extend_double_slash&quot;: false,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  // If set to true, Ctrl+Enter while in a single line comment will &apos;decorate&apos; the comment.</span><br><span class="line">  &quot;jsdocs_decorate&quot;: false,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><h4 id="一、-HTML-CSS-JS-Prettify-🔗️-879k"><a href="#一、-HTML-CSS-JS-Prettify-🔗️-879k" class="headerlink" title="一、 HTML-CSS-JS Prettify  🔗️ 879k"></a>一、 <code>HTML-CSS-JS Prettify</code>  <a href="https://packagecontrol.io/packages/HTML-CSS-JS%20Prettify" target="_blank" rel="noopener">🔗️ 879k</a></h4><h5 id="1-简介-8"><a href="#1-简介-8" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>HTML+CSS+JAVASCRIPT+JSON快速格式化</p>
+<h5 id="2-格式化的偏好设置"><a href="#2-格式化的偏好设置" class="headerlink" title="2) 格式化的偏好设置"></a>2) 格式化的偏好设置</h5><p><code>.jsbeautifyrc</code></p>
+<h4 id="二、-JsFormat-🔗️-666k"><a href="#二、-JsFormat-🔗️-666k" class="headerlink" title="二、 JsFormat  🔗️ 666k"></a>二、 <code>JsFormat</code>  <a href="https://packagecontrol.io/packages/JsFormat" target="_blank" rel="noopener">🔗️ 666k</a></h4><h5 id="1-简介-9"><a href="#1-简介-9" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>HTML+CSS+JAVASCRIPT+JSON快速格式化</p>
+<h5 id="2-偏好设置-3"><a href="#2-偏好设置-3" class="headerlink" title="2) 偏好设置"></a>2) 偏好设置</h5><p><code>JsFormat.sublime-settings</code></p>
+<h4 id="三、-JsPrettier-🔗️-55k"><a href="#三、-JsPrettier-🔗️-55k" class="headerlink" title="三、 JsPrettier  🔗️ 55k"></a>三、 <code>JsPrettier</code>  <a href="https://packagecontrol.io/packages/JsPrettier" target="_blank" rel="noopener">🔗️ 55k</a></h4><h5 id="1-简介-10"><a href="#1-简介-10" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>2017 火起来了，格式化有自己的规则，可供定义的很少。 支持jsx语法格式话，对齐中的 html 做到很好的格式化。 需要全局安装 npm install -g prettier</li>
+<li>其本身仅是提供了一个面向 本地 <code>prettier</code> 包的一个接口。其本身不做格式化，而是驱使 <code>prettier</code> 包进行文件的格式化</li>
+</ol>
+<h5 id="2-偏好设置-JsPrettier-sublime-settings-prettier-cli-path-的设置"><a href="#2-偏好设置-JsPrettier-sublime-settings-prettier-cli-path-的设置" class="headerlink" title="2) 偏好设置 JsPrettier.sublime-settings prettier_cli_path 的设置"></a>2) 偏好设置 <code>JsPrettier.sublime-settings</code> <code>prettier_cli_path</code> 的设置</h5><ul>
+<li>假设一个项目的开发使用 prettier 做格式化，那么，我们希望的是一个人自进行 <code>npm install</code> 之后便可以在项目当中进行格式化的操作了，而不是说还要依赖于项目之外的插件</li>
+<li><code>prettier_cli_path</code> 最好设置为空，这样 <code>jsPrettier</code> 插件 会依次在以下几个目录下面寻找 <code>prettier</code> 包<ul>
+<li>“prettier_cli_path”: “/usr/local/bin/prettier”</li>
+<li>“prettier_cli_path”: “/some/absolute/path/to/node_modules/.bin/prettier”</li>
+<li>“prettier_cli_path”: “./node_modules/.bin/prettier”</li>
+<li>“prettier_cli_path”: “~/bin/prettier”</li>
+<li>“prettier_cli_path”: “$HOME/bin/prettier”</li>
+<li>“prettier_cli_path”: “${project_path}/bin/prettier”</li>
+<li>“prettier_cli_path”: “$ENV/bin/prettier”　</li>
+<li>总之是先在当前目项目录下寻找 prettier 目录下设置，没有找到的情况下在在全局包当中寻找。如果均为找到，则会直接报错找不到 <code>prettier</code> 包了</li>
+</ul>
+</li>
+<li>sublime 当中想要在项目当中就能够找到 <code>prettier</code> 包 是需要将 将当前的 项目目录拖放到 Sublime 的 Side_Bar 上面的，目测，这个是 <code>${project_path}/bin/prettier</code> 这条命令的作用</li>
+<li>当 Sublime Side_Bar 上仅有一个<code>A项目</code>时，其它项目中的文件所使用的 prettier 亦是 <code>A项目</code> 的，不过，如果当前文件所在项目目录也在 Side_Bar 上时，各自用各自的 prettier</li>
+</ul>
+<h5 id="3-补充说明"><a href="#3-补充说明" class="headerlink" title="3) 补充说明"></a>3) 补充说明</h5><p>prettier 不同版本最后格式化的结果有可能是不一样的 {“printWidth”: 120,}<br>比如 如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;template functional&gt;</span><br><span class="line">  &lt;span class=&quot;age&quot;&gt;</span><br><span class="line">    &lt;i class=&quot;iconfont icon-cake&quot;/&gt;</span><br><span class="line">    &#123;&#123;props.value&#125;&#125;岁</span><br><span class="line">  &lt;/span&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<p><a href="mailto:prettier@1.16.4" target="_blank" rel="noopener">prettier@1.16.4</a> 校验后为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;template functional&gt;</span><br><span class="line">  &lt;span class=&quot;age&quot;&gt;</span><br><span class="line">    &lt;i class=&quot;iconfont icon-cake&quot; /&gt;</span><br><span class="line">    &#123;&#123; props.value &#125;&#125;岁</span><br><span class="line">  &lt;/span&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<p><a href="mailto:prettier@1.15.3" target="_blank" rel="noopener">prettier@1.15.3</a> 校验后为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;template functional&gt;</span><br><span class="line">  &lt;span class=&quot;age&quot;&gt; &lt;i class=&quot;iconfont icon-cake&quot; /&gt; &#123;&#123; props.value &#125;&#125;岁 &lt;/span&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、-Pretty-JSON-🔗️-548k"><a href="#四、-Pretty-JSON-🔗️-548k" class="headerlink" title="四、 Pretty JSON 🔗️ 548k"></a>四、 <code>Pretty JSON</code> <a href="https://packagecontrol.io/packages/Pretty%20JSON" target="_blank" rel="noopener">🔗️ 548k</a></h4><h5 id="1-简介-11"><a href="#1-简介-11" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>Prettify/Minify/Query/Goto/Validate/Lint JSON</li>
+<li>文件未保存的时候也可以进行格式化</li>
+</ol>
+<hr>
+<h3 id="补全"><a href="#补全" class="headerlink" title="补全"></a>补全</h3><h4 id="一、-SublimeCodeIntel-🔗️-1-42m"><a href="#一、-SublimeCodeIntel-🔗️-1-42m" class="headerlink" title="一、 SublimeCodeIntel  🔗️ 1.42m"></a>一、 <code>SublimeCodeIntel</code>  <a href="https://packagecontrol.io/packages/SublimeCodeIntel" target="_blank" rel="noopener">🔗️ 1.42m</a></h4><h5 id="1-简介-12"><a href="#1-简介-12" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>代码补全工具，补全时可提示代码类型</li>
+<li>可以结合 sublimecodeIntel 出来提示的时候，它在后面添加名字</li>
+<li>css 中 分号 也会弹出补全，所以将其忽略</li>
+<li><a href="https://github.com/SublimeCodeIntel/SublimeCodeIntel/issues/461" target="_blank" rel="noopener">Javascript completing after semi-colon</a></li>
+</ol>
+<h4 id="二、-CodeComplice-🔗️-13k"><a href="#二、-CodeComplice-🔗️-13k" class="headerlink" title="二、 CodeComplice  🔗️ 13k"></a>二、 <code>CodeComplice</code>  <a href="https://packagecontrol.io/packages/CodeComplice" target="_blank" rel="noopener">🔗️ 13k</a></h4><p>解决 sublimecodeIntel 与 Anaconda 冲突的问题，直接忽略 sublimecodeIntel 插件就可以了</p>
+<h4 id="三、-Nodejs-🔗️-286k"><a href="#三、-Nodejs-🔗️-286k" class="headerlink" title="三、 Nodejs  🔗️ 286k"></a>三、 <code>Nodejs</code>  <a href="https://packagecontrol.io/packages/Nodejs" target="_blank" rel="noopener">🔗️ 286k</a></h4><h5 id="1-简介-13"><a href="#1-简介-13" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>Code Completion Nodejs</li>
+<li>Run current script in node (alt+r) </li>
+<li>Run current script in node debug (Alt + D)</li>
+</ol>
+<h5 id="2-No-module-name-AIX"><a href="#2-No-module-name-AIX" class="headerlink" title="2) No module name AIX "></a>2) <a href="https://github.com/tanepiper/SublimeText-Nodejs/issues/98" target="_blank" rel="noopener">No module name AIX </a></h5><p>You need to add:<br><code>AIX = sys.platform.startswith(&quot;aix&quot;)</code><br>in <code>psutil\st3_windows_x32\psutil\_common.py and psutil\st3_windows_x64\psutil\_common.py</code> files<br>after:<br><code>SUNOS = sys.platform.startswith(&quot;sunos&quot;) or sys.platform.startswith(&quot;solaris&quot;)</code></p>
+<h4 id="四、-React-ES6-Snippets-🔗️-63k"><a href="#四、-React-ES6-Snippets-🔗️-63k" class="headerlink" title="四、 React ES6 Snippets  🔗️ 63k"></a>四、 <code>React ES6 Snippets</code>  <a href="https://packagecontrol.io/packages/React%20ES6%20Snippets" target="_blank" rel="noopener">🔗️ 63k</a></h4><h5 id="1-简介-14"><a href="#1-简介-14" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>react 语法提示</li>
+<li>Snippets 当中已经将其进行了个性化设置，固可已省略</li>
+</ol>
+<hr>
+<h3 id="校验-🔗️"><a href="#校验-🔗️" class="headerlink" title="校验 🔗️"></a>校验 <a href="https://halfmoonvic.github.io/2018/08/05/eslint-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/" target="_blank" rel="noopener">🔗️</a></h3><h4 id="一、-SublimeLinter-🔗️-1-74m"><a href="#一、-SublimeLinter-🔗️-1-74m" class="headerlink" title="一、 SublimeLinter  🔗️ 1.74m"></a>一、 <code>SublimeLinter</code>  <a href="https://packagecontrol.io/packages/SublimeLinter" target="_blank" rel="noopener">🔗️ 1.74m</a></h4><h5 id="1-简介-15"><a href="#1-简介-15" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>The code linting framework</li>
+<li>其本身并不提供代码校验，他就是一个架子。</li>
+<li>通过安装其 旗下的 插件来 提供 与 相应的包的接口 来进行校验</li>
+</ol>
+<h5 id="2-偏好设置-4"><a href="#2-偏好设置-4" class="headerlink" title="2) 偏好设置"></a>2) 偏好设置</h5><details><br><summary>点击查看 User\SublimeLinter.sublime-settings</summary><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    // Lint Mode determines when the linter is run.</span><br><span class="line">    // - background: asynchronously on every change</span><br><span class="line">    // - load_save: when a file is opened and every time it&apos;s saved</span><br><span class="line">    // - manual: only when calling the Lint This View command</span><br><span class="line">    // - save: only when a file is saved</span><br><span class="line">    &quot;lint_mode&quot;: &quot;load_save&quot;,</span><br><span class="line">    &quot;paths&quot;: &#123;</span><br><span class="line">        &quot;linux&quot;: [],</span><br><span class="line">        // $PATH 应该是直接将 node_env.py 的 $PATH 拿了过来</span><br><span class="line">        // &quot;osx&quot;: [&quot;/usr/local/bin:$PATH&quot;, &quot;/Users/john/go/bin&quot;],</span><br><span class="line">        &quot;osx&quot;: [&quot;$PATH&quot;, &quot;/Users/john/go/bin&quot;],</span><br><span class="line">        &quot;windows&quot;: [&quot;D:\\_Git\\Go\\bin&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;linters&quot;: &#123;</span><br><span class="line">        &quot;golint&quot;: &#123;</span><br><span class="line">            // &quot;env&quot;: &#123;&quot;PATH&quot;: &quot;D:\\_Git\\Go\\bin&quot;&#125;,</span><br><span class="line">            &quot;selector&quot;: &quot;source.go - meta.attribute-with-value&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;tslint&quot;: &#123;</span><br><span class="line">            &quot;disable&quot;: true,</span><br><span class="line">            &quot;selector&quot;: &quot;text.html.vue, source.ts - meta.attribute-with-value&quot;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;eslint&quot;: &#123;</span><br><span class="line">            &quot;disable&quot;: false,</span><br><span class="line">            // &quot;env&quot;: &#123;&quot;PATH&quot;: &quot;&quot;&#125;,</span><br><span class="line">            &quot;selector&quot;: &quot;text.html,text.vue,source.js,source.ts&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;jshint&quot;: &#123;</span><br><span class="line">            &quot;selector&quot;: &quot;source.js - meta.attribute-with-value&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;csslint&quot;: &#123;</span><br><span class="line">            &quot;args&quot;: [],</span><br><span class="line">            &quot;errors&quot;: &quot;&quot;,</span><br><span class="line">            &quot;excludes&quot;: [],</span><br><span class="line">            &quot;ignore&quot;: &quot;&quot;,</span><br><span class="line">            &quot;ignored&quot;: [],</span><br><span class="line">            &quot;warnings&quot;: &quot;&quot;,</span><br><span class="line">            &quot;selector&quot;: &quot;source.css - meta.attribute-with-value&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;scsslint&quot;: &#123;</span><br><span class="line">            &quot;disable&quot;: true,</span><br><span class="line">            &quot;selector&quot;: &quot;source.scss,source.sass - meta.attribute-with-value&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;sass&quot;: &#123;</span><br><span class="line">            &quot;disable&quot;: true,</span><br><span class="line">            &quot;selector&quot;: &quot;source.scss,source.sass - meta.attribute-with-value&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;stylelint&quot;: &#123;</span><br><span class="line">            &quot;disable&quot;: false,</span><br><span class="line">            &quot;selector&quot;: &quot;text.html.vue,source.scss,source.sass - meta.attribute-with-value&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;styles&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            // &apos;fill&apos;, &apos;outline&apos;, &apos;solid_underline&apos;, &apos;squiggly_underline&apos;, &apos;stippled_underline&apos;, &apos;none&apos;</span><br><span class="line">            &quot;priority&quot;: 1,</span><br><span class="line">            // 设置颜色，根据不同的主题，其颜色不一样 ＝ ＝</span><br><span class="line">            &quot;scope&quot;: &quot;region.yellowish markup.warning.sublime_linter&quot;,</span><br><span class="line">            // The icon displayed in the gutter area</span><br><span class="line">            // - &quot;circle&quot;, &quot;dot&quot; or &quot;bookmark&quot; - &quot;none&quot; to remove the icon</span><br><span class="line">            // - A path to an icon file like</span><br><span class="line">            //   &quot;Packages/SublimeLinter/gutter-themes/Blueberry Cross/error.png&quot;</span><br><span class="line">            // - One provided by a gutter theme (e.g. &quot;warning&quot; or &quot;error&quot;).</span><br><span class="line">            //   In theme Default: warning, error, cog, x,</span><br><span class="line">            //   and diamond, heart, pointer, square, star, triangle, which all</span><br><span class="line">            //   also have an -outline variant.</span><br><span class="line">            &quot;icon&quot;: &quot;dot&quot;,</span><br><span class="line">            &quot;types&quot;: [</span><br><span class="line">                &quot;warning&quot;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;mark_style&quot;: &quot;outline&quot;,</span><br><span class="line">            &quot;priority&quot;: 1,</span><br><span class="line">            &quot;scope&quot;: &quot;region.redish markup.deleted.sublime_linter markup.error.sublime_linter invalid&quot;,</span><br><span class="line">            &quot;icon&quot;: &quot;dot&quot;,</span><br><span class="line">            &quot;types&quot;: [</span><br><span class="line">                &quot;error&quot;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br></details>
+
+<p>偏好设置主要是针对是否开启当前校验及其环境变量的设置</p>
+<h5 id="3-偏好设置详细说明"><a href="#3-偏好设置详细说明" class="headerlink" title="3) 偏好设置详细说明"></a>3) 偏好设置详细说明</h5><ol>
+<li>此偏好设置同时开启了 tslint 与 eslint，且都可以 校验 vue 文件。但是，根据不同语言（js、ts)编写的 vue 文件需要扩展不同的第三方包。<ul>
+<li>js 编写的则只需 安装 vue 官方的 plugin 即可，如 <code>eslint-plugin-vue</code>，此时 eslint 便可以做出很好的校验了。如果说想要用 prettier 来校验，相应的 还可以 安装 <code>eslint-config-prettier</code> 做扩展</li>
+<li>ts 编写的 vue 文件，如果确定还是 使用 tslint 来做校验而非 eslint。则不需要安装什么第三方插件了，vue 官方也未出台 类似 <code>eslint-plugin-vue</code> 这样的插件（这样 tslint 会校验 vue 文件的所有部分，包括 html css 部分）。当然，还是可以 安装 <code>tslint-config-prettier</code> 来做 <code>extends</code> 扩展</li>
+<li>tslint 是一个逐渐被放弃的，一些 ts 的校验也逐渐在使用 eslint 来做校验。详见下一条</li>
+</ul>
+</li>
+<li><a href="https://eslint.org/blog/2019/01/future-typescript-eslint" target="_blank" rel="noopener">tslint</a> 逐渐被放弃使用，转而使用 eslint 来校验 ts 文件，相应的 parser 则为 <a href="https://github.com/typescript-eslint/typescript-eslint" target="_blank" rel="noopener">@typescript-eslint/parser </a>，较为详细的 安装步骤 可 参看 <a href="https://www.npmjs.com/package/@typescript-eslint/eslint-plugin" target="_blank" rel="noopener">@typescript-eslint/eslint-plugin</a></li>
+<li>一个 linter 想要生效其有时候借助了许多 插件包的，比如在一个 ts 书写的 vue 文件当中如果没有相应的 <code>@typescript-eslint/parser</code> 包等，eslint 是无法校验其大部分代码的。</li>
+<li>由于 此偏好设置 同时开启了 tslint 与 eslint，所以导致如果一些项目主导是用 eslint 来做校验的，没有安装 tslint 的一些包，这就导致了其有可能在控制台报错缺少 tslint 插件的安装。反之 eslint 亦然</li>
+</ol>
+<h4 id="二、-SublimeLinter-csslint-🔗️-188k"><a href="#二、-SublimeLinter-csslint-🔗️-188k" class="headerlink" title="二、 SublimeLinter-csslint  🔗️ 188k"></a>二、 <code>SublimeLinter-csslint</code>  <a href="https://packagecontrol.io/packages/SublimeLinter-csslint" target="_blank" rel="noopener">🔗️ 188k</a></h4><p>css 错误提示插件 <code>npm install -g csslint</code></p>
+<h4 id="三、-Sublime​Linter-contrib-scss-lint-SublimeLinter-scss-lint-🔗️-45k"><a href="#三、-Sublime​Linter-contrib-scss-lint-SublimeLinter-scss-lint-🔗️-45k" class="headerlink" title="三、 Sublime​Linter-contrib-scss-lint || SublimeLinter-scss-lint  🔗️ 45k"></a>三、 <code>Sublime​Linter-contrib-scss-lint || SublimeLinter-scss-lint</code>  <a href="https://packagecontrol.io/packages/SublimeLinter-contrib-scss-lint" target="_blank" rel="noopener">🔗️ 45k</a></h4><p>This linter plugin for SublimeLinter provides an interface to the scss-lint. It will be used with files that have the CSS, SASS and SCSS syntax.  </p>
+<ol>
+<li>Install Ruby.</li>
+<li>Install scss-lint by typing the following in a terminal: <code>gem install scss_lint</code></li>
+<li>scss-lint 是 ruby 包，项目当中就不可以使用了，仅能够全局使用</li>
+</ol>
+<h4 id="四、-Sublime​Linter-contrib-sass-lint-🔗️-45k"><a href="#四、-Sublime​Linter-contrib-sass-lint-🔗️-45k" class="headerlink" title="四、 Sublime​Linter-contrib-sass-lint 🔗️ 45k"></a>四、 <code>Sublime​Linter-contrib-sass-lint</code> <a href="https://packagecontrol.io/packages/SublimeLinter-contrib-sass-lint" target="_blank" rel="noopener">🔗️ 45k</a></h4><p>This linter plugin for SublimeLinter provides an interface to sass-lint (Node.js). It will be used with files that have Sass and SCSS syntax.</p>
+<ol>
+<li><code>npm install -g sass-lint</code></li>
+<li>sass-lint 是 node 包</li>
+</ol>
+<h4 id="五、-Sublime​Linter-stylelint-🔗️-14k"><a href="#五、-Sublime​Linter-stylelint-🔗️-14k" class="headerlink" title="五、 Sublime​Linter-stylelint 🔗️ 14k"></a>五、 <code>Sublime​Linter-stylelint</code> <a href="https://packagecontrol.io/packages/SublimeLinter-stylelint" target="_blank" rel="noopener">🔗️ 14k</a></h4><p>This linter plugin for SublimeLinter provides an interface to stylelint.<br><code>stylelint</code> 的设计与 <code>eslint</code> 大致类似。不同于 <code>sass-lint</code> <code>scss_lint</code>，<code>stylelint</code> 不仅可在 编辑上得到支持，还可在 终端、webpack 等编译工具上得到支持。这使得其亦相 <code>eslint</code> 般得到广泛支持</p>
+<ol>
+<li><code>npm install postcss stylelint</code></li>
+</ol>
+<h4 id="五、-SublimeLinter-jshint-🔗️-334k"><a href="#五、-SublimeLinter-jshint-🔗️-334k" class="headerlink" title="五、 SublimeLinter-jshint  🔗️ 334k"></a>五、 <code>SublimeLinter-jshint</code>  <a href="https://packagecontrol.io/packages/SublimeLinter-jshint" target="_blank" rel="noopener">🔗️ 334k</a></h4><ol>
+<li>依赖包 <code>npm install -g jshint</code></li>
+<li>js 错误提示插件，es6 语法也会警告 <code>arrow function syntax (=&gt;) is only available in  ES6 (use &#39;esversion:6&#39;)</code></li>
+<li>所以将其忽略了</li>
+</ol>
+<h4 id="六、-SublimeLinter-eslint-🔗️-152k"><a href="#六、-SublimeLinter-eslint-🔗️-152k" class="headerlink" title="六、 SublimeLinter-eslint  🔗️ 152k"></a>六、 <code>SublimeLinter-eslint</code>  <a href="https://packagecontrol.io/packages/SublimeLinter-eslint" target="_blank" rel="noopener">🔗️ 152k</a></h4><ol>
+<li>依赖包 <code>npm install -g eslint</code></li>
+<li>其要求有一个项目配置文件，直接放到 根目录下面即可。如果没有项目配置文件，sublime 控制台报错如下信息 <code>ESLint couldn&#39;t find a configuration file. To set up a configuration file for this project, please run: eslint --init</code></li>
+</ol>
+<details><br><summary>点击查看 根目录下的配置文件</summary><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  root: true,</span><br><span class="line">  parserOptions: &#123;</span><br><span class="line">    parser: &apos;babel-eslint&apos;,</span><br><span class="line">    sourceType: &apos;module&apos;,</span><br><span class="line">    ecmaVersion: 2017</span><br><span class="line">  &#125;,</span><br><span class="line">  env: &#123;</span><br><span class="line">    browser: true,</span><br><span class="line">    node: true,</span><br><span class="line">    es6: true,</span><br><span class="line">    commonjs: true</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [&apos;vue&apos;],</span><br><span class="line">  extends: [&apos;plugin:vue/essential&apos;, &apos;eslint:recommended&apos;],</span><br><span class="line">  rules: &#123;</span><br><span class="line">    &apos;comma-dangle&apos;: [1, &apos;never&apos;],</span><br><span class="line">    eqeqeq: 1,</span><br><span class="line">    indent: [0, 2],</span><br><span class="line">    &apos;generator-star-spacing&apos;: 0,</span><br><span class="line">    &apos;no-console&apos;: 0,</span><br><span class="line">    &apos;no-debugger&apos;: process.env.NODE_ENV === &apos;production&apos; ? 0 : 1,</span><br><span class="line">    &apos;no-multiple-empty-lines&apos;: [1, &#123; max: 2 &#125;],</span><br><span class="line">    &apos;no-multi-spaces&apos;: 1,</span><br><span class="line">    &apos;no-unused-vars&apos;: 1,</span><br><span class="line">    semi: [0, &apos;never&apos;],</span><br><span class="line">    &apos;space-before-function-paren&apos;: [</span><br><span class="line">      1,</span><br><span class="line">      &#123;</span><br><span class="line">        anonymous: &apos;never&apos;,</span><br><span class="line">        named: &apos;never&apos;,</span><br><span class="line">        asyncArrow: &apos;always&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    &apos;spaced-comment&apos;: 1,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br></details>
+
+<h4 id="七、-SublimeLinter-tslint-🔗️-17k"><a href="#七、-SublimeLinter-tslint-🔗️-17k" class="headerlink" title="七、 SublimeLinter-tslint  🔗️ 17k"></a>七、 <code>SublimeLinter-tslint</code>  <a href="https://packagecontrol.io/packages/SublimeLinter-tslint" target="_blank" rel="noopener">🔗️ 17k</a></h4><ol>
+<li>依赖包 <code>npm install -g tslint</code></li>
+<li>其要求有一个项目配置文件 <code>tslint.json</code>，同 <code>SublimeLinter-eslint</code></li>
+<li><code>tslint</code> 包 无法区分一个文件当中的 html css 部分，固忽略了</li>
+</ol>
+<details><br><summary>点击查看 根目录下的配置文件</summary><br>{<br>  “defaultSeverity”: “error”,<br>  “extends”: [<br>    “tslint:recommended”<br>  ],<br>  “linterOptions”: {<br>    “exclude”: [<br>      “node_modules/**”<br>    ]<br>  },<br>  “rules”: {<br>    “prettier”: true<br>  }<br>}<br></details>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/21/装饰器Decorator/" rel="next" title="装饰器Decorator">
+                <i class="fa fa-chevron-left"></i> 装饰器Decorator
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/07/玩转sublime之：sublime编译器属性增强篇/" rel="prev" title="玩转sublime之：sublime工具增强篇">
+                玩转sublime之：sublime工具增强篇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-相关"><span class="nav-number">1.</span> <span class="nav-text">HTML 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-Emmet-🔗️-3-99m"><span class="nav-number">1.1.</span> <span class="nav-text">一、 Emmet 🔗️ 3.99m</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介"><span class="nav-number">1.1.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-快捷键"><span class="nav-number">1.1.2.</span> <span class="nav-text">2) 快捷键</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-SublimeTmpl-🔗️-122k"><span class="nav-number">1.2.</span> <span class="nav-text">一、 SublimeTmpl 🔗️ 122k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-快捷键-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">2) 快捷键</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-相关"><span class="nav-number">2.</span> <span class="nav-text">CSS 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-cssrem-🔗️"><span class="nav-number">2.1.</span> <span class="nav-text">一、 cssrem 🔗️</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-2"><span class="nav-number">2.1.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置"><span class="nav-number">2.1.2.</span> <span class="nav-text">2) 偏好设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-Color-Highlighter-🔗️-834k"><span class="nav-number">2.2.</span> <span class="nav-text">二、 Color Highlighter 🔗️ 834k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-3"><span class="nav-number">2.2.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">2) 偏好设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-Minify-🔗️-89k"><span class="nav-number">2.3.</span> <span class="nav-text">二、 Minify 🔗️ 89k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-4"><span class="nav-number">2.3.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-使用"><span class="nav-number">2.3.2.</span> <span class="nav-text">2) 使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-快捷键"><span class="nav-number">2.3.3.</span> <span class="nav-text">3) 快捷键</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-less-sass-scsss-stylus-语法高亮"><span class="nav-number">2.4.</span> <span class="nav-text">三、 less sass scsss stylus 语法高亮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、-SASS-Build-🔗️-169k"><span class="nav-number">2.5.</span> <span class="nav-text">四、 SASS Build 🔗️ 169k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-5"><span class="nav-number">2.5.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-使用-1"><span class="nav-number">2.5.2.</span> <span class="nav-text">2) 使用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、-Less2Css-🔗️-101k"><span class="nav-number">2.6.</span> <span class="nav-text">五、 Less2Css  🔗️ 101k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-6"><span class="nav-number">2.6.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-使用-2"><span class="nav-number">2.6.2.</span> <span class="nav-text">2) 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-Windows"><span class="nav-number">2.6.2.1.</span> <span class="nav-text">1. Windows</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-mac-安装-参考资料：lessc-is-not-avavailable"><span class="nav-number">2.6.3.</span> <span class="nav-text">2. mac 安装 参考资料：lessc is not avavailable</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS-相关"><span class="nav-number">3.</span> <span class="nav-text">JS 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-语法高亮"><span class="nav-number">3.1.</span> <span class="nav-text">一、 语法高亮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-DocBlockr-🔗️-941k"><span class="nav-number">3.2.</span> <span class="nav-text">二、 DocBlockr  🔗️ 941k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-7"><span class="nav-number">3.2.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置-2"><span class="nav-number">3.2.2.</span> <span class="nav-text">2) 偏好设置</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化"><span class="nav-number"></span> <span class="nav-text">格式化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-HTML-CSS-JS-Prettify-🔗️-879k"><span class="nav-number">0.1.</span> <span class="nav-text">一、 HTML-CSS-JS Prettify  🔗️ 879k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-8"><span class="nav-number">0.1.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-格式化的偏好设置"><span class="nav-number">0.1.2.</span> <span class="nav-text">2) 格式化的偏好设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-JsFormat-🔗️-666k"><span class="nav-number">0.2.</span> <span class="nav-text">二、 JsFormat  🔗️ 666k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-9"><span class="nav-number">0.2.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置-3"><span class="nav-number">0.2.2.</span> <span class="nav-text">2) 偏好设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-JsPrettier-🔗️-55k"><span class="nav-number">0.3.</span> <span class="nav-text">三、 JsPrettier  🔗️ 55k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-10"><span class="nav-number">0.3.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置-JsPrettier-sublime-settings-prettier-cli-path-的设置"><span class="nav-number">0.3.2.</span> <span class="nav-text">2) 偏好设置 JsPrettier.sublime-settings prettier_cli_path 的设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-补充说明"><span class="nav-number">0.3.3.</span> <span class="nav-text">3) 补充说明</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、-Pretty-JSON-🔗️-548k"><span class="nav-number">0.4.</span> <span class="nav-text">四、 Pretty JSON 🔗️ 548k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-11"><span class="nav-number">0.4.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补全"><span class="nav-number">1.</span> <span class="nav-text">补全</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-SublimeCodeIntel-🔗️-1-42m"><span class="nav-number">1.1.</span> <span class="nav-text">一、 SublimeCodeIntel  🔗️ 1.42m</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-12"><span class="nav-number">1.1.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-CodeComplice-🔗️-13k"><span class="nav-number">1.2.</span> <span class="nav-text">二、 CodeComplice  🔗️ 13k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-Nodejs-🔗️-286k"><span class="nav-number">1.3.</span> <span class="nav-text">三、 Nodejs  🔗️ 286k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-13"><span class="nav-number">1.3.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-No-module-name-AIX"><span class="nav-number">1.3.2.</span> <span class="nav-text">2) No module name AIX </span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、-React-ES6-Snippets-🔗️-63k"><span class="nav-number">1.4.</span> <span class="nav-text">四、 React ES6 Snippets  🔗️ 63k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-14"><span class="nav-number">1.4.1.</span> <span class="nav-text">1) 简介</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#校验-🔗️"><span class="nav-number">2.</span> <span class="nav-text">校验 🔗️</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-SublimeLinter-🔗️-1-74m"><span class="nav-number">2.1.</span> <span class="nav-text">一、 SublimeLinter  🔗️ 1.74m</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-15"><span class="nav-number">2.1.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置-4"><span class="nav-number">2.1.2.</span> <span class="nav-text">2) 偏好设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-偏好设置详细说明"><span class="nav-number">2.1.3.</span> <span class="nav-text">3) 偏好设置详细说明</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-SublimeLinter-csslint-🔗️-188k"><span class="nav-number">2.2.</span> <span class="nav-text">二、 SublimeLinter-csslint  🔗️ 188k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-Sublime​Linter-contrib-scss-lint-SublimeLinter-scss-lint-🔗️-45k"><span class="nav-number">2.3.</span> <span class="nav-text">三、 Sublime​Linter-contrib-scss-lint || SublimeLinter-scss-lint  🔗️ 45k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、-Sublime​Linter-contrib-sass-lint-🔗️-45k"><span class="nav-number">2.4.</span> <span class="nav-text">四、 Sublime​Linter-contrib-sass-lint 🔗️ 45k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、-Sublime​Linter-stylelint-🔗️-14k"><span class="nav-number">2.5.</span> <span class="nav-text">五、 Sublime​Linter-stylelint 🔗️ 14k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、-SublimeLinter-jshint-🔗️-334k"><span class="nav-number">2.6.</span> <span class="nav-text">五、 SublimeLinter-jshint  🔗️ 334k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、-SublimeLinter-eslint-🔗️-152k"><span class="nav-number">2.7.</span> <span class="nav-text">六、 SublimeLinter-eslint  🔗️ 152k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、-SublimeLinter-tslint-🔗️-17k"><span class="nav-number">2.8.</span> <span class="nav-text">七、 SublimeLinter-tslint  🔗️ 17k</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/01/07/玩转sublime之：前端系列环境搭建/';
+          this.page.identifier = '2019/01/07/玩转sublime之：前端系列环境搭建/';
+          this.page.title = '玩转sublime之：前端系列环境搭建';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

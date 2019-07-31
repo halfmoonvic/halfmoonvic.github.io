@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="vue开发团队在sublime上的插件开发 仅有 Vue Syntax Highlight 语法高亮 一项，而未像 vscode 上的 vetur 插件那般 Syntax-highlighting Snippet Emmet Linting / Error Checking Formatting Auto Completion Debugging 等诸多功能，各项功能均需自己配置 * 语法高亮 V">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩转sublime之：vue react 环境搭建">
+<meta property="og:url" content="http://yoursite.com/2019/01/07/玩转sublime之：vue react 环境搭建/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="vue开发团队在sublime上的插件开发 仅有 Vue Syntax Highlight 语法高亮 一项，而未像 vscode 上的 vetur 插件那般 Syntax-highlighting Snippet Emmet Linting / Error Checking Formatting Auto Completion Debugging 等诸多功能，各项功能均需自己配置 * 语法高亮 V">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-01-07T06:47:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="玩转sublime之：vue react 环境搭建">
+<meta name="twitter:description" content="vue开发团队在sublime上的插件开发 仅有 Vue Syntax Highlight 语法高亮 一项，而未像 vscode 上的 vetur 插件那般 Syntax-highlighting Snippet Emmet Linting / Error Checking Formatting Auto Completion Debugging 等诸多功能，各项功能均需自己配置 * 语法高亮 V">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/07/玩转sublime之：vue react 环境搭建/"/>
+
+
+
+
+
+  <title>玩转sublime之：vue react 环境搭建 | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/07/玩转sublime之：vue react 环境搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">玩转sublime之：vue react 环境搭建</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-07T16:00:10+08:00">
+                2019-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IDE/" itemprop="url" rel="index">
+                    <span itemprop="name">IDE</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/07/玩转sublime之：vue react 环境搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/07/玩转sublime之：vue react 环境搭建/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/01/07/玩转sublime之：vue react 环境搭建/" class="leancloud_visitors" data-flag-title="玩转sublime之：vue react 环境搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>vue开发团队在sublime上的插件开发 仅有 <code>Vue Syntax Highlight</code> 语法高亮 一项，而未像 <code>vscode</code> 上的 <code>vetur</code> 插件那般 <code>Syntax-highlighting Snippet Emmet Linting / Error Checking Formatting Auto Completion Debugging</code> 等诸多功能，各项功能均需自己配置</p>
+<h3 id="语法高亮"><a href="#语法高亮" class="headerlink" title="* 语法高亮"></a>* 语法高亮</h3><ol>
+<li><code>Vue Syntax Highlight</code>  <a href="https://packagecontrol.io/packages/Vue%20Syntax%20Highlight" target="_blank" rel="noopener">🔗️ 278k</a><ul>
+<li>如果 <code>script</code> 标签标记为 <code>type=&quot;text/ecmascript-6&quot;</code> 或 <code>type=&quot;text/babel&quot;</code>，在新版的 <code>Vue Syntax Highlight</code> 则无法对 js 代码进行高亮</li>
+<li>旧版的 <code>type=&quot;text/ecmascript-6&quot;</code> 解决方法是向 <code>vue.tmLanguage</code> 文件当中添加 <code>|ecmascript</code> 选项 <a href="https://github.com/vuejs/vue-syntax-highlight/blob/master/vue.tmLanguage#L832" target="_blank" rel="noopener">🔗️</a></li>
+</ul>
+</li>
+<li><code>Babel</code> <a href="https://packagecontrol.io/packages/Babel" target="_blank" rel="noopener">🔗️ 500k</a></li>
+</ol>
+<h3 id="校验-参考链接-🔗️"><a href="#校验-参考链接-🔗️" class="headerlink" title="* 校验 参考链接 🔗️"></a>* 校验 <a href="https://halfmoonvic.github.io/2018/08/05/eslint-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/" target="_blank" rel="noopener">参考链接 🔗️</a></h3><h4 id="1-sublime-插件-SublimeLinter-eslint-🔗️-153k"><a href="#1-sublime-插件-SublimeLinter-eslint-🔗️-153k" class="headerlink" title="1) sublime 插件 SublimeLinter-eslint 🔗️ 153k"></a>1) sublime 插件 <code>SublimeLinter-eslint</code> <a href="https://packagecontrol.io/packages/SublimeLinter-eslint" target="_blank" rel="noopener">🔗️ 153k</a></h4><p>This linter plugin for SublimeLinter provides an interface to ESLint</p>
+<ol>
+<li>npm 包 <code>eslint</code> <a href="https://github.com/eslint/eslint" target="_blank" rel="noopener">🔗️</a></li>
+<li>npm 包 <code>eslint-plugin-vue</code> <a href="https://github.com/vuejs/eslint-plugin-vue" target="_blank" rel="noopener">🔗️</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins: [&apos;vue&apos;],</span><br><span class="line">extends: [&apos;plugin:vue/essential&apos;, &apos;eslint:recommended&apos;],</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-sublime-插件-Sublime​Linter-tslint-🔗️-17k"><a href="#2-sublime-插件-Sublime​Linter-tslint-🔗️-17k" class="headerlink" title="2) sublime 插件 Sublime​Linter-tslint 🔗️ 17k"></a>2) sublime 插件 <code>Sublime​Linter-tslint</code> <a href="https://packagecontrol.io/packages/SublimeLinter-tslint" target="_blank" rel="noopener">🔗️ 17k</a></h4><p>This linter plugin for SublimeLinter provides an interface to tslint. It will be used with files that have the “typescript” syntax.</p>
+<ol>
+<li>npm 包 <code>tslint</code> <code>tslint.json</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;defaultSeverity&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;extends&quot;: [</span><br><span class="line">    &quot;tslint:recommended&quot;,</span><br><span class="line">    &quot;tslint-config-prettier&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;rules&quot;: &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="格式化"><a href="#格式化" class="headerlink" title="* 格式化"></a>* 格式化</h3><h4 id="一、-HTML-CSS-JS-Prettify-🔗️-879k"><a href="#一、-HTML-CSS-JS-Prettify-🔗️-879k" class="headerlink" title="一、 HTML-CSS-JS Prettify 🔗️ 879k"></a>一、 <code>HTML-CSS-JS Prettify</code> <a href="https://packagecontrol.io/packages/HTML-CSS-JS%20Prettify" target="_blank" rel="noopener">🔗️ 879k</a></h4><h5 id="1-简介"><a href="#1-简介" class="headerlink" title="1) 简介"></a>1) 简介</h5><ol>
+<li>HTML, CSS, JavaScript, JSON, React and Vue code formatter for Sublime Text 2 and 3 via node.js</li>
+<li>其对 js 的格式化是 通过 <a href="https://github.com/einars/js-beautify" target="_blank" rel="noopener">js-beautify</a> 来进行设置的</li>
+</ol>
+<h5 id="2-偏好设置"><a href="#2-偏好设置" class="headerlink" title="2) 偏好设置"></a>2) 偏好设置</h5><p>其 node 路径通过 <code>Packages/node_env.py</code> 来设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">User\HTMLPrettify.sublime-settings</span><br><span class="line">----------</span><br><span class="line">&#123;</span><br><span class="line">    // Simply using `node` without specifying a path sometimes doesn&apos;t work :(</span><br><span class="line">    // https://github.com/victorporof/Sublime-HTMLPrettify#oh-noez-command-not-found</span><br><span class="line">    // http://nodejs.org/#download</span><br><span class="line">    &quot;node_path&quot;:</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;windows&quot;: &quot;C:/Program Files/nodejs/node.exe&quot;,</span><br><span class="line">        &quot;linux&quot;: &quot;/usr/bin/nodejs&quot;,</span><br><span class="line">        &quot;osx&quot;: &quot;node&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    // Automatically format when a file is saved.</span><br><span class="line">    &quot;format_on_save&quot;: false,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="3-jsbeautifyrc-格式化规则-🔗️"><a href="#3-jsbeautifyrc-格式化规则-🔗️" class="headerlink" title="3) .jsbeautifyrc 格式化规则 🔗️"></a>3) <code>.jsbeautifyrc</code> 格式化规则 <a href="https://github.com/beautify-web/js-beautify#setting-inheritance-and-language-specific-overrides" target="_blank" rel="noopener">🔗️</a></h5><p>The plugin looks for a .jsbeautifyrc file in the following directories:</p>
+<ol>
+<li>The same directory as the source file you’re prettifying.</li>
+<li>The source file’s parent directories.</li>
+<li>Your home folder.</li>
+<li>Your personal Sublime settings folder.</li>
+</ol>
+<h4 id="二、-JsPrettier-🔗️-55k"><a href="#二、-JsPrettier-🔗️-55k" class="headerlink" title="二、 JsPrettier 🔗️ 55k"></a>二、 <code>JsPrettier</code> <a href="https://packagecontrol.io/packages/JsPrettier" target="_blank" rel="noopener">🔗️ 55k</a></h4><h5 id="1-偏好设置"><a href="#1-偏好设置" class="headerlink" title="1) 偏好设置"></a>1) 偏好设置</h5><ol>
+<li><code>JsPrettier</code> 的偏好设置文件是一些类似设置 node prettier 路径的配置和 <code>Prettier Options</code> 选项</li>
+<li><code>node prettier</code> 路径有 <code>Packages/node_env.py</code> 来设置了，文件中可直接留空<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JsPrettier.sublime-settings</span><br><span class="line">----------</span><br><span class="line">&quot;prettier_cli_path&quot;: &quot;&quot;,</span><br><span class="line">// &quot;prettier_cli_path&quot;: &quot;/Users/john/.nvm/versions/node/v10.13.0/bin/prettier&quot;,</span><br><span class="line">&quot;node_path&quot;: &quot;&quot;,</span><br><span class="line">// &quot;node_path&quot;: &quot;/Users/john/.nvm/versions/node/v10.13.0/bin/node&quot;,</span><br><span class="line">some other config .....</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="2-Prettier-Options-格式化规则-🔗️"><a href="#2-Prettier-Options-格式化规则-🔗️" class="headerlink" title="2) Prettier Options 格式化规则 🔗️"></a>2) <code>Prettier Options</code> 格式化规则 <a href="https://prettier.io/docs/en/options.html" target="_blank" rel="noopener">🔗️</a></h5><h4 id="三、-JsFormat-🔗️-666k"><a href="#三、-JsFormat-🔗️-666k" class="headerlink" title="三、 JsFormat 🔗️ 666k"></a>三、 <code>JsFormat</code> <a href="https://packagecontrol.io/packages/JsFormat" target="_blank" rel="noopener">🔗️ 666k</a></h4><h5 id="1-简介-1"><a href="#1-简介-1" class="headerlink" title="1) 简介"></a>1) 简介</h5><p>JsFormat is a javascript formatting plugin for Sublime Text 2. <strong>It uses jsbeautifier</strong> to format whole js or json files, or the selected portion(s).</p>
+<h5 id="2-偏好设置-1"><a href="#2-偏好设置-1" class="headerlink" title="2) 偏好设置"></a>2) 偏好设置</h5><p>其偏好设置 亦是一些 诸如 <code>auto_formatter</code> 的选项 和 <code>Pretter Options</code></p>
+<h3 id="补全"><a href="#补全" class="headerlink" title="* 补全"></a>* 补全</h3><h4 id="一、-VUE"><a href="#一、-VUE" class="headerlink" title="一、 VUE"></a>一、 VUE</h4><p>vue 补全主要依赖于 <code>User\Snippets</code> 中的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// the third library</span><br><span class="line">// the local function and variables</span><br><span class="line">// the local component</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/07/玩转sublime之：sublime工具增强篇/" rel="next" title="玩转sublime之：sublime工具增强篇">
+                <i class="fa fa-chevron-left"></i> 玩转sublime之：sublime工具增强篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/07/玩转sublime之：sublime主题篇/" rel="prev" title="玩转sublime之：sublime 主题修改篇">
+                玩转sublime之：sublime 主题修改篇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法高亮"><span class="nav-number">1.</span> <span class="nav-text">* 语法高亮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#校验-参考链接-🔗️"><span class="nav-number">2.</span> <span class="nav-text">* 校验 参考链接 🔗️</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-sublime-插件-SublimeLinter-eslint-🔗️-153k"><span class="nav-number">2.1.</span> <span class="nav-text">1) sublime 插件 SublimeLinter-eslint 🔗️ 153k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-sublime-插件-Sublime​Linter-tslint-🔗️-17k"><span class="nav-number">2.2.</span> <span class="nav-text">2) sublime 插件 Sublime​Linter-tslint 🔗️ 17k</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化"><span class="nav-number">3.</span> <span class="nav-text">* 格式化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-HTML-CSS-JS-Prettify-🔗️-879k"><span class="nav-number">3.1.</span> <span class="nav-text">一、 HTML-CSS-JS Prettify 🔗️ 879k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介"><span class="nav-number">3.1.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置"><span class="nav-number">3.1.2.</span> <span class="nav-text">2) 偏好设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-jsbeautifyrc-格式化规则-🔗️"><span class="nav-number">3.1.3.</span> <span class="nav-text">3) .jsbeautifyrc 格式化规则 🔗️</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、-JsPrettier-🔗️-55k"><span class="nav-number">3.2.</span> <span class="nav-text">二、 JsPrettier 🔗️ 55k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-偏好设置"><span class="nav-number">3.2.1.</span> <span class="nav-text">1) 偏好设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Prettier-Options-格式化规则-🔗️"><span class="nav-number">3.2.2.</span> <span class="nav-text">2) Prettier Options 格式化规则 🔗️</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、-JsFormat-🔗️-666k"><span class="nav-number">3.3.</span> <span class="nav-text">三、 JsFormat 🔗️ 666k</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-简介-1"><span class="nav-number">3.3.1.</span> <span class="nav-text">1) 简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-偏好设置-1"><span class="nav-number">3.3.2.</span> <span class="nav-text">2) 偏好设置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补全"><span class="nav-number">4.</span> <span class="nav-text">* 补全</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-VUE"><span class="nav-number">4.1.</span> <span class="nav-text">一、 VUE</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/01/07/玩转sublime之：vue react 环境搭建/';
+          this.page.identifier = '2019/01/07/玩转sublime之：vue react 环境搭建/';
+          this.page.title = '玩转sublime之：vue react 环境搭建';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
