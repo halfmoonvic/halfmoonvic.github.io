@@ -60,8 +60,8 @@ globals: {
 ```
 
 ### plugins —— 第三方插件
-插件名称可以省略 `eslint-plugin-` 前缀  
-引入第三方插件后即可在 extends 中指定使用
+1. `plugin` 可以 为当前 的 eslint 提供额外的功能，如 `eslint-plugin-vue`，其可支持校验 `html` 部分，单独的 `eslint` 则是仅能校验 `js` 的。
+2. 插件名称可以省略 `eslint-plugin-` 前缀
 ```
 "plugins": [
     "plugin1",
@@ -70,7 +70,10 @@ globals: {
 ```
 
 ### extends —— 基础配置
-用于引入某配置作为基础配置，然后再在后续的rules中对其进行扩展
+1. `eslint-config-prettier` 为例，其主代码就是 各种 `rules` 的开关，其本身并不是插件，更没有说提供一套规则（这是 plugin）的功能，`eslint-config-prettier` 本身既是基于 `eslint` 自带的规则进行开关罢了。  
+  其 github 介绍也说了 Turns off all rules that are unnecessary or might conflict with Prettier.
+2. 与 `eslint` 相类似的，如 `stylelint`，无论是 `plugin` 还是 `extends` 都是与 `eslint` 这里一致的
+3. extends 属性值，可以为字符串，或者字符串数组
 ```
 extends: 'eslint:recommended',
 ```
@@ -79,25 +82,25 @@ extends: 'eslint:recommended',
 扩展（或覆盖）extends 中预定义的规则
 ```
 rules: {
-  eqeqeq: 1,  // if 判断语句间
-  'no-console': 0, 
+  'comma-dangle': [1, 'never'],
+  eqeqeq: 1,
+  indent: [1, 2],
+  'generator-star-spacing': 0,
+  'no-console': 0,
+  'no-debugger': process.env.NODE_ENV === 'production' ? 0 : 1,
+  'no-multiple-empty-lines': [1, { max: 2 }],
+  'no-multi-spaces': 1,
+  'no-unused-vars': 1,
+  semi: [1, 'never'],
   'space-before-function-paren': [
     1,
     {
-      anonymous: 'always',
+      anonymous: 'never',
       named: 'never',
       asyncArrow: 'always'
     }
   ],
-  'generator-star-spacing': 0,
-  'spaced-comment': 1,  // 注释之后先跟一空格 在写注释内容
-  indent: [1, 2], 
-  'no-unused-vars': 1,
-  semi: [1, 'never'],
-  'no-multiple-empty-lines': [1, { max: 2 }], // 不允许多个空行
-  'comma-dangle': [1, 'never'], // 要求或禁止使用拖尾逗号
-  'no-multi-spaces': 1, // 禁止出现多个空格
-  'no-debugger': process.env.NODE_ENV === 'production' ? 0 : 1 // allow debugger during development
+  'spaced-comment': 1,
 },
 ```
 

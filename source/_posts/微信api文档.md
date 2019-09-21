@@ -4,6 +4,8 @@ date: 2018-05-27 15:58:27
 category: api
 tags:
 ---
+[微信小程序文档](https://developers.weixin.qq.com/miniprogram/dev/framework/MINA.html)
+
 ### 一、 框架 → 配置 
 主要介绍 app.json 与 page.json 控制的各项内容  
 

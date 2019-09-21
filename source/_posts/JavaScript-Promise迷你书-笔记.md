@@ -2,7 +2,7 @@
 title: JavaScript Promise迷你书--笔记
 date: 2017-12-14 09:49:08
 category: js
-tags: [promise, 异步]
+tags: [promise, 异步, doc]
 ---
 
 
