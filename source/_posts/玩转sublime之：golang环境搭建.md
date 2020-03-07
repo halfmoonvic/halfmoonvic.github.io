@@ -88,4 +88,4 @@ User\Godef.sublime-settings
 
 #### 校验
 ##### 1) `SublimeLinter-golint` [🔗️](https://packagecontrol.io/packages/SublimeLinter-golint)
-依赖包 `go get -u golang.org/x/lint/golint` [`golint`](https://github.com/golang/lint)
+依赖包 [`golint`](https://github.com/golang/lint): `go get -u golang.org/x/lint/golint` 
