@@ -24,7 +24,7 @@ Windows 编辑 环境变量则是通过 UI 界面来设置。
 `高级系统设置` → `系统属性-高级` → `环境变量` → 编辑 path 信息  
 在此界面中有 `用户变量` 与 `系统变量` 两项，`用户变量` 中 path 设置 则是 仅当前 Windows用户可以使用了，而 `系统变量` 则是所有 Windows用户都可以使用。
 
-### 四、 sublime 中环境变量设置
+### 四、 sublime 中环境变量设置 —— mac
 sublime 默认获取的 的 path 为 一些系统级别的path，而用户所编写的 path，sublime 并不能获取到，这就导致了 如果我们使用了 nvm 来管理 node 则 一些 npm 包是无法探寻到的
 ```
 $PATH
@@ -35,7 +35,7 @@ $PATH
     /sbin
 ```
 这个时候，我们 建立一个 python 文件，在 sublime 启动时运行，文件中将 $PATH 重新赋值。  
-其所在位置便是 `Sublime Text 3/Packages/node_env.py`  
+其所在位置便是 `Sublime Text 3/Packages/env_mac.py`  
 ```
 # SOLVE NVM ENVIRONMENT OF NODEPATH
 # reference https://gist.github.com/joesepi/11269417
@@ -45,30 +45,43 @@ $PATH
 # "osx": "/usr/local/bin/node"  // line windows: you cd to some directory and run it
 # "osx": "node"  // like windows: you put the node_path into Environmental variable
 
+# reference https://gist.github.com/joesepi/11269417 and the node_env.py
+# code by echenley commented on 17 Jun 2015
+# add golang env to the path
+# 2020.03.12
+
 import os
 import getpass
+import re
 
 user = getpass.getuser()
 
+default_path = "/Users/%(user)s/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" % {'user':user}
+
+# node env
 nvm_default_file_path = '/Users/%(user)s/.nvm/alias/default' % {'user': user}
-
 with open(nvm_default_file_path, 'r') as content_file:
-    content = content_file.read()
+    nvm_content = content_file.read()
+node_version = nvm_content.strip()
+nodeenv_path = ":/Users/%(user)s/.nvm/versions/node/v%(node_version)s/bin:/Users/%(user)s/.nvm/versions/node/v%(node_version)s/lib" % {'node_version':node_version, 'user':user}
 
-version = content.strip()
 
-path = "/Users/%(user)s/.nvm/versions/node/v%(version)s/bin:/Users/%(user)s/.nvm/versions/node/v%(version)s/lib:/Users/%(user)s/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" % {'version':version, 'user':user}
+# golang env
+gvm_go_file_environments = '/Users/%(user)s/.gvm/environments/default' % {'user': user}
+with open(gvm_go_file_environments, 'r') as content_file:
+    gvm_content = content_file.read()
+go_version = re.findall('gvm_go_name=\"(go[\.\d]{1,6})\"', gvm_content.strip())[0]
 
+goenv_path = ":/Users/%(user)s/.gvm/pkgsets/%(go_version)s/global/bin:/Users/%(user)s/.gvm/gos/%(go_version)s/bin:/Users/%(user)s/.gvm/pkgsets/%(go_version)s/global/overlay/bin:/Users/%(user)s/.Go/bin" % {'go_version':go_version, 'user':user}
+
+path = default_path + nodeenv_path + goenv_path
+os.environ["GOPATH"] = "/Users/%(user)s/.Go" % {'go_version':go_version, 'user':user}
+os.environ["GOROOT"] = "/Users/%(user)s/.gvm/gos/%(go_version)s" % {'go_version':go_version, 'user':user}
+
+
+# edit $PATH
 os.environ["PATH"] = path
-
-# 2019.2.21 by cs
-nodepathbin = "/Users/%(user)s/.nvm/versions/node/v%(version)s/bin" % {'version':version, 'user':user}
-os.environ["NODEPATHBIN"] = nodepathbin
-
-# gvm_go_file_environments = '/Users/%(user)s/.gvm/environments/default' % {'user': user}
-
 print(path)
-print(nodepathbin)
 ```
 
 sublime 在此输出 $PATH 时 如下
@@ -83,4 +96,36 @@ sublime 在此输出 $PATH 时 如下
 /bin
 /usr/sbin
 /sbin
+```
+
+### 五、 sublime 中环境变量设置 —— window
+1. window 下 sublime 可以拿到 我们自行设置的 用户环境变量，比如，我们设置 `GOPATH=C:\_Git\Go`
+2. 但也可以设置 `env_windows.py` 自行设置 这种用户变量，以防止有些程序并不会自动在用户环境变量里去设置这种变量
+3. `env_windows.py` 设置的变量是可以覆盖 在UI界面设置的用户环境变量
+```
+# SOLVE NVM ENVIRONMENT OF NODEPATH
+# reference https://gist.github.com/joesepi/11269417
+# code by echenley commented on 17 Jun 2015
+# which node /Users/john/.nvm/versions/node/v10.15.0/bin/node
+# which prettier /Users/john/.nvm/versions/node/v10.15.0/bin/prettier
+# "osx": "/usr/local/bin/node"  // line windows: you cd to some directory and run it
+# "osx": "node"  // like windows: you put the node_path into Environmental variable
+
+# reference https://gist.github.com/joesepi/11269417 and the node_env.py
+# code by echenley commented on 17 Jun 2015
+# add golang env to the path
+# 2020.03.12
+
+import os
+import getpass
+
+user = getpass.getuser()
+
+# os.environ["GOPATH"] = "C:/Users/John/Go" % {'user':user}
+os.environ["GOPATH"] = "D:/_Git/Go"
+os.environ["GOROOT"] = "%ProgramFiles%/Go"
+
+# edit $PATH
+# os.environ["PATH"] = path
+print(os.environ["PATH"])
 ```
