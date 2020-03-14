@@ -1,6 +1,6 @@
 ---
 title: 玩转sublime之：path环境变量设置
-date: 2020-03-07 16:21:10
+date: 2020-03-12 16:21:10
 category: IDE
 tags:
 ---
@@ -35,7 +35,7 @@ $PATH
     /sbin
 ```
 这个时候，我们 建立一个 python 文件，在 sublime 启动时运行，文件中将 $PATH 重新赋值。  
-其所在位置便是 `Sublime Text 3/Packages/env_mac.py`  
+其所在位置便是 `Sublime Text 3/Packages/env_os.py`  
 ```
 # SOLVE NVM ENVIRONMENT OF NODEPATH
 # reference https://gist.github.com/joesepi/11269417
