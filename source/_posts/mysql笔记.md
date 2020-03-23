@@ -133,7 +133,7 @@ mysql> select * from tbl;
 
 
 ### 第三章 约束以及修改数据表 ———— 修改列
-![内容总结](./../images/2018-10-24-mysql/第三章.jpg)
+![内容总结](/images/2018-10-24-mysql/第三章.jpg)
 #### 一. 约束
 1. 约束保证数据的完整性和一致性
 2. 约束分为表级约束和列级约束
@@ -423,10 +423,10 @@ alter table users2 alter age drop default;  删除
 
 ### 第四章 操作数据表中的记录（增删改查）———— 修改行
 <div>
-    <img width="48%" src="./../images/2018-10-24-mysql/4/insert.jpg">
-    <img width="48%" src="./../images/2018-10-24-mysql/4/update.jpg">
-    <img width="48%" src="./../images/2018-10-24-mysql/4/delete.jpg">
-    <img width="48%" src="./../images/2018-10-24-mysql/4/select.jpg">
+    <img width="48%" src="/images/2018-10-24-mysql/4/insert.jpg">
+    <img width="48%" src="/images/2018-10-24-mysql/4/update.jpg">
+    <img width="48%" src="/images/2018-10-24-mysql/4/delete.jpg">
+    <img width="48%" src="/images/2018-10-24-mysql/4/select.jpg">
 </div>
 
 #### 一、MySQL插入记录 INSERT
