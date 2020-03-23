@@ -87,16 +87,16 @@
 <meta property="og:site_name" content="YUE">
 <meta property="og:description" content="第一章 初涉Mysql一、 启动关闭 MySQLmac &amp;amp;&amp;amp; windows12345mysql.server startmysql.server stopnet start mysqlnet stop mysql    参数 描述     -D, –database=name 打开指定数据库   –delimiter=name 指定分隔符   －h, –host=name 服务器">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2018/10/16/images/2018-10-24-mysql/第三章.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/16/images/2018-10-24-mysql/4/insert.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/16/images/2018-10-24-mysql/4/update.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/16/images/2018-10-24-mysql/4/delete.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/16/images/2018-10-24-mysql/4/select.jpg">
-<meta property="og:updated_time" content="2019-07-31T06:36:03.468Z">
+<meta property="og:image" content="http://yoursite.com/images/2018-10-24-mysql/第三章.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018-10-24-mysql/4/insert.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018-10-24-mysql/4/update.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018-10-24-mysql/4/delete.jpg">
+<meta property="og:image" content="http://yoursite.com/images/2018-10-24-mysql/4/select.jpg">
+<meta property="og:updated_time" content="2020-03-23T03:12:35.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql笔记">
 <meta name="twitter:description" content="第一章 初涉Mysql一、 启动关闭 MySQLmac &amp;amp;&amp;amp; windows12345mysql.server startmysql.server stopnet start mysqlnet stop mysql    参数 描述     -D, –database=name 打开指定数据库   –delimiter=name 指定分隔符   －h, –host=name 服务器">
-<meta name="twitter:image" content="http://yoursite.com/2018/10/16/images/2018-10-24-mysql/第三章.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/2018-10-24-mysql/第三章.jpg">
 
 
 
@@ -449,7 +449,7 @@
 <h5 id="5-显示当前所使用的数据库-SELECT-DATABASE"><a href="#5-显示当前所使用的数据库-SELECT-DATABASE" class="headerlink" title="5) 显示当前所使用的数据库 SELECT DATABASE();"></a>5) 显示当前所使用的数据库 <code>SELECT DATABASE();</code></h5><h5 id="6-查看数据表-SHOW-TABLES-from-db-name"><a href="#6-查看数据表-SHOW-TABLES-from-db-name" class="headerlink" title="6) 查看数据表 SHOW TABLES [from db_name]"></a>6) 查看数据表 <code>SHOW TABLES [from db_name]</code></h5><pre><code>1. 查看当前数据库的数据表 `show tables` 
 2. 查看其它数据库的数据表 `show tables from db_name`
 </code></pre><hr>
-<h3 id="第三章-约束以及修改数据表-————-修改列"><a href="#第三章-约束以及修改数据表-————-修改列" class="headerlink" title="第三章 约束以及修改数据表 ———— 修改列"></a>第三章 约束以及修改数据表 ———— 修改列</h3><p><img src="./../images/2018-10-24-mysql/第三章.jpg" alt="内容总结"></p>
+<h3 id="第三章-约束以及修改数据表-————-修改列"><a href="#第三章-约束以及修改数据表-————-修改列" class="headerlink" title="第三章 约束以及修改数据表 ———— 修改列"></a>第三章 约束以及修改数据表 ———— 修改列</h3><p><img src="/images/2018-10-24-mysql/第三章.jpg" alt="内容总结"></p>
 <h4 id="一-约束"><a href="#一-约束" class="headerlink" title="一. 约束"></a>一. 约束</h4><ol>
 <li>约束保证数据的完整性和一致性</li>
 <li>约束分为表级约束和列级约束<ul>
@@ -506,7 +506,7 @@
 <h5 id="3-2-删除外键约束"><a href="#3-2-删除外键约束" class="headerlink" title="3.2) 删除外键约束"></a>3.2) 删除外键约束</h5><p><code>ALTER TABLE table_name drop FOREIGN KEY fk_symbol</code></p>
 <h5 id="4-添加-删除默认约束"><a href="#4-添加-删除默认约束" class="headerlink" title="4) 添加/删除默认约束"></a>4) 添加/删除默认约束</h5><p><code>ALTER TABLE table_name ALTER [COLUMN] column_name {SET DEFAULT literal | DROP DEFAULT}</code><br>alter table users2 alter age set default 15;  添加<br>alter table users2 alter age drop default;  删除</p>
 <hr>
-<h3 id="第四章-操作数据表中的记录（增删改查）————-修改行"><a href="#第四章-操作数据表中的记录（增删改查）————-修改行" class="headerlink" title="第四章 操作数据表中的记录（增删改查）———— 修改行"></a>第四章 操作数据表中的记录（增删改查）———— 修改行</h3><div><br>    <img width="48%" src="./../images/2018-10-24-mysql/4/insert.jpg"><br>    <img width="48%" src="./../images/2018-10-24-mysql/4/update.jpg"><br>    <img width="48%" src="./../images/2018-10-24-mysql/4/delete.jpg"><br>    <img width="48%" src="./../images/2018-10-24-mysql/4/select.jpg"><br></div>
+<h3 id="第四章-操作数据表中的记录（增删改查）————-修改行"><a href="#第四章-操作数据表中的记录（增删改查）————-修改行" class="headerlink" title="第四章 操作数据表中的记录（增删改查）———— 修改行"></a>第四章 操作数据表中的记录（增删改查）———— 修改行</h3><div><br>    <img width="48%" src="/images/2018-10-24-mysql/4/insert.jpg"><br>    <img width="48%" src="/images/2018-10-24-mysql/4/update.jpg"><br>    <img width="48%" src="/images/2018-10-24-mysql/4/delete.jpg"><br>    <img width="48%" src="/images/2018-10-24-mysql/4/select.jpg"><br></div>
 
 <h4 id="一、MySQL插入记录-INSERT"><a href="#一、MySQL插入记录-INSERT" class="headerlink" title="一、MySQL插入记录 INSERT"></a>一、MySQL插入记录 INSERT</h4><ol>
 <li><code>INSERT [INTO] tabl_name [(col_name, ...)] {VALUES | VALUE} ({expr | DEFAULT}, ...), (...), ...</code><br>insert users values(default, ‘li’, ‘123’, 2 <em> 8, 1);<br>insert users values(default, ‘lfi’, ‘123’, 2 </em> 8, 1), (null, ‘rose’, md5(‘123’), default, 0); 插入多条记录</li>
