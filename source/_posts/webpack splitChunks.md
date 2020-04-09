@@ -68,7 +68,24 @@ Entrypoint app = vendors~app.js app.js
 2. 入口文件 `app.js` 中 引入了两个 动态包 `a.js` `b.js` 会被拆分成两个 chunk
 3. 入口文件 `app.js` 中 引入了 `vue`，因为 `vue` 过大，其被拆分成了一个 单独的 chunk，打包进 `vendors~app.js` 中
 4. `a.js` 与 `b.js` 当中虽然引用了 `vue`，但 `vue` 不会在被打包进这两个 chunk 中，因为 `vue` 已经被打包成了单独的 chunk了，直接引用即可。
-5. 如果说，入口文件 `app.js` 未 引用 `vue`，那么其打包结果与`splitChunks: false`一样
+5. 如果说，入口文件 `app.js` 未 引用 `vue`，那么其打包结果与`splitChunks: false`一样  
+
+另外，对于有多个入口文件的时候，依然起作用  
+比如  
+```
+   ≡ app.js        import Vue from 'vue'
+   ≡ login.js      import Vue from 'vue'
+```
+![bundle multi entry](/images/2020-03-27/bundle-multi_entry.png)
+```
+               Asset       Size  Chunks             Chunk Names
+              app.js   1.55 KiB       1  [emitted]  app
+          index.html  275 bytes          [emitted]
+            login.js   1.55 KiB       2  [emitted]  login
+vendors~app~login.js     68 KiB       0  [emitted]  vendors~app~login
+Entrypoint login = vendors~app~login.js login.js
+Entrypoint app = vendors~app~login.js app.js
+```
 
 #### 2) `chunks: async` 针对对象为 动态加载的文件
 `chunks: async` 针对的则是就 异步引用的块中所引用的包 的拆分。拆分规则也是 诸如包的体积 大小，引用次数这些。
@@ -104,6 +121,27 @@ Entrypoint app = app.js
 3. `a.js` 引入的 `vue` 过大，其被拆分成了 单独的 chunk，打包进 `0.js` 文件中
 4. `b.js` 顺势直接引用 被拆分出来的 `vue` chunk
 
+### 三、 webpack 打包优化
+首先讲，我的理解是 打包优化是一个伪命题，对于打包，我更想使用的一个词语是 —— 平衡  
+
+#### 1) 先说下这个问题的来源
+  以首屏加载为例
+
+  1. 如果所有代码打包到一个 js 文件当中，造成的结果是
+      * 首屏加载了诸多首屏不需要的 js 代码，资源浪费
+      * 一个 js 文件体积过大，页面需要需要等待这个 js 资源，造成页面长久的卡死状态
+  2. 如果尽可能的拆分 js 到不同的文件
+      * 优点：遗弃了不需要的 js 加载
+      * 缺点：拆分的越多 浏览器发起的请求数量越多，等待全部js 资源发起并返回可能也会花销一段时间
+      * [Browser connection limitations](https://docs.pushtechnology.com/cloud/latest/manual/html/designguide/solution/support/connection_limitations.html), 总结就是：ie 不同版本 限制数量是不一样的，其它浏览器都是 6个
+
+#### 2) 解决方案
+  1. 从代码体积上进行拆分
+      * 减少非当前页面需要的 js 请求
+      * 拆分出其它chunk 需要的公共代码，形成缓存
+  2. 从文件数量上尽可能减少
+      * 合并 较小体积的 公共代码
+
 ----------
 
 ```
@@ -137,6 +175,8 @@ splitChunks: {
     }
 }
 ```
+
+
 
 ```
 // webpack.config.js
