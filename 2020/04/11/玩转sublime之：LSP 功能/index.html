@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="vue," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="1. 检测变化的注意事项受现代 JavaScript 的限制 (以及废弃 Object.observe)，Vue 不能检测到对象属性的添加或删除。由于 Vue 会在初始化实例时对属性执行 getter/setter 转化过程，所以属性必须在 data 对象上存在才能让 Vue 转换它，这样才能让它是响应的。   注意： 针对对象的数据变化，要在data当中提前设置好其各个属性值">
-<meta name="keywords" content="vue">
+<meta name="description" content="一、 What is LSPThe Language Server protocol is used between a tool (the client) and a language smartness provider (the server) to integrate features like auto complete, go to definition, find all refer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue 杂记">
-<meta property="og:url" content="http://yoursite.com/2017/12/06/vue-杂记/index.html">
+<meta property="og:title" content="玩转sublime之：LSP 实现 ide 功能">
+<meta property="og:url" content="http://yoursite.com/2020/04/11/玩转sublime之：LSP 功能/index.html">
 <meta property="og:site_name" content="YUE">
-<meta property="og:description" content="1. 检测变化的注意事项受现代 JavaScript 的限制 (以及废弃 Object.observe)，Vue 不能检测到对象属性的添加或删除。由于 Vue 会在初始化实例时对属性执行 getter/setter 转化过程，所以属性必须在 data 对象上存在才能让 Vue 转换它，这样才能让它是响应的。   注意： 针对对象的数据变化，要在data当中提前设置好其各个属性值">
+<meta property="og:description" content="一、 What is LSPThe Language Server protocol is used between a tool (the client) and a language smartness provider (the server) to integrate features like auto complete, go to definition, find all refer">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-31T06:36:03.468Z">
+<meta property="og:updated_time" content="2020-04-11T11:19:54.265Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue 杂记">
-<meta name="twitter:description" content="1. 检测变化的注意事项受现代 JavaScript 的限制 (以及废弃 Object.observe)，Vue 不能检测到对象属性的添加或删除。由于 Vue 会在初始化实例时对属性执行 getter/setter 转化过程，所以属性必须在 data 对象上存在才能让 Vue 转换它，这样才能让它是响应的。   注意： 针对对象的数据变化，要在data当中提前设置好其各个属性值">
+<meta name="twitter:title" content="玩转sublime之：LSP 实现 ide 功能">
+<meta name="twitter:description" content="一、 What is LSPThe Language Server protocol is used between a tool (the client) and a language smartness provider (the server) to integrate features like auto complete, go to definition, find all refer">
 
 
 
@@ -120,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/06/vue-杂记/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/11/玩转sublime之：LSP 功能/"/>
 
 
 
 
 
-  <title>vue 杂记 | YUE</title>
+  <title>玩转sublime之：LSP 实现 ide 功能 | YUE</title>
   
 
 
@@ -253,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/06/vue-杂记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/11/玩转sublime之：LSP 功能/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="halfmoon">
@@ -270,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vue 杂记</h1>
+          <h1 class="post-title" itemprop="name headline">玩转sublime之：LSP 实现 ide 功能</h1>
         
 
         <div class="post-meta">
@@ -283,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-06T11:39:20+08:00">
-                2017-12-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-11T17:06:10+08:00">
+                2020-04-11
               </time>
             
 
@@ -294,6 +293,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IDE/" itemprop="url" rel="index">
+                    <span itemprop="name">IDE</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -302,9 +323,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/12/06/vue-杂记/#comments" itemprop="discussionUrl">
+                <a href="/2020/04/11/玩转sublime之：LSP 功能/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/12/06/vue-杂记/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2020/04/11/玩转sublime之：LSP 功能/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -312,7 +333,7 @@
 
           
           
-             <span id="/2017/12/06/vue-杂记/" class="leancloud_visitors" data-flag-title="vue 杂记">
+             <span id="/2020/04/11/玩转sublime之：LSP 功能/" class="leancloud_visitors" data-flag-title="玩转sublime之：LSP 实现 ide 功能">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -343,8 +364,41 @@
       
 
       
-        <h6 id="1-检测变化的注意事项"><a href="#1-检测变化的注意事项" class="headerlink" title="1. 检测变化的注意事项"></a>1. 检测变化的注意事项</h6><p>受现代 JavaScript 的限制 (以及废弃 Object.observe)，Vue 不能检测到对象属性的添加或删除。由于 Vue 会在初始化实例时对属性执行 getter/setter 转化过程，所以属性必须在 data 对象上存在才能让 Vue 转换它，这样才能让它是响应的。  </p>
-<p>注意： 针对对象的数据变化，要在data当中提前设置好其各个属性值</p>
+        <h4 id="一、-What-is-LSP"><a href="#一、-What-is-LSP" class="headerlink" title="一、 What is LSP"></a>一、 What is LSP</h4><p>The Language Server protocol is used between a tool (the client) and a language smartness provider (the server) to integrate features like auto complete, go to definition, find all references and alike into the tool</p>
+<h3 id="二、-运行原理"><a href="#二、-运行原理" class="headerlink" title="二、 运行原理"></a>二、 运行原理</h3><ol>
+<li><p>ide(sublime 等) 与 语言服务，比如 <code>golang</code> 进行通讯，以便完成诸如 <code>auto complete</code> <code>go to definition</code> <code>find all references</code> 等功能需要一个协议，这个协议便是 <code>lsp —— Language Server protocol</code></p>
+</li>
+<li><p>一般的一些 ide 实现对一些语言的功能都是编写了一些插件  </p>
+<ul>
+<li>比如 <code>sublime</code> 对 <code>golang 插件</code> 的支持，主要是由 <code>GoSublime</code> 这个插件完成的，其可完成对 <code>go</code> 的自动补全等功能。</li>
+<li>而 <code>vscode</code> 则是需要安装 <code>go 插件</code>，且需要 安装 配套的一些包比如 <code>go get golang.org/x/tools/gopls</code></li>
+<li>这样就造成的一些问题，比如，不同的编辑器都需要编写特定的 插件来实现对语言的支持，如果有 <code>n</code> 个编程器，<code>m</code> 个语言，则需要 <code>m * n</code> 个程序</li>
+</ul>
+</li>
+<li><p><code>lsp</code> 提供了 <code>ide</code> 与 <code>language server</code> 之间的一个媒介</p>
+<ul>
+<li>比如 <code>golang</code> 实现了这套 <code>lsp</code> 协议，—— <code>gopls</code></li>
+<li><code>ide</code> 支持 <code>lsp</code>，比如 <code>sublime</code> 可以通过安装 <a href="https://github.com/sublimelsp/LSP" target="_blank" rel="noopener"><code>LSP</code></a></li>
+<li>这样两者就链接了起来，<code>sublime</code> 就可以很好运行 <code>golang</code> 了</li>
+</ul>
+</li>
+</ol>
+<h3 id="三、-Vetur"><a href="#三、-Vetur" class="headerlink" title="三、 Vetur"></a>三、 <code>Vetur</code></h3><ol>
+<li>方式一： 通过 安装 <code>LSP-vue</code> 就可以实现 <code>Vetur</code> 的功能。</li>
+<li>方式二： 也不需要安装 <code>LSP-vue</code> 插件，自信 <code>npm install -g vue-language-serve</code> 插件后，编写 <code>LSP.sublime-settings</code>，就可以实现。<br><a href="https://www.louisbourque.ca/blog/2019/06/TypeScript-Vue-SFC-Sublime-Text/" target="_blank" rel="noopener">Support TypeScript with Vue SFC in Sublime Text</a></li>
+</ol>
+<h3 id="四、-go"><a href="#四、-go" class="headerlink" title="四、 go"></a>四、 <code>go</code></h3><ol>
+<li><p>使用 <code>Sourcegraph&#39;s go-langserver</code>，<code>Gopls</code> 不能自动引入<br> <code>go get golang.org/x/tools/gopls@latest</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;clients&quot;: &#123;</span><br><span class="line">        &quot;golsp&quot;: &#123;</span><br><span class="line">            &quot;enabled&quot;: true,</span><br><span class="line">            &quot;initializationOptions&quot;: &#123;</span><br><span class="line">                // use go code</span><br><span class="line">                &quot;gocodeCompletionEnabled&quot;: false</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;settings&quot;: &#123;</span><br><span class="line">                &quot;only_show_lsp_completions&quot;: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;gopls&quot;: &#123;</span><br><span class="line">            &quot;enabled&quot;: false</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;show_view_status&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>GoSublime</code> 自动导入一直有些问题，可以使用 <code>go-lsp</code> → <code>formatter</code> 来完成，但是并没有 <code>formatter on save</code> 的选项貌似</p>
+</li>
+</ol>
+<h3 id="五、-参考资料"><a href="#五、-参考资料" class="headerlink" title="五、 参考资料"></a>五、 参考资料</h3><ol>
+<li><a href="https://langserver.org/" target="_blank" rel="noopener">Langserver.org</a></li>
+<li><a href="https://blog.csdn.net/u012930117/article/details/79291677" target="_blank" rel="noopener">什么是Language Server protocol（LSP）?</a></li>
+<li><a href="https://lsp.readthedocs.io/en/latest/" target="_blank" rel="noopener">SublimeLsp doc</a></li>
+</ol>
 
       
     </div>
@@ -360,12 +414,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/vue/" rel="tag"># vue</a>
-          
-        </div>
-      
 
       
       
@@ -375,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/27/Redux-Vs-Vuex-学习与比较/" rel="next" title="Redux Vs Vuex 学习与比较">
-                <i class="fa fa-chevron-left"></i> Redux Vs Vuex 学习与比较
+              <a href="/2020/03/27/webpack splitChunks/" rel="next" title="webpack splitChunks">
+                <i class="fa fa-chevron-left"></i> webpack splitChunks
               </a>
             
           </div>
@@ -384,10 +432,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/14/JavaScript-Promise迷你书-笔记/" rel="prev" title="JavaScript Promise迷你书--笔记">
-                JavaScript Promise迷你书--笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -535,7 +579,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-检测变化的注意事项"><span class="nav-number">1.</span> <span class="nav-text">1. 检测变化的注意事项</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、-What-is-LSP"><span class="nav-number">1.</span> <span class="nav-text">一、 What is LSP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、-运行原理"><span class="nav-number"></span> <span class="nav-text">二、 运行原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、-Vetur"><span class="nav-number"></span> <span class="nav-text">三、 Vetur</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、-go"><span class="nav-number"></span> <span class="nav-text">四、 go</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、-参考资料"><span class="nav-number"></span> <span class="nav-text">五、 参考资料</span></a></div>
             
 
           </div>
@@ -698,9 +742,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/12/06/vue-杂记/';
-          this.page.identifier = '2017/12/06/vue-杂记/';
-          this.page.title = 'vue 杂记';
+          this.page.url = 'http://yoursite.com/2020/04/11/玩转sublime之：LSP 功能/';
+          this.page.identifier = '2020/04/11/玩转sublime之：LSP 功能/';
+          this.page.title = '玩转sublime之：LSP 实现 ide 功能';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://halfmoonvic.disqus.com/embed.js';
