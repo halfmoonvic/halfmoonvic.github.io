@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="doc,js," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、 定义Proxy 对象用于定义基本操作的自定义行为（如属性查找、赋值、枚举、函数调用等）。The Proxy object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).">
+<meta name="keywords" content="doc,js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Proxy">
+<meta property="og:url" content="http://yoursite.com/2020/04/14/Proxy/index.html">
+<meta property="og:site_name" content="YUE">
+<meta property="og:description" content="一、 定义Proxy 对象用于定义基本操作的自定义行为（如属性查找、赋值、枚举、函数调用等）。The Proxy object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-04-14T08:52:10.539Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Proxy">
+<meta name="twitter:description" content="一、 定义Proxy 对象用于定义基本操作的自定义行为（如属性查找、赋值、枚举、函数调用等）。The Proxy object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/14/Proxy/"/>
+
+
+
+
+
+  <title>Proxy | YUE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YUE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">RUN FOR FREEDOM</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/14/Proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="halfmoon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YUE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Proxy</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-14T10:55:15+08:00">
+                2020-04-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/14/Proxy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2020/04/14/Proxy/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/04/14/Proxy/" class="leancloud_visitors" data-flag-title="Proxy">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、-定义"><a href="#一、-定义" class="headerlink" title="一、 定义"></a>一、 定义</h3><p>Proxy 对象用于定义基本操作的自定义行为（如属性查找、赋值、枚举、函数调用等）。<br>The Proxy object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).</p>
+<ol>
+<li>handler 包含陷阱（trap）的占位符对象，可译为处理器对象。<br>handler 对象各个属性通常为函数，这些函数构成了对 被代理对象的 捕获器(trap)</li>
+<li>traps 提供属性访问的方法。这类似于操作系统中捕获器的概念，一般直译作陷阱。</li>
+<li>target 被 Proxy 代理虚拟化的对象。它常被作为代理的存储后端。根据目标验证关于对象不可扩展性或不可配置属性的不变量（保持不变的语义）。</li>
+</ol>
+<h3 id="二、-一个完整的-traps-列表示例"><a href="#二、-一个完整的-traps-列表示例" class="headerlink" title="二、 一个完整的 traps 列表示例"></a>二、 一个完整的 traps 列表示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">var docCookies = new Proxy(docCookies, &#123;</span><br><span class="line">  &quot;get&quot;: function (oTarget, sKey) &#123;</span><br><span class="line">    return oTarget[sKey] || oTarget.getItem(sKey) || undefined;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;set&quot;: function (oTarget, sKey, vValue) &#123;</span><br><span class="line">    if (sKey in oTarget) &#123; return false; &#125;</span><br><span class="line">    return oTarget.setItem(sKey, vValue);</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;deleteProperty&quot;: function (oTarget, sKey) &#123;</span><br><span class="line">    if (sKey in oTarget) &#123; return false; &#125;</span><br><span class="line">    return oTarget.removeItem(sKey);</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;enumerate&quot;: function (oTarget, sKey) &#123;</span><br><span class="line">    return oTarget.keys();</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;ownKeys&quot;: function (oTarget, sKey) &#123;</span><br><span class="line">    return oTarget.keys();</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;has&quot;: function (oTarget, sKey) &#123;</span><br><span class="line">    return sKey in oTarget || oTarget.hasItem(sKey);</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;defineProperty&quot;: function (oTarget, sKey, oDesc) &#123;</span><br><span class="line">    if (oDesc &amp;&amp; &quot;value&quot; in oDesc) &#123; oTarget.setItem(sKey, oDesc.value); &#125;</span><br><span class="line">    return oTarget;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;getOwnPropertyDescriptor&quot;: function (oTarget, sKey) &#123;</span><br><span class="line">    var vValue = oTarget.getItem(sKey);</span><br><span class="line">    return vValue ? &#123;</span><br><span class="line">      &quot;value&quot;: vValue,</span><br><span class="line">      &quot;writable&quot;: true,</span><br><span class="line">      &quot;enumerable&quot;: true,</span><br><span class="line">      &quot;configurable&quot;: false</span><br><span class="line">    &#125; : undefined;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/* Cookies 测试 */</span><br><span class="line"></span><br><span class="line">alert(docCookies.my_cookie1 = &quot;First value&quot;);</span><br><span class="line">alert(docCookies.getItem(&quot;my_cookie1&quot;));</span><br><span class="line"></span><br><span class="line">docCookies.setItem(&quot;my_cookie1&quot;, &quot;Changed value&quot;);</span><br><span class="line">alert(docCookies.my_cookie1);</span><br></pre></td></tr></table></figure>
+<h3 id="三、-handler-对象的方法"><a href="#三、-handler-对象的方法" class="headerlink" title="三、 handler 对象的方法"></a>三、 handler 对象的方法</h3><p>handler 对象是一个容纳一批特定属性的占位符对象。它包含有 Proxy 的各个捕获器（trap）。<br>所有的陷阱是可选的。<strong>如果没有定义某个陷阱，那么就会保留源对象的默认行为</strong>。</p>
+<h4 id="1-handler-get-A-trap-for-getting-property-values"><a href="#1-handler-get-A-trap-for-getting-property-values" class="headerlink" title="1) handler.get(): A trap for getting property values."></a>1) handler.get(): A trap for getting property values.</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function get(obj, defaultVal) &#123;</span><br><span class="line">    return new Proxy(obj, &#123;</span><br><span class="line">        get(target, prop) &#123;</span><br><span class="line">            if (</span><br><span class="line">                Object.prototype.toString.call(target[prop]) ===</span><br><span class="line">                &apos;[object Object]&apos;</span><br><span class="line">            ) &#123;</span><br><span class="line">                return get(target[prop], defaultVal);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return target[prop] || defaultVal;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-handler-set-A-trap-for-setting-property-values"><a href="#2-handler-set-A-trap-for-setting-property-values" class="headerlink" title="2) handler.set(): A trap for setting property values."></a>2) handler.set(): A trap for setting property values.</h4><p>拦截设置，做校验</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 验证规则</span><br><span class="line">let validators = &#123;</span><br><span class="line">    name: &#123;</span><br><span class="line">        validate(value) &#123;</span><br><span class="line">            return value.length &gt; 6;</span><br><span class="line">        &#125;,</span><br><span class="line">        message: &apos;用户名长度不能小于六&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    moblie: &#123;</span><br><span class="line">        validate(value) &#123;</span><br><span class="line">            return /^1(3|5|7|8|9)[0-9]&#123;9&#125;$/.test(value);</span><br><span class="line">        &#125;,</span><br><span class="line">        message: &apos;手机号格式错误&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">validators = new Proxy(validators, &#123;</span><br><span class="line">    set(target, prop, value) &#123;</span><br><span class="line">        if (!target[prop].validate(value)) &#123;</span><br><span class="line">            throw new Error(target[prop].message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">validators.name = &apos;1212321321&apos;;</span><br><span class="line">validators.moblie = &apos;25110240955&apos;; // Error: 手机号格式错误</span><br></pre></td></tr></table></figure>
+<h4 id="3-handler-apply-target-context-args-A-trap-for-a-function-call"><a href="#3-handler-apply-target-context-args-A-trap-for-a-function-call" class="headerlink" title="3) handler.apply(target, context, args): A trap for a function call."></a>3) handler.apply(target, context, args): A trap for a function call.</h4><p>拦截函数的调用，交由 <code>handler.apply</code> 函数内部如何执行这个 函数</p>
+<ol>
+<li><code>target</code> 被代理的函数</li>
+<li><code>context</code> 为函数执行的上下文</li>
+<li><code>args</code> 为一个数组，即传入给 代理对象的参数 会被自动转换为一个数组</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function test() &#123;</span><br><span class="line">    console.log(&apos;this is a test function&apos;);</span><br><span class="line">&#125;</span><br><span class="line">const obj = &#123;</span><br><span class="line">    name: &apos;123&apos;</span><br><span class="line">&#125;;</span><br><span class="line">const func = new Proxy(test, &#123;</span><br><span class="line">    apply(target, context, args) &#123;</span><br><span class="line">        console.log(context.name); // 123</span><br><span class="line">        console.log(args); // [ &apos;a&apos;, &apos;b&apos;, &apos;c&apos; ]</span><br><span class="line">        target.apply(context, args); // this is a test function</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">func.call(obj, &apos;a&apos;, &apos;b&apos;, &apos;c&apos;);</span><br></pre></td></tr></table></figure>
+<h4 id="4-handler-construct-target-args-newTarget-A-trap-for-the-new-operator"><a href="#4-handler-construct-target-args-newTarget-A-trap-for-the-new-operator" class="headerlink" title="4) handler.construct(target, args, newTarget): A trap for the new operator."></a>4) handler.construct(target, args, newTarget): A trap for the new operator.</h4><p>拦截 构造函数实例化的过程，交由 <code>handler.construct</code> 内部执行具体的 构造函数实例话的过程</p>
+<ol>
+<li><code>target</code> 为被代理的 构造函数</li>
+<li><code>args</code> 为数组，即传入给构造函数的参数被转换为也给数组</li>
+<li><code>newTarget</code> 为 Proxy 对象，即被代理后返回的对象</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function Person(name, age) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">&#125;</span><br><span class="line">const P = new Proxy(Person, &#123;</span><br><span class="line">    construct(target, args, newTarget) &#123;</span><br><span class="line">        target.prototype.log = &apos;logs&apos;;</span><br><span class="line">        return new target(...args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">const p = new P(&apos;tom&apos;, 21);</span><br><span class="line">console.log(p.name); // &apos;tom&apos;</span><br><span class="line">console.log(p.age); // 21</span><br><span class="line">console.log(p.log); // &apos;logs&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="5-handler-defineProperty-A-trap-for-Object-defineProperty"><a href="#5-handler-defineProperty-A-trap-for-Object-defineProperty" class="headerlink" title="5) handler.defineProperty(): A trap for Object.defineProperty."></a>5) handler.defineProperty(): A trap for Object.defineProperty.</h4><p>拦截了 <code>Object.defineProperty(obj, key, descriptor)</code> 的行为，可以重新赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    name: &apos;origin name&apos;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj = new Proxy(obj, &#123;</span><br><span class="line">    defineProperty(target, prop, descriptor) &#123;</span><br><span class="line">        console.log(target, prop, descriptor);</span><br><span class="line">        return Reflect.defineProperty(target, prop, &#123;</span><br><span class="line">            set(val) &#123;</span><br><span class="line">                return (target[prop] = val);</span><br><span class="line">            &#125;,</span><br><span class="line">            get() &#123;</span><br><span class="line">                return &apos;prefix: &apos; + descriptor.get();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Object.defineProperty(obj, &apos;name&apos;, &#123;</span><br><span class="line">    get() &#123;</span><br><span class="line">        return &apos;Object.defineProperty has changed obj.name&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// obj.name = &apos;12321&apos;;</span><br><span class="line">console.log(obj.name);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/doc/" rel="tag"># doc</a>
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/11/玩转sublime之：LSP 功能/" rel="next" title="玩转sublime之：LSP 实现 ide 功能">
+                <i class="fa fa-chevron-left"></i> 玩转sublime之：LSP 实现 ide 功能
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="halfmoon" />
+            
+              <p class="site-author-name" itemprop="name">halfmoon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、-定义"><span class="nav-number">1.</span> <span class="nav-text">一、 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、-一个完整的-traps-列表示例"><span class="nav-number">2.</span> <span class="nav-text">二、 一个完整的 traps 列表示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、-handler-对象的方法"><span class="nav-number">3.</span> <span class="nav-text">三、 handler 对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-handler-get-A-trap-for-getting-property-values"><span class="nav-number">3.1.</span> <span class="nav-text">1) handler.get(): A trap for getting property values.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-handler-set-A-trap-for-setting-property-values"><span class="nav-number">3.2.</span> <span class="nav-text">2) handler.set(): A trap for setting property values.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-handler-apply-target-context-args-A-trap-for-a-function-call"><span class="nav-number">3.3.</span> <span class="nav-text">3) handler.apply(target, context, args): A trap for a function call.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-handler-construct-target-args-newTarget-A-trap-for-the-new-operator"><span class="nav-number">3.4.</span> <span class="nav-text">4) handler.construct(target, args, newTarget): A trap for the new operator.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-handler-defineProperty-A-trap-for-Object-defineProperty"><span class="nav-number">3.5.</span> <span class="nav-text">5) handler.defineProperty(): A trap for Object.defineProperty.</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">halfmoon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://halfmoonvic.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2020/04/14/Proxy/';
+          this.page.identifier = '2020/04/14/Proxy/';
+          this.page.title = 'Proxy';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://halfmoonvic.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nhE1bcMgsr8l0xvcElsxiCVQ-gzGzoHsz", "hr3sgEpIGfORAK014R01kOpT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
