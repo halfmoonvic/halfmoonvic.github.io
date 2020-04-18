@@ -232,32 +232,36 @@ class MyPromise {
         if (this.state === PromiseStatus.Pendding) {
             this.state = PromiseStatus.Fulfilled;
             this.value = value;
+
+            // 状态管理 仅有在 Pendding → Fulfilled 时 才会执行当前 promise.callbacks
+            this.fulfilledCallbacks.forEach(resolveCb => {
+                // 如果当前的 promiseA 没有相应的 cb
+                // 则直接将 this.value 传递给 promiseA.callback 所收集的 下一个 promiseB.resolve
+                // 下一个 promiseB.resolve 好去继续调用 下一个 promiseB.callback 队列
+                // 如此实现，即便隔着几个 promise，也能将 相应的值传递出去
+                if (resolveCb.cb) {
+                    this.value = resolveCb.cb(this.value);
+                }
+                resolveCb.resolve(this.value);
+            });
         }
 
-        this.fulfilledCallbacks.forEach(resolveCb => {
-            // 如果当前的 promiseA 没有相应的 cb
-            // 则直接将 this.value 传递给 promiseA.callback 所收集的 下一个 promiseB.resolve
-            // 下一个 promiseB.resolve 好去继续调用 下一个 promiseB.callback 队列
-            // 如此实现，即便隔着几个 promise，也能将 相应的值传递出去
-            if (resolveCb.cb) {
-                this.value = resolveCb.cb(this.value);
-            }
-            resolveCb.resolve(this.value);
-        });
     }
 
     private reject(err: any): void {
         if (this.state === PromiseStatus.Pendding) {
             this.state = PromiseStatus.Rejected;
             this.value = err;
+
+            // 状态管理 仅有在 Pendding → Rejected 时 才会执行当前 promise.callbacks
+            this.rejectedCallbacks.forEach(rejectCb => {
+                if (rejectCb.cb) {
+                    this.value = rejectCb.cb(this.value);
+                }
+                rejectCb.reject(this.value);
+            });
         }
 
-        this.rejectedCallbacks.forEach(rejectCb => {
-            if (rejectCb.cb) {
-                this.value = rejectCb.cb(this.value);
-            }
-            rejectCb.reject(this.value);
-        });
     }
 
     public then(onFulfilled?: thenCb, onRejected?: thenCb): MyPromise {
@@ -383,18 +387,19 @@ class MyPromise {
         if (this.state === PromiseStatus.Pendding) {
             this.state = PromiseStatus.Fulfilled;
             this.value = value;
-        }
 
-        this.fulfilledCallbacks.forEach(resolveCb => {
-            // 如果当前的 promiseA 没有相应的 cb
-            // 则直接将 this.value 传递给 promiseA.callback 所收集的 下一个 promiseB.resolve
-            // 下一个 promiseB.resolve 好去继续调用 下一个 promiseB.callback 队列
-            // 如此实现，即便隔着几个 promise，也能将 相应的值传递出去
-            if (resolveCb.cb) {
-                this.value = resolveCb.cb(this.value);
-            }
-            resolveCb.resolve(this.value);
-        });
+            // 状态管理 仅有在 Pendding → Fulfilled 时 才会执行当前 promise.callbacks
+            this.fulfilledCallbacks.forEach(resolveCb => {
+                // 如果当前的 promiseA 没有相应的 cb
+                // 则直接将 this.value 传递给 promiseA.callback 所收集的 下一个 promiseB.resolve
+                // 下一个 promiseB.resolve 好去继续调用 下一个 promiseB.callback 队列
+                // 如此实现，即便隔着几个 promise，也能将 相应的值传递出去
+                if (resolveCb.cb) {
+                    this.value = resolveCb.cb(this.value);
+                }
+                resolveCb.resolve(this.value);
+            });
+        }
     }
 
     private reject(err: any): void {
@@ -408,14 +413,15 @@ class MyPromise {
         if (this.state === PromiseStatus.Pendding) {
             this.state = PromiseStatus.Rejected;
             this.value = err;
-        }
 
-        this.rejectedCallbacks.forEach(rejectCb => {
-            if (rejectCb.cb) {
-                this.value = rejectCb.cb(this.value);
-            }
-            rejectCb.reject(this.value);
-        });
+            // 状态管理 仅有在 Pendding → Rejected 时 才会执行当前 promise.callbacks
+            this.rejectedCallbacks.forEach(rejectCb => {
+                if (rejectCb.cb) {
+                    this.value = rejectCb.cb(this.value);
+                }
+                rejectCb.reject(this.value);
+            });
+        }
     }
 
     public then(onFulfilled?: thenCb, onRejected?: thenCb): MyPromise {
@@ -478,7 +484,7 @@ pUserId
     })
     .then(name => {
         console.log('name', name);
-    })
+    });
 ```
 
 上例中具体的执行流程为： 
