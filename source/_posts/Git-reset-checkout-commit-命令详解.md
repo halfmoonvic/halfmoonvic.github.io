@@ -58,7 +58,7 @@ tags: git
 至于那种 `commit` 的传递，我将其认为是 Git 自己内部命令的结果。  
 而涉及到「提交」一概念大概只有`git commit <file_path>`中的`commit`。
 
-### 3、reset 命令  
+### 3、reset 命令
 与`checkout`命令相比，我认为`reset`简单的多，但此命令有危险。除非，你知道自己在做什么。
 
 **reset** 许多命令模式会变更 `master`（或者其它分支名，本文只以 `master` 分支举例）分支位置
@@ -118,14 +118,14 @@ tags: git
 当进行 `git reset <file_path>`（当未注明 `<commitID>` 时，默认采用 `HEAD`） 操作时，`Staged Snapshot` 区的 `commit` 恢复到上个状态。  
 这看起来像是撤销操作，实质上是覆盖操作。即是如上图中的`6`跑到了现在的`7'`位置上
 
-###### 3. 其它无关杂项  
+###### 3. 其它无关杂项
 1. 事实上， `HEAD` `<file_path>` 均可省略书写，
     * `git reset <file_path>`  等价于 `git reset HEAD <file_path>`
     * `git reset`              等价于 `git reset HEAD`
 2. `git reset <commitID> .` 并不等价于 `git reset <commitID>`  
 `git reset HEAD^^ .` 也不会移动 `HEAD`，因为 `.` 就是代表了所有文件。这样，`reset` 的操作对象又变成了 `Staged Snapshot` 区。
 
-##### 3.3 情况2 **hard —— `git reset --hard <commitID>`**  
+##### 3.3 情况2 **hard —— `git reset --hard <commitID>`**
 此命令用于你做错了事情，想要彻底抹除踪迹。  
 采用`hard`模式的时候，意味着你想要丢弃在 `Working Dir` 区中的修改。之后继续进行你的工作。详细的 `commit` 步骤不讲了，对照第一条看即可。放张图给你。
 ![](https://halfmoonvic.github.io/images/git-reset-checkout/6.git-reset-hard.jpg)  
@@ -146,8 +146,10 @@ soft 仅仅是移动 `Commit History `区的 `master` 就不同的 `commit` 的�
 ### 4、checkout 命令
 * 情况1.1: **切换`HEAD`到具体分支**「如 `git checkout dev`」
 * 情况1.2: **切换`HEAD`到匿名分支**「如 `git checkout <commitID>`」
-* 情况2:  **`Staged Snapshop 区 <commitID>`的同步操作，未有分支切换**「如 `git checkout <file_path>`」
+* <del>情况 2: **`Staged Snapshop 区 <commitID>`的同步操作，未有分支切换**「如 `git checkout <file_path>`」</del>
 * 情况3: **`Commit History 区 <commitID>`同步操作，未有分支切换** 如「`git checkout <commitID> <file_path>`」
+
+情况2 实际上与 情况3 一样，只不过其默认是 `git checkout HEAD <commitID>`
 
 
 ##### 4.1、 checkout 作用对象是谁？答：看你写谁
@@ -158,7 +160,7 @@ soft 仅仅是移动 `Commit History `区的 `master` 就不同的 `commit` 的�
 3. 而当 `checkout` 用于「情况3」，其作用对象为 **Commit History 中 的 `<commitID>`，而非 HEAD**。  
 其作用是 同步`Commit History`上某一个`<commitID>`的内容至当下的`Staged Snapshop` 与 `Woring Dir` 区
 
-##### 4.2、 情况1.1 && 1.2  
+##### 4.2、 情况1.1 && 1.2
 **HEAD基本上是一直处于指向某一分支的情况的（HEAD指针指向发生过变动），如 HEAD → master、HEAD → dev 亦或是 HEAD → 匿名分支**
 
 1. `git checkout dev`  
@@ -170,7 +172,7 @@ soft 仅仅是移动 `Commit History `区的 `master` 就不同的 `commit` 的�
 
 ![](https://halfmoonvic.github.io/images/git-reset-checkout/8.git-checkout-commitID.jpg)
 
-##### 4.3、 情况2: `git checkout <file_path>`  
+##### 4.3、 情况2: `git checkout <file_path>`
 **HEAD 未发生过变动，一直处于当前分支。**
 
 `git checkout <file_path>`命令常常被用于丢弃本地修改。  
